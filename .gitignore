@@ -1,0 +1,83 @@
+# ============================
+# PASTAS QUE NÃO SERÃO VERSIONADAS
+# ============================
+
+AppVendas/
+Bin/
+Cliente/
+DCU/
+Images/
+Velha/
+Win32/
+
+# Build / compilacao
+Debug/
+Release/
+Win64/
+FinalExe/
+
+# Historico e recuperacao Delphi
+__history/
+__recovery/
+
+# ============================
+# ARQUIVOS GERADOS PELO DELPHI
+# ============================
+
+*.dcu
+*.dcp
+*.dcuil
+*.drc
+*.bpl
+*.bpi
+*.map
+*.exe
+*.dll
+*.tds
+*.obj
+*.ppu
+*.o
+*.a
+*.so
+*.lib
+
+*.local
+*.identcache
+*.stat
+*.dproj.local
+*.dproj.ok
+*.cbproj.local
+*.ipj
+*.groupproj.local
+*.groupproj.tvsconfig
+*.tvsconfig
+
+# ============================
+# TEMPORARIOS / BACKUPS
+# ============================
+
+*.~*
+*.bak
+*.tmp
+*.log
+*.dsk
+
+*.~pas
+*.~dfm
+*.~fmx
+*.~dpr
+*.~dpk
+*.~cpp
+*.~h
+*.~bdsproj
+*.~dproj
+
+# ============================
+# OUTROS
+# ============================
+
+*.msi
+*.rar
+
+Thumbs.db
+.DS_Store

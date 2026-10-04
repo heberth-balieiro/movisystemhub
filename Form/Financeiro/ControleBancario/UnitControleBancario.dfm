@@ -1,0 +1,2399 @@
+inherited FrmControleBancario: TFrmControleBancario
+  Caption = 'Controle Banc'#225'rio'
+  OnCreate = FormCreate
+  OnShow = FormShow
+  TextHeight = 17
+  inherited PanelClient: TPanel
+    Top = 169
+    Height = 326
+    ExplicitTop = 169
+    ExplicitHeight = 326
+    inherited cxGrid: TcxGrid
+      Height = 326
+      ExplicitHeight = 326
+      inherited Grid: TcxGridDBTableView
+        DataController.DataSource = Ds
+        DataController.Summary.DefaultGroupSummaryItems = <
+          item
+            Kind = skCount
+            FieldName = 'id_ticket'
+          end>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Kind = skCount
+            FieldName = 'id_lancamento_bancario'
+            Column = GridEmissao
+          end
+          item
+            Format = 'R$ ,0.00; R$ -,0.00'
+            Kind = skSum
+            FieldName = 'valor'
+            Column = GridValor
+          end>
+        DataController.Summary.SummaryGroups = <
+          item
+            Links = <
+              item
+              end>
+            SummaryItems = <
+              item
+                FieldName = 'nmconvenio'
+                Sorted = True
+              end>
+          end>
+        OptionsView.Footer = True
+        Styles.Content = nil
+        Styles.ContentEven = nil
+        Styles.ContentOdd = nil
+        Styles.Footer = nil
+        Styles.Group = nil
+        Styles.GroupByBox = nil
+        Styles.Header = nil
+        Styles.Inactive = nil
+        Styles.Indicator = nil
+        Styles.Preview = nil
+        Styles.Selection = nil
+        object GridRecId: TcxGridDBColumn
+          DataBinding.FieldName = 'RecId'
+          Visible = False
+        end
+        object Gridid_ticket: TcxGridDBColumn
+          DataBinding.FieldName = 'id_ticket'
+          Visible = False
+          Width = 51
+        end
+        object GridAnexo: TcxGridDBColumn
+          DataBinding.FieldName = 'tem_anexo'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Images = cxIMGMenu
+          Properties.Items = <
+            item
+              Description = 'Sem'
+              ImageIndex = 16
+              Value = 0
+            end
+            item
+              Description = 'Com'
+              ImageIndex = 17
+              Tag = 1
+              Value = 1
+            end>
+          Properties.ShowDescriptions = False
+          HeaderGlyph.SourceDPI = 96
+          HeaderGlyph.Data = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            610000001974455874536F6674776172650041646F626520496D616765526561
+            647971C9653C00000015744558745469746C650046696C654174746163686D65
+            6E743B976E49BA0000021349444154785E6D933F68535114C6BF73EE7BC93356
+            8AB60D062DFE415003920E827F868A9B22A2E2101441844A0545323854C1C1C5
+            820EBAD84910747310840E82757173B20EAE82088201875AA3A5EFBE773DE7E6
+            C6465F021F27EFC2EFF7BE7343E09CFB9BBE0F4B8C243A383D77F7D0F49C3B30
+            F5701640225917A65126EA11379E7ED441D7EEBDD8B2616BFD0B33C0CC78FD6A
+            1E8DC63EB05D9939F2E4DDCCF0A62A9809374F6E1F02D0F10222F2E3AAC023B5
+            9D0B1D9BE1C2E438CA3163FEF90F34F76F44BDBE07C34315448630FBF2936225
+            1570284097EF3C1B1FA9ED7873EB5C63772A82A46490C4067665D94393675A30
+            320980B539C28A61059DA37B3FB77F3AB41E2F6A457DBB1750BA82A5A56570DA
+            C187F78B684C4C201D2088ADD4BE747C172AE5089512238E8C8471FEF451B46E
+            3FC2C5E6313822384004B620306A5D9FC41E4ECA06658163C3B83E7516CD1387
+            D16E7FC3D86815B95341A60CF70BD88A3511B8141B05F5ED7E1527C0D8E61AAA
+            12227881B42D36D08B290BAC60240252185D00147ABAEED734CD8B02AD65987C
+            9808790E10ADB1D40B89202BAE60AC3F0C97943910031C48F622F20266BF4251
+            908920770EABA9C204CE4203A220725E848C60D3E21DB0DE81CDFC6E2019AC34
+            FE9510779BD86C60831CAB22A11E040A30C259EF79F0CF98EA0A57EE2FACD566
+            EA4E0A335430E11CC0EF7EC1F7B70F4E6D0B7F551A10FCF7FC4BF255823FE2B8
+            BB81AB7F56B30000000049454E44AE426082}
+          HeaderGlyphAlignmentHorz = taCenter
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
+          Options.Moving = False
+          Options.ShowCaption = False
+          Width = 28
+          IsCaptionAssigned = True
+        end
+        object GridTipo: TcxGridDBColumn
+          DataBinding.FieldName = 'tipo_movimento'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Images = cxIMGMenu
+          Properties.ImmediatePost = True
+          Properties.Items = <
+            item
+              ImageIndex = 18
+              Value = 'C'
+            end
+            item
+              ImageIndex = 19
+              Tag = 1
+              Value = 'D'
+            end>
+          Properties.PopupAlignment = taCenter
+          HeaderGlyph.SourceDPI = 96
+          HeaderGlyph.Data = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            6100000016744558745469746C6500457870616E643B436F6C6C617073653B1B
+            ED71700000006049444154785ECD93C109C0200C45BB606F2ED28CE04AB9B84C
+            67F952D0E241F22341F0F02010783F987801086136450416BFE0CEA5838F56D3
+            F46581AA62641460064BA70232C1FE37706D61EB1DF8B7F03E0933A8940BF804
+            67FC8508714105448CCA13644A58980000000049454E44AE426082}
+          HeaderGlyphAlignmentHorz = taCenter
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
+          Options.Moving = False
+          Options.ShowCaption = False
+          Width = 27
+          IsCaptionAssigned = True
+        end
+        object GridConciliado: TcxGridDBColumn
+          DataBinding.FieldName = 'conciliado'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Images = cxIMGMenu
+          Properties.Items = <
+            item
+              ImageIndex = 20
+              Value = 'S'
+            end
+            item
+              ImageIndex = 21
+              Tag = 1
+              Value = 'N'
+            end>
+          HeaderGlyph.SourceDPI = 96
+          HeaderGlyph.Data = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            610000001A744558745469746C650050726F647563743B53686F7750726F6475
+            63743B091751AF0000003B49444154785EED91310A00200C03FDA73FE99B843C
+            F14A570729549D3ADC140847328012F582698B9D082491E15490E191C1DF0DFA
+            C61B067DA303138FD579FF303EE10000000049454E44AE426082}
+          HeaderGlyphAlignmentHorz = taCenter
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
+          Options.Moving = False
+          Options.ShowCaption = False
+          Width = 28
+        end
+        object GridEmissao: TcxGridDBColumn
+          Caption = 'Emiss'#227'o'
+          DataBinding.FieldName = 'data_emissao'
+          Width = 81
+        end
+        object GridConta: TcxGridDBColumn
+          Caption = 'Conta'
+          DataBinding.FieldName = 'nbanco'
+          Width = 279
+        end
+        object GridNumero: TcxGridDBColumn
+          Caption = 'N'#250'mero'
+          DataBinding.FieldName = 'numero'
+          Width = 71
+        end
+        object Gridsituacao: TcxGridDBColumn
+          Caption = 'Situa'#231#227'o'
+          DataBinding.FieldName = 'situacao'
+          Styles.Content = cxStyle1
+          Width = 85
+        end
+        object GridHistorico: TcxGridDBColumn
+          Caption = 'Hist'#243'rico'
+          DataBinding.FieldName = 'nhistorico'
+          Width = 192
+        end
+        object Gridobs: TcxGridDBColumn
+          Caption = 'Observa'#231#227'o'
+          DataBinding.FieldName = 'historico'
+          Visible = False
+          Width = 115
+        end
+        object GridValor: TcxGridDBColumn
+          Caption = 'Valor'
+          DataBinding.FieldName = 'valor'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Width = 95
+        end
+        object Gridmotivo: TcxGridDBColumn
+          DataBinding.FieldName = 'motivo'
+          Visible = False
+        end
+        object Gridobs_cancelamento: TcxGridDBColumn
+          DataBinding.FieldName = 'obs_cancelamento'
+          Visible = False
+        end
+      end
+      object cxGridDBTableView1: TcxGridDBTableView [1]
+        Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        object cxGridDBTableView1Column1: TcxGridDBColumn
+        end
+        object cxGridDBTableView1Column2: TcxGridDBColumn
+        end
+      end
+    end
+  end
+  inherited Paneltitulo: TPanel
+    inherited lblTitulo: TLabel
+      Caption = 'Controle Banc'#225'rio'
+    end
+  end
+  inherited PanelFiltro: TPanel
+    Height = 129
+    ExplicitHeight = 129
+    inherited GBFiltro: TcxGroupBox
+      ExplicitHeight = 129
+      Height = 129
+      inherited Label1: TLabel
+        Width = 63
+        Caption = 'Data In'#237'cial'
+        ExplicitWidth = 63
+      end
+      inherited Label2: TLabel
+        Left = 300
+        ExplicitLeft = 300
+      end
+      object Label5: TLabel [2]
+        Left = 102
+        Top = 20
+        Width = 57
+        Height = 17
+        Caption = 'Data Final'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label3: TLabel [3]
+        Left = 201
+        Top = 20
+        Width = 63
+        Height = 17
+        Caption = 'Buscar por'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label4: TLabel [4]
+        Left = 389
+        Top = 20
+        Width = 26
+        Height = 17
+        Caption = 'Tipo'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label6: TLabel [5]
+        Left = 478
+        Top = 20
+        Width = 48
+        Height = 17
+        Caption = 'N'#250'mero'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label7: TLabel [6]
+        Left = 568
+        Top = 20
+        Width = 34
+        Height = 17
+        Caption = 'Conta'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label8: TLabel [7]
+        Left = 3
+        Top = 69
+        Width = 52
+        Height = 17
+        Caption = 'Hist'#243'rico'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label9: TLabel [8]
+        Left = 248
+        Top = 69
+        Width = 95
+        Height = 17
+        Caption = 'Centro de Custo'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      object Label10: TLabel [9]
+        Left = 478
+        Top = 69
+        Width = 44
+        Height = 17
+        Caption = 'Cheque'
+        Color = 8679796
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5325111
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        StyleName = 'Windows'
+      end
+      inherited EdtBusca: TcxTextEdit
+        Left = 478
+        TabOrder = 5
+        TextHint = 'N'#250'mero'
+        ExplicitLeft = 478
+        ExplicitWidth = 91
+        ExplicitHeight = 25
+        Width = 91
+      end
+      inherited PPopPap: TPanel
+        Top = 87
+        TabOrder = 13
+        ExplicitTop = 87
+      end
+      inherited cxAtivo: TcxComboBox
+        Left = 478
+        Top = 87
+        Properties.Items.Strings = (
+          'Todos'
+          'Sim'
+          'N'#227'o')
+        TabOrder = 9
+        ExplicitLeft = 478
+        ExplicitTop = 87
+        ExplicitWidth = 91
+        ExplicitHeight = 25
+        Width = 91
+      end
+      inherited BtnPesquisar: TStyledBitBtn
+        Top = 87
+        TabOrder = 10
+        ExplicitTop = 87
+      end
+      inherited BtnLimpar: TStyledBitBtn
+        Top = 87
+        TabOrder = 11
+        ExplicitTop = 87
+      end
+      inherited BtnNovo: TStyledBitBtn
+        Top = 87
+        TabOrder = 12
+        ExplicitTop = 87
+      end
+      object cxConta: TcxLookupComboBox
+        Left = 568
+        Top = 38
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_conta'
+        Properties.ListColumns = <
+          item
+            Caption = 'Categoria'
+            FieldName = 'npesquisa'
+          end>
+        Properties.ListOptions.GridLines = glNone
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsconta
+        Properties.ReadOnly = False
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 6
+        Width = 327
+      end
+      object cxhistorico: TcxLookupComboBox
+        Left = 3
+        Top = 87
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_historico'
+        Properties.ListColumns = <
+          item
+            FieldName = 'npesquisa'
+          end>
+        Properties.ListOptions.GridLines = glNone
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsHistorico
+        Properties.ReadOnly = False
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 7
+        Width = 246
+      end
+      object EdtDataInicial: TcxDateEdit
+        AlignWithMargins = True
+        Left = 3
+        Top = 38
+        EditValue = 0d
+        ParentFont = False
+        Properties.ButtonGlyph.SourceDPI = 96
+        Properties.ButtonGlyph.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001D744558745469746C650043616C656E6461723B5363686564756C65
+          723B5669657785A932520000022749444154785E8D93CF4B545114C7BF6FE651
+          1839D8F457B46AE3C640712144508B82A85DBB681515495308868C8454630B2B
+          A2DAB4CA36516AA33625E314D3508B468BB0EC07445612D5A84DFAEE8FD3BDE7
+          CE7B031AD181CBE79C7BCE3BE77B2FF779007C0031D4CDC36A5B9B23036D28BD
+          C9BDBBF271A04D6B0DAD0996649632B4C6FBCAC564A95C5D206561FF93A71DBE
+          EFA16DCBEE1D00B98FA115A08C2FA51BA56CACA0A4A1595ADA1A89E2DD5C2B80
+          B8AF89B8687976C635503C91F7AC11C78A19FAF18D8D207247F2C9CA0E022829
+          4192E51B2AA6359261439B73FB240C49BB06E53D69B4ECDB8A4645088DBCDA35
+          19921B554F782E1E1E7C0E949ABD98946ED2ADD169CCCD2F60303B85CF5F1770
+          F35E8DC3657C995F44A5FF0496BE7FC3CFF39D7C89422856E09DBB5EA223079A
+          F161AE827F59C20F581511D0904C62E0C6339C3AB42D1113424313902FBD0369
+          60A238CB7CF0F80D737CF235535CED85B6BCD2E328B453D03350A0D4C116BCFF
+          54098FFD5726E22BD10B6A68DA8CCCB522D2C7DA9B622250BC79BF30C34AC6F2
+          AF9823132F9943B9174C71B1DB9DFD421714190AE914A4FA7274FA683BDE7EFC
+          51BFE5B564055493B0DE28E8BB9447A66BFBA6582014771E31932C87C6A79977
+          46A798B7B365669049812CCF76421341867770B83B4B674E7660A95A7B793C11
+          915114460E23DDFF10977B7726FD6A75B1703C3DD60AA248625416BDAA2817F9
+          C1F2AF471636BB01C0BA55BFB1F71FBF7360F8FB0FFBFD934CCFEEFED0000000
+          0049454E44AE426082}
+        Properties.ClearKey = 16452
+        Properties.DateButtons = []
+        Properties.ImmediatePost = True
+        Properties.SaveTime = False
+        Properties.ShowTime = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = 8222060
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.BorderColor = clWindowFrame
+        StyleFocused.Color = 15855596
+        TabOrder = 0
+        Width = 100
+      end
+      object edtDataFinal: TcxDateEdit
+        AlignWithMargins = True
+        Left = 102
+        Top = 38
+        EditValue = 0d
+        ParentFont = False
+        Properties.ButtonGlyph.SourceDPI = 96
+        Properties.ButtonGlyph.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001D744558745469746C650043616C656E6461723B5363686564756C65
+          723B5669657785A932520000022749444154785E8D93CF4B545114C7BF6FE651
+          1839D8F457B46AE3C640712144508B82A85DBB681515495308868C8454630B2B
+          A2DAB4CA36516AA33625E314D3508B468BB0EC07445612D5A84DFAEE8FD3BDE7
+          CE7B031AD181CBE79C7BCE3BE77B2FF779007C0031D4CDC36A5B9B23036D28BD
+          C9BDBBF271A04D6B0DAD0996649632B4C6FBCAC564A95C5D206561FF93A71DBE
+          EFA16DCBEE1D00B98FA115A08C2FA51BA56CACA0A4A1595ADA1A89E2DD5C2B80
+          B8AF89B8687976C635503C91F7AC11C78A19FAF18D8D207247F2C9CA0E022829
+          4192E51B2AA6359261439B73FB240C49BB06E53D69B4ECDB8A4645088DBCDA35
+          19921B554F782E1E1E7C0E949ABD98946ED2ADD169CCCD2F60303B85CF5F1770
+          F35E8DC3657C995F44A5FF0496BE7FC3CFF39D7C89422856E09DBB5EA223079A
+          F161AE827F59C20F581511D0904C62E0C6339C3AB42D1113424313902FBD0369
+          60A238CB7CF0F80D737CF235535CED85B6BCD2E328B453D03350A0D4C116BCFF
+          54098FFD5726E22BD10B6A68DA8CCCB522D2C7DA9B622250BC79BF30C34AC6F2
+          AF9823132F9943B9174C71B1DB9DFD421714190AE914A4FA7274FA683BDE7EFC
+          51BFE5B564055493B0DE28E8BB9447A66BFBA6582014771E31932C87C6A79977
+          46A798B7B365669049812CCF76421341867770B83B4B674E7660A95A7B793C11
+          915114460E23DDFF10977B7726FD6A75B1703C3DD60AA248625416BDAA2817F9
+          C1F2AF471636BB01C0BA55BFB1F71FBF7360F8FB0FFBFD934CCFEEFED0000000
+          0049454E44AE426082}
+        Properties.ClearKey = 16452
+        Properties.DateButtons = []
+        Properties.ImmediatePost = True
+        Properties.SaveTime = False
+        Properties.ShowTime = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = 8222060
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 15855596
+        TabOrder = 1
+        Width = 100
+      end
+      object EdtFiltropor: TcxComboBox
+        AlignWithMargins = True
+        Left = 201
+        Top = 38
+        ParentFont = False
+        Properties.Alignment.Horz = taLeftJustify
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Emiss'#227'o'
+          'Compet'#234'ncia'
+          'Conciliado')
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = 8222060
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 15855596
+        TabOrder = 2
+        Text = 'Emiss'#227'o'
+        Width = 100
+      end
+      object cxSituacao: TcxComboBox
+        AlignWithMargins = True
+        Left = 300
+        Top = 38
+        ParentFont = False
+        Properties.Alignment.Horz = taLeftJustify
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Todos'
+          'Pendente'
+          'Conclu'#237'do')
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = 8222060
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 15855596
+        TabOrder = 3
+        Text = 'Todos'
+        Width = 90
+      end
+      object cxtipo: TcxComboBox
+        AlignWithMargins = True
+        Left = 389
+        Top = 38
+        ParentFont = False
+        Properties.Alignment.Horz = taLeftJustify
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Todos'
+          'Cr'#233'dito'
+          'D'#233'bito')
+        Properties.OnChange = cxtipoPropertiesChange
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = 8222060
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 15855596
+        TabOrder = 4
+        Text = 'Todos'
+        Width = 90
+      end
+      object cxCusto: TcxLookupComboBox
+        Left = 248
+        Top = 87
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_custo'
+        Properties.ListColumns = <
+          item
+            FieldName = 'descricao'
+          end>
+        Properties.ListOptions.GridLines = glNone
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsCusto
+        Properties.ReadOnly = False
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 8
+        Width = 231
+      end
+    end
+  end
+  inherited ACBrEnterTab1: TACBrEnterTab
+    Left = 544
+    Top = 65530
+  end
+  inherited Ds: TUniDataSource
+    DataSet = mdPesquisa
+    Left = 616
+    Top = 208
+  end
+  inherited cxStyle: TcxStyleRepository
+    Left = 503
+    Top = 65527
+    PixelsPerInch = 96
+    inherited cxStyle2: TcxStyle
+      Font.Height = -13
+    end
+    inherited cxStyle3: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Font.Height = -13
+    end
+    inherited CxGridPedido: TcxGridTableViewStyleSheet
+      BuiltIn = True
+    end
+    inherited GridTableDependente: TcxGridTableViewStyleSheet
+      BuiltIn = True
+    end
+  end
+  inherited MenuPop: TPopupMenu
+    Left = 456
+    Top = 65532
+    object btnConciliar: TMenuItem [2]
+      Caption = 'Conciliar'
+      ImageIndex = 20
+      OnClick = btnConciliarClick
+    end
+    object btnDesconciliar: TMenuItem [3]
+      Caption = 'Desconciliar'
+      ImageIndex = 22
+      OnClick = btnDesconciliarClick
+    end
+    object btnAnexo: TMenuItem [4]
+      Caption = 'Anexo'
+      ImageIndex = 2
+      OnClick = btnAnexoClick
+    end
+    object LerOFX1: TMenuItem [5]
+      Caption = 'Ler OFX'
+      ImageIndex = 23
+      OnClick = LerOFX1Click
+    end
+  end
+  inherited cxIMGMenu: TcxImageList
+    FormatVersion = 1
+    DesignInfo = 408
+    ImageInfo = <
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000029744558745469746C650052656D6F76653B44656C6574653B426172
+          733B526962626F6E3B5374616E646172643B635648300000026449444154785E
+          A551494C5351146568194A2B583746627F458902118892AAB811369246043462
+          8556D032A82D831664486D8C3FB40B8128E3C68998A289625720314469022591
+          26566BC484681C22C6012B5A1556C7F73EBF507FDCF193F3DFBBE7DC7BDE7BF7
+          86005811B820E80B2310F16B6880E4F7E10462AAF3F1B2014F889E961FBB307D
+          AAE2EBC8FEDC137C72280FB1AB546BA0DAE4F11296C491940F36089F2CD5593F
+          DFE8C682771453E71B31909D6D207C044D76166B8C339D1789E6C4A76B5D18D7
+          15D9A869B04184A744E7FBED72C03FD08EF9B13BF09CADC1F50C55CDE08182DA
+          B7ED562CB807E1BFDB06FF701F3C47753E52131D6C20B2EFCA343C31EAF1D3D1
+          89B93E167F1EF5E37155255ED92C989F70E0C74D96E3C734F9B89498749A1E2A
+          EC41644F4A6AF5B8F6107C7D2D98ED6D847FE80A7EDDBF8A6FBD4D98ED69C088
+          3A0BD678A589E44A843D089844DB141B4D0FF3D5F8D251878FAC9EA08C5B87F6
+          EC44B37C6D23C991F2530AF99F81E472BAAA7E42AFC307B612EFEA0E2FC1A52D
+          446B5A4633C991090D968A5B93D24D4EAD06336DF5982E5363BA9C07D9BF674F
+          62B4F020AC9B53976EF1CF145A36249B1EE4E5E28DA5022F8AB23045706B1383
+          DB498974CFE1F599620CAB736061B63409A720ED5624CFBD341E81B760379EE5
+          65A23F410183487ACE208EB1F42728E1CDCFE4F0BC641FBA9894395213176C10
+          655EA3EC706CDF06778E0A76C57A5447C8E87B63298C91B166BB92817BEF0EDC
+          4BDB8A0639D34DF8986083309A58278BEFB0C631BEAAC5E255940F6886A8D566
+          A27DAF95ADEB22B15CD883808984208E209A8F859A9C6F6078F0145684BF98E8
+          BFC080A205F60000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000020744558745469746C6500456469743B426172733B526962626F6E3B
+          5374616E646172643B3013C3DB0000028449444154785E5D515D48145114FEEE
+          CE9AA662FE942B1499246108D94B106588D24B461914843DD443500FF590D81F
+          F550D443692F86A1A084AB581AD90F124260A4596AB14A96B556AC6192FDA045
+          AEB3BBCE9DB9B77BE732BBEA99F9CEB9C39CEF3BDF9C219C731042B496CEB167
+          9AA6157170C89045BE53C758A286D177F4C0A69D826700801B2A5C42A4E85069
+          2E9CE08B12711EE07DFC6907004DD16202C4B254834119B823C2559297BA092C
+          66D9FD4B05603135832D602BBEE348C134B923B0D40175BE3B4A8AED80280191
+          2D93D9FDAF6E6C4744A70B05542B63311224513A23CA8D26EAE6BC3400482C3C
+          DB6F00A02E47C0A41694650E0680896AC933E1F699886ACCCF636EB419DD97B6
+          FC6A3ABEB10A4092E300865A22989CCA17FF46108648288C89170DC84D1B41CE
+          E17BF0B7579CBAFE3DE88E3A60A6691319531305D462B920EB3AC69FD7211583
+          C8D9530DFAB5067F3E04A045CC93D11D50CA94804CB610E0727184F520023DF5
+          58A5F9B07E5F0DC21FABF1A6B907C8F4E0CBCFC9A69880A5044489EE7D6EF61F
+          C67BEA904986B0E1602D667D573174A70FD64A0FDA6E0FB77AC782179C25C2B2
+          991CC9091A92E25D6086B47D0B19F435F2CA6B31DD7BD19E1C4E4E87D7FBB65D
+          90CF0198761C987A48EFBD7CB3BF880358E34900D7032808FA905F598FA9AE4A
+          8C3E194638291D775BDFDFEF98089F01F0BBDCB3CC74362D9D2C1748115821B0
+          2E6FEB91879D0DD7B83E39C8BB8E65F3F613F9BC6C75FC0300D902EE40DB2EEC
+          CF888314588497D5DB00606D4149C58F77034F794BD5797EA538979766C53F02
+          902310E76F2C81BFB1187B5335B8B12422212A0BF9F67924ABB0AC6F8646FE0E
+          249A531D33A1F96E697B778A464F57F6AA8100FE037C7D7091F11B3976000000
+          0049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001D744558745469746C65004578706F72743B5064663B4578706F7274
+          546F5064663BEE390774000001EF49444154785E8D933D6B545110869F7335C6
+          DA46482322821FD1C244831F6113B4B2D49FA0A5959FB0A831C48082B58DFF21
+          B522BA2B1B171504A362136D54B45410DD6473675EC9700E2CB1B1983BEF5C98
+          6786993909D86814BF411713504B12C06620DD7DF0E26995AA068010521070C5
+          1729811C91A8EB95CECD0B532781B502A8506A5C3A7FB8F029E2DF10E6EF7727
+          814D838054CB41B0DA3704284394854808D8BA2561B51345010AC0FA06804950
+          92F348829D94C189DA0C200D02B0DA00A10C504AA145308A0E58636207F31B26
+          3CDCBCD75A99BBD8E0EBCC2CBDE71DE48EB9A1DA30B3D06EEBE6B8D5983BA1DD
+          166206D101B0D2EDB0F3E123E489EFB7AEF3ABDD66777B1D085F9A57F9D97AC2
+          DEEE6B8470176F0E8D9EA980D45F3324401EC9CBA7A6D83E3387CB71870FC78F
+          3072FB4E5495C4BBF183BC1D3B10BA0258CB1DB813F45D8F5B7CBBD18C5685A0
+          CC4011B3EFE5122E21296FC10C092241F071FA04EE8ECC41C21495E39F0B96C6
+          474B4C550004D1C3BB2BD61510873D8BAFF87CED32E4582EE40E281F928380A1
+          89632C4F4F121B702189F747C7504CDD30A9540F2DB150EE000123B3F3E52D94
+          BD67EDD943A7FB89B3A7F76F93F4A31C52DDEFFD7976EECA42C305553E1C17A4
+          24E469E03A457FF5F722D01F3CA40A180686FEE3492B3FA29E2403F80BF7A584
+          590387B74F0000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000000C744558745469746C65005072696E743BC83632EA00000267494441
+          54785E7D93CB6B135114C6BF99C434A60F05698B1B5716752582E84AAD2822B6
+          88B8101F50B45441210BEBC285150591A250A326462AA218F20FB810178A482C
+          AD165AD0958216051F68D1966426F3B82FCFDCCC0C71512F7C73EE3DDCEF77EE
+          DC87A19442D40C6AB74A332F4CD3EC05745E7FA33982F1CAF0E0D65D34E69127
+          897F9B49EA3D7374A376AA901041F2E5D9ED0012A4A5019C0B28092C5A5E58D9
+          808244476B0B38135111C4005AB55E7D587D191712928C147579052308908272
+          5C03D2E4610064A0C0648E8E5776DF2EBF7D33385CB0BF7C7E0F2915494288C0
+          28C0833E69EEE33B1C3E35FA67ECE1CCF4C5DCD33D0012C9E0B33CD3513EB477
+          6DD744E54930D4D5852008240CD55807A3B1EB3AB0EC1A8EF4ADDF547A2C4B00
+          D66880E0AAAB7B550675CB42329186904A5754A119000125015C38561DAB3B33
+          604C75462B303D5F5042229D4AE0E78FEF3878EC4274046150210C686F4BE8B9
+          9EC7D00460700832347000378B252C2C542145E0931AA1A4D23BBC72453B4E0F
+          1D87C3380138026F03E032D409D2B3A107C5FC95C6A1C8F0084D8A8D0C744602
+          B6CB41459B003E47CDE1A8D7194E666FE07FED5EFE2C7C9102F385E60600C3F7
+          04AA1643D576B0BFBF0FD981CD284CCDEBCD6402641038BFA31BC5F22C7E2FDA
+          A03F81CF1A0013009BFFF5753277E719EE8E3F070FCFDD63244E002E29070DE3
+          D4B976BD8C91CB0FF0E9C3E46B10C708EF762BA985D43632F6722E7B628BDE79
+          4087F846161E4DE3EAB99DEB0054490EC94E2AA54490085FA3655BD6ABDCFDA9
+          6DF1B6A9F8ADC2756B1300BE91C75EEA31F9B94BFDFB00A44866EC44FCB23D92
+          DB6CF80BF54A6944F3A08E160000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000000E744558745469746C65004C697374426F783B0357E96A
+          0000018E49444154785E7D52BD4A0341109E4DA258F82242109B44B03168A388
+          58042120162156561AD427B0129F40D1222068A18520D828DA5AA8A04F72C118
+          DDDB19776677E3925C32DCCECF31F3CDB7335B2022504AE54EAFDE1E544E5580
+          85F8634B6CE50445A00075FABCBD595A24225300272AF9D29566BD14EAC13B99
+          727CF632CF35EC07003086B821202BF9A8D799E8DF1F1FCBDB5C847E00658C81
+          20E737EF805C6815A2834A920EEC36E604CCE020001894DB4A516DA518B1573D
+          468C4A79080CA08F0102F9C4CBBBCF4C063BF559C93169160383D215D1C0FA52
+          314C9CAD67C160E8AF3082015A7B71FB110D94844DD2FE8666BD0C04A3181009
+          83DAEAB4BB772000CA6D85527B86CC0019C00FB365B7E09A93585649BB037B8D
+          B26F92C98037E066B0B13613BA7BE502A25F4092DC0100952202FA35B6AE5FC3
+          E3E1586CDB32D8DF2A010E1922A01BA248A33A05CA0D5E6C2C8490FD901049D0
+          C726265D224545F12AF9643040FDD37D3C38BC5F90C218A16F131C68DD7DB24E
+          1A03E893A3EAB28F150C4AFC8F7CB1E6E00F942D47B1285CD8E9000000004945
+          4E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000023744558745469746C6500436F6E766572743B5265706561743B4172
+          726F773B45786368616E6765762368D20000032A49444154785E6D53694C5467
+          147D8330B21697B20D90B24C0483ED4075001FCB94B1044424D646238B457170
+          196618360B3874405B96010B418AD461699125085202DABA0C830BAB92F00344
+          88C4000D0442F901F8C78926A7EF23F32824BDC9C9FBBE77EE39F7BE7BF32812
+          3FFE194A5DBB1F4A5DEDFA9ACAEB3A44E512741E2294C90F1D21C8BA237A109F
+          EFE345EE0C38D9ADA2751D006A3D541D21D49A7E902224032306C68664CBCC3B
+          C17831A3414167D4FBA45B7E6A9F309E8D81E76C1864B5065344187B55C093D7
+          F84B537EA7DBD36ED3D3A90D011F526FD39859A9C3FCEA7D34F427435E1B301B
+          7DED8B185260C38088132B842149D57E5D37B5E7F078AC18AF175AB0F0EE3146
+          E71A31BEA4C6C06C26746F2FA37B220FDFE47B10A5396BC0892B1408641AFA69
+          EBD0153C99284141CB499C2EDC8FD0741748AB6868DF48F1DBD011486F7AC337
+          DE767EEFD19DF18C8ECB1A6CFBEEBAA0A8FCAF5834F7CA1197BF7F29F0A253B9
+          30D6216CB78B99D3D1DC3DC86A3A80C0447BFD9E48EBF21D2E5C7B22DE3C0393
+          98A2CF47EAFA629150EA8D83124715439A1263D26684920FF7C3564FEC7CCC0E
+          327732C09D0CAC08CF1A708FE4F0F5114A77445CE1635FB88D1B439A19C02526
+          0C2CE863E73D14B7FA91FC6B1FA273BBF4C48435303254B460601D79E1A72F65
+          15DDDA14CD20612D0D2BB38CCE6928286C1F45AD6E12AE5FA58F93DC8D219224
+          6FF1091B89BAF37A76FD90BE7D6401D28A67B073F5E2472695469D5236693234
+          BDCBE50F277052D50647BFC4AACD5B308E5135464B6FF4FC5DA59D826EFA1D9A
+          5FAD20A3660009255AA4302DABFF1843F5F3199C297E007771C6F02ECFC860A2
+          630D4C253FEB70EFD532EE4EAEA2F2E53F281B5842E3F0021E4DADA1AE771619
+          B5FD0853D4C33940DEF3A9D7B7C78966CB16C40965F1C7BE6F9B97D70C43FD74
+          11EA678B0857B44070BCF8E3DEC3B9732EA2B4473CE159E5279F057A3082ED44
+          4C849B67C0E579063988CEDCF8252AAB439FD23C0EF1A526C2BAB16B6357DB31
+          B14AD909655B7FA6505933BB0D734F9124803E5DD91B24A927EC0E57B1927216
+          65523C3A9DB2F75750B6BE72CA76AB018B8D6E4C0C15AD0DE7FF0DD6E05FDF42
+          745F4BE48E490000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000024744558745469746C6500436F6D6D656E743B546F6F6C7469703B48
+          696E743B5469703B436C6F7564D3C1DBC90000021C49444154785E7D934D6B13
+          4118C7FFB3BB89ADD412DB4A23DA521B501B0AE620F5A5871CF4E2D99BA8B417
+          F52078D00F103CF8155A44053D081E0A42F1AE17452952B4F4E041140B8A62B4
+          79D99D9D571F7606F32275E137FB9B679FE73F9B8430008187C15DACDF7778A6
+          08C16E3F597F1E844115D6D7615C8FB5AE6433C8ADBBBB05298F5FDD59983F1B
+          4965ABE7CF1D718DBEDFDFFB6BDE090A5F597D7F8A341771A1A0B5C5A73AEFED
+          665D13ACB73EBA3B07CE250004513B4E218541C24DCF44F6C6AC93C868637D91
+          471AED58B880468B23E61A712AF1667D0B6B1B5F707C760200BADC926F653E77
+          EC201A01B0DD8CB3DC40088D464BA0FE4B60F3C357ACDE3A898F9F7FF4F9B7BF
+          FEFD2747FDB7804875161049A99050483356383439860B4B6F313DB10FC698CC
+          4BE45A3B9F3A3086980693BC8610CA059020E606A9D4284D8EA35CDA4FEEBE8F
+          99E922B8F7A325E70905C45C41481F202515522A089D81C00286F5FD00DEFC9A
+          840C52767D8416A50EE443C0008C020C05A44A432977BAB140C02C7234988FC2
+          EC2DA4CA026CC4E3F68B674F5F5661DD39B4C0900D0C06385CA940C20044C418
+          36D736903465162A93EDD724298141629828107B8911A2383CBBB87CE6E68A5D
+          BCFFCE2E10A7AF3DB27BCA971E0098228ABE3F42AD56FB07FFE72A8C9FB87177
+          FEFA633B77E5A11D9AB9780FC02811F6F492FC2F64A450B9BA3454BEBCDC3BDC
+          819160A78B1A42925D7E9BD25EF7F7FC014356435A0816D96C0000000049454E
+          44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000000D744558745469746C6500506572736F6E3B5F31C58F00
+          0002B449444154785E85925B48545B18C7FFDBD9337B7B9DB149D254BC0D92E3
+          0D26332D3A921619521678A0E946171F248A6CAC1EE4D0F541831EA49708A287
+          CE7938170E1DD0430F3E9C0376F450525896E13483974C6D1C47479BD97BAFBD
+          F76A0D884E42CCB7F8C1B73EBEF55BDF82C5514A111D2E9B0049A78D44858BE8
+          D44134FA29A4E2FA5F73DA6F747D33236E7D41D6B025C56AFDB5FE74D30F4ED7
+          A9A486930D850949E22F8DF9E28D7D39A69498028DD273F98E1291E739BC1F1C
+          42DFD301E41515C419387A4D3070ED3105AA8E2CA389C7BFDDFD30E754E0FCDD
+          5BA86BDCC30946E39CA6D392980249A3AF9FFDDD476FF63CC3F1B6D3C8DE4C21
+          0A216459E24D44D3FD3105CF17F447E68D1662E07990A007CB8179688A045551
+          E109EAF7620ADC217D293D7FF39B8FC3FF23140860D13F8769EF247CCBE48337
+          4867BE2B68ED7C0C8EE37800C99324C93DD2D783D191597887DD8C31F80CA991
+          C316D623FC78F6CA9A21EA1F0899B985A5C72EDEEEEFB8FF07EDB8DC42BB9C5B
+          69C7C1627A62FF1EFA53E7035ADFD43C644E4DAB0190C888FCA1D509785B7185
+          BDE98CEB9FD63347AADB9A0F41B05561BBF328722B2B114E2FC591C37B71A1E5
+          54D9EE03CEEED4B48C2A00C6E827249657D7B96A773AAC6545B9F0079650682B
+          C0935740AF2F0B3BAA1C189B9AC617454179993D3933CF7E09402A03FC8A20D9
+          BC216D97BD201BE353F3F0CD07919D99819A9A5A842519A2A8636A2684B02CC3
+          2898601493B701B030665726603DF189E99BAC29181AFD8C116F0092ACE09D77
+          116F3DCB90C232DC1361782608C47813C0C56D0090103D014029224B960824A2
+          415214288AC66E5521310861B9A2B31A0151550A408D162CB8DFBEFCF9EA1DBD
+          5925042A3BFC5FBF0C459620CB320607C29023B924E105DBFBA7C77F07E0FB46
+          D0FBE7C376005D0C71A5C64558CDD74261CC30FC0C7C05925732FB69F156C100
+          00000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000000E744558745469746C6500436F6E746163743B11C76901
+          000001DB49444154785EA5933168536110C77FDF6BA84B0511173BB9B8080A45
+          2B8A8304BA3928E224888B3A64D0A5932ED28AA20515112A14315A8418AB5890
+          826D2C8A58A2580451A882880E4A11DB0443A136DFFDC523E445272177FCBFFB
+          F31D77EF7FEFDD0B9268C712DAB4D06C9422FC27FF05D4FCF2E4F0D43424BBCD
+          4494615144331445DD0C3323D61BD1448CC6D2CFCAEBB1CB47FB3240C79FE281
+          635900D4384C420E30D1C2E5C89DB9DF03742540874900CC7FFE40E1F44106F7
+          6D60F25A3F5240ADC57804055709647CA618CD1373E5492A0B0BAC5ED7CDECE3
+          71E40E371EBE6264FC25C3F7CA5CB9F31C93F98840E223C884B7EB5C457DE907
+          BD3D1B59E9DC85C50821E1F09E6DC88421CC4088E835244D05003BF61E61FF89
+          0B2CB396EE2D7D9E96C4D5E20C170BCF181A7DCAB97C0909AC5581BF718999F2
+          5B3E7D81CDD953BC7833C7D795776CEFDD44EEC04ECF470919B89ABF14B83C28
+          144BE46F4DF0E8C947F2A31314C7FC699CBF39CDE0F5120323530830C04CA902
+          8BAE0001D5CA22776FE771633D12F41FCA7ADE1C20473A428851A0C0A5A1E3CD
+          6FEDD1F04277E168DD0D401960B956FD3E9B3BFB606B3423C6C6262AE56686C9
+          63A3B1A82D7E7B0F54039001D6005DCED39D0FFFF214185005E6DBFE9D7F03AA
+          9655B0E2294B9E0000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D22D0
+          A1D0BBD0BED0B95F312220786D6C6E733D22687474703A2F2F7777772E77332E
+          6F72672F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A
+          2F2F7777772E77332E6F72672F313939392F786C696E6B2220783D2230707822
+          20793D22307078222076696577426F783D223020302033322033322220737479
+          6C653D22656E61626C652D6261636B67726F756E643A6E657720302030203332
+          2033323B2220786D6C3A73706163653D227072657365727665223E262331333B
+          262331303B3C7374796C6520747970653D22746578742F6373732220786D6C3A
+          73706163653D227072657365727665223E2E57686974657B66696C6C3A234646
+          464646463B7D262331333B262331303B2623393B2E426C75657B66696C6C3A23
+          3131373744373B7D3C2F7374796C653E0D0A3C672069643D22D0A1D0BBD0BED0
+          B95F32223E0D0A09093C7061746820636C6173733D22426C75652220643D224D
+          302C31344C33322C326C2D362C32386C2D392D356C2D352C354C382C31384C30
+          2C31347A222F3E0D0A09093C7061746820636C6173733D225768697465222064
+          3D224D31302C31386C322C386C322D364C32382C364C31302C31387A222F3E0D
+          0A093C2F673E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          617965725F312220786D6C6E733D22687474703A2F2F7777772E77332E6F7267
+          2F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F77
+          77772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D
+          22307078222076696577426F783D2230203020333220333222207374796C653D
+          22656E61626C652D6261636B67726F756E643A6E657720302030203332203332
+          3B2220786D6C3A73706163653D227072657365727665223E262331333B262331
+          303B3C7374796C6520747970653D22746578742F6373732220786D6C3A737061
+          63653D227072657365727665223E2E59656C6C6F777B66696C6C3A2346464231
+          31353B7D262331333B262331303B2623393B2E5265647B66696C6C3A23443131
+          4331433B7D262331333B262331303B2623393B2E426C61636B7B66696C6C3A23
+          3732373237323B7D262331333B262331303B2623393B2E426C75657B66696C6C
+          3A233131373744373B7D262331333B262331303B2623393B2E57686974657B66
+          696C6C3A234646464646463B7D262331333B262331303B2623393B2E47726565
+          6E7B66696C6C3A233033394332333B7D262331333B262331303B2623393B2E73
+          74307B6F7061636974793A302E37353B7D262331333B262331303B2623393B2E
+          7374317B6F7061636974793A302E353B7D262331333B262331303B2623393B2E
+          7374327B6F7061636974793A302E32353B7D262331333B262331303B2623393B
+          2E7374337B66696C6C3A234646423131353B7D3C2F7374796C653E0D0A3C672F
+          3E0D0A3C672069643D224175746F6D6174696355706461746573223E0D0A0909
+          3C7061746820636C6173733D22477265656E2220643D224D31352E362C32352E
+          314C31342E362C3235632D312D302E322D312E362D312D312E362D32762D312E
+          31632D302E332C302D302E372C302E312D312C302E31632D342E342C302D382D
+          332E362D382D3863302D342E342C332E362D382C382D3820202623393B262339
+          3B63322E322C302C342E322C302E392C352E362C322E344C31342C313268352E
+          3748323268312E3848323456326C2D332E352C332E354331382E332C332E332C
+          31352E332C322C31322C3243352E342C322C302C372E342C302C313463302C36
+          2E362C352E342C31322C31322C313220202623393B2623393B63312E312C302C
+          322E322D302E322C332E332D302E354C31352E362C32352E317A222F3E0D0A09
+          093C7061746820636C6173733D22426C75652220643D224D33312C3233762D32
+          6C2D322E322D302E34632D302E322D302E362D302E342D312E332D302E382D31
+          2E386C312E332D312E386C2D312E342D312E346C2D312E382C312E33632D302E
+          352D302E332D312E322D302E362D312E382D302E374C32342C3134682D322020
+          2623393B2623393B6C2D302E342C322E32632D302E362C302E322D312E332C30
+          2E342D312E382C302E374C31382C31352E364C31362E362C31376C312E332C31
+          2E38632D302E332C302E352D302E362C312E322D302E382C312E384C31352C32
+          3176326C322E322C302E3463302E322C302E362C302E342C312E332C302E382C
+          312E3820202623393B2623393B4C31362E372C32376C312E342C312E346C312E
+          382D312E3363302E352C302E332C312E322C302E362C312E382C302E374C3232
+          2C333068326C302E342D322E3263302E362D302E322C312E332D302E342C312E
+          382D302E376C312E382C312E336C312E342D312E346C2D312E332D312E382020
+          2623393B2623393B63302E332D302E352C302E362D312E322C302E382D312E38
+          4C33312C32337A204D32332C3234632D312E312C302D322D302E392D322D3273
+          302E392D322C322D3273322C302E392C322C325332342E312C32342C32332C32
+          347A222F3E0D0A093C2F673E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          617965725F312220786D6C6E733D22687474703A2F2F7777772E77332E6F7267
+          2F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F77
+          77772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D
+          22307078222076696577426F783D2230203020333220333222207374796C653D
+          22656E61626C652D6261636B67726F756E643A6E657720302030203332203332
+          3B2220786D6C3A73706163653D227072657365727665223E262331333B262331
+          303B3C7374796C6520747970653D22746578742F6373732220786D6C3A737061
+          63653D227072657365727665223E2E426C75657B66696C6C3A23313137374437
+          3B7D262331333B262331303B2623393B2E59656C6C6F777B66696C6C3A234646
+          423131353B7D262331333B262331303B2623393B2E426C61636B7B66696C6C3A
+          233732373237323B7D262331333B262331303B2623393B2E477265656E7B6669
+          6C6C3A233033394332333B7D262331333B262331303B2623393B2E5265647B66
+          696C6C3A234431314331433B7D262331333B262331303B2623393B2E7374307B
+          6F7061636974793A302E37353B7D262331333B262331303B2623393B2E737431
+          7B6F7061636974793A302E353B7D3C2F7374796C653E0D0A3C672069643D2241
+          7474616368223E0D0A09093C7061746820636C6173733D22426C61636B222064
+          3D224D32302C313076313363302C322E382D322E322C352D352C35732D352D32
+          2E322D352D35563763302D312E372C312E332D332C332D3373332C312E332C33
+          2C3376313663302C302E362D302E342C312D312C31732D312D302E342D312D31
+          563130682D3276313320202623393B2623393B63302C312E372C312E332C332C
+          332C3373332D312E332C332D33563763302D322E382D322E322D352D352D3553
+          382C342E322C382C3776313663302C332E392C332E312C372C372C3773372D33
+          2E312C372D375631304832307A222F3E0D0A093C2F673E0D0A3C2F7376673E0D
+          0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          617965725F312220786D6C6E733D22687474703A2F2F7777772E77332E6F7267
+          2F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F77
+          77772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D
+          22307078222076696577426F783D2230203020333220333222207374796C653D
+          22656E61626C652D6261636B67726F756E643A6E657720302030203332203332
+          3B2220786D6C3A73706163653D227072657365727665223E262331333B262331
+          303B3C7374796C6520747970653D22746578742F6373732220786D6C3A737061
+          63653D227072657365727665223E2E426C75657B66696C6C3A23313137374437
+          3B7D262331333B262331303B2623393B2E59656C6C6F777B66696C6C3A234646
+          423131353B7D262331333B262331303B2623393B2E426C61636B7B66696C6C3A
+          233732373237323B7D262331333B262331303B2623393B2E477265656E7B6669
+          6C6C3A233033394332333B7D262331333B262331303B2623393B2E5265647B66
+          696C6C3A234431314331433B7D262331333B262331303B2623393B2E7374307B
+          6F7061636974793A302E37353B7D262331333B262331303B2623393B2E737431
+          7B6F7061636974793A302E353B7D3C2F7374796C653E0D0A3C672069643D2255
+          6E646F223E0D0A09093C7061746820636C6173733D22426C75652220643D224D
+          31342C313256392E3656364C342C31366C31302C3130762D3663372E372C302C
+          31342C322E372C31342C364332382C31382E332C32312E372C31322C31342C31
+          327A222F3E0D0A093C2F673E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D22D0
+          A1D0BBD0BED0B95F312220786D6C6E733D22687474703A2F2F7777772E77332E
+          6F72672F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A
+          2F2F7777772E77332E6F72672F313939392F786C696E6B2220783D2230707822
+          20793D22307078222076696577426F783D223020302033322033322220737479
+          6C653D22656E61626C652D6261636B67726F756E643A6E657720302030203332
+          2033323B2220786D6C3A73706163653D227072657365727665223E262331333B
+          262331303B3C7374796C6520747970653D22746578742F6373732220786D6C3A
+          73706163653D227072657365727665223E2E426C61636B7B66696C6C3A233732
+          373237323B7D262331333B262331303B2623393B2E426C75657B66696C6C3A23
+          3131373744373B7D262331333B262331303B2623393B2E57686974657B66696C
+          6C3A234646464646463B7D262331333B262331303B2623393B2E7374307B6F70
+          61636974793A302E33353B7D3C2F7374796C653E0D0A3C672069643D22507269
+          6E7476696577223E0D0A09093C7061746820636C6173733D22426C61636B2220
+          643D224D31382C313463302D332E332C322E372D362C362D3656324832763236
+          683232762D384332302E372C32302C31382C31372E332C31382C31347A222F3E
+          0D0A09093C7061746820636C6173733D2257686974652220643D224D31382C31
+          3463302D322E362C312E372D342E382C342D352E375634483476323268313876
+          2D362E334331392E372C31382E382C31382C31362E362C31382C31347A222F3E
+          0D0A09093C7061746820636C6173733D22426C61636B2220643D224D32302C32
+          304C382C33326C2D322D326C31322D31324331382C31382C32302E322C32302C
+          32302C32307A222F3E0D0A09093C7061746820636C6173733D22426C75652220
+          643D224D32342C36632D342E342C302D382C332E362D382C3873332E362C382C
+          382C3873382D332E362C382D385332382E342C362C32342C367A204D32342C32
+          30632D332E332C302D362D322E372D362D3673322E372D362C362D3673362C32
+          2E372C362C3620202623393B2623393B5332372E332C32302C32342C32307A22
+          2F3E0D0A09093C6720636C6173733D22737430223E0D0A0909093C7061746820
+          636C6173733D22426C61636B2220643D224D32362C382E334332352E342C382E
+          312C32342E372C382C32342C38632D332E332C302D362C322E372D362C367332
+          2E372C362C362C3663302E372C302C312E342D302E312C322D302E3356382E33
+          7A222F3E0D0A0909093C7061746820636C6173733D2257686974652220643D22
+          4D31382C313463302C332E332C322E372C362C362C3656384332302E372C382C
+          31382C31302E372C31382C31347A222F3E0D0A09093C2F673E0D0A093C2F673E
+          0D0A3C672069643D22D0A1D0BBD0BED0B95F32222F3E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          617965725F312220786D6C6E733D22687474703A2F2F7777772E77332E6F7267
+          2F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F77
+          77772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D
+          22307078222076696577426F783D2230203020333220333222207374796C653D
+          22656E61626C652D6261636B67726F756E643A6E657720302030203332203332
+          3B2220786D6C3A73706163653D227072657365727665223E262331333B262331
+          303B3C7374796C6520747970653D22746578742F6373732220786D6C3A737061
+          63653D227072657365727665223E2E426C75657B66696C6C3A23313137374437
+          3B7D262331333B262331303B2623393B2E59656C6C6F777B66696C6C3A234646
+          423131353B7D262331333B262331303B2623393B2E426C61636B7B66696C6C3A
+          233732373237323B7D262331333B262331303B2623393B2E477265656E7B6669
+          6C6C3A233033394332333B7D262331333B262331303B2623393B2E5265647B66
+          696C6C3A234431314331433B7D262331333B262331303B2623393B2E7374307B
+          6F7061636974793A302E37353B7D262331333B262331303B2623393B2E737431
+          7B6F7061636974793A302E353B7D3C2F7374796C653E0D0A3C672069643D2241
+          6464223E0D0A09093C7061746820636C6173733D22477265656E2220643D224D
+          32372C3134682D39563563302D302E352D302E352D312D312D31682D32632D30
+          2E352C302D312C302E352D312C3176394835632D302E352C302D312C302E352D
+          312C31763263302C302E352C302E352C312C312C316839763920202623393B26
+          23393B63302C302E352C302E352C312C312C31683263302E352C302C312D302E
+          352C312D31762D39683963302E352C302C312D302E352C312D31762D32433238
+          2C31342E352C32372E352C31342C32372C31347A222F3E0D0A093C2F673E0D0A
+          3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          617965725F312220786D6C6E733D22687474703A2F2F7777772E77332E6F7267
+          2F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F77
+          77772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D
+          22307078222076696577426F783D2230203020333220333222207374796C653D
+          22656E61626C652D6261636B67726F756E643A6E657720302030203332203332
+          3B2220786D6C3A73706163653D227072657365727665223E262331333B262331
+          303B3C7374796C6520747970653D22746578742F637373223E2E5265647B6669
+          6C6C3A234431314331433B7D3C2F7374796C653E0D0A3C7061746820636C6173
+          733D225265642220643D224D31362C3243382E332C322C322C382E332C322C31
+          3673362E332C31342C31342C31347331342D362E332C31342D31345332332E37
+          2C322C31362C327A204D32332C32306C2D332C336C2D342D346C2D342C346C2D
+          332D336C342D346C2D342D346C332D336C342C3420202623393B6C342D346C33
+          2C336C2D342C344C32332C32307A222F3E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000044744558745469746C6500436F6E646974696F6E616C466F726D6174
+          74696E7349636F6E536574526564546F426C61636B343B436F6E646974696F6E
+          616C466F726D617474696E673B98A0D4C8000002D249444154785E4D904D685C
+          5518869F7373D330C9CC346D8DC224216A37D5858A228822940856A9687ECD4C
+          4B25585D68144A8A15244A37AE224840574550680B75E1602A81800846D4855D
+          B8C8A2D4D8665A4D9BA449E6CE4C66EEBD73EEF99CCB3D48CFE1E17DCFE17BBF
+          8F73902F67620014D076757C64E8467EECDCCD63AF5F593B3E11940AE357AE4F
+          8C9E5B1E191A065C40C9DC19626E4D8CF17F78FEC5177A57F363F3EB6F9D90FA
+          D9F7447FF681C8DC872D3D2DF54FA6E4F664415646872E5F3AFC7C1FE0C8EC34
+          ABA3C300A85F8EBEF468293FBA519E3E2966F694C8C79322670A22D3E322A7F3
+          221F9D10F3E9946CBF3F292BC3AFAE5F7CEED9070167E5B5575047FB7A53734F
+          3FF57BCFC1FB1FCFA6814A192203825D0262C000D92C5E0D56AF6D2C3CB1B838
+          0284EA8F2347DECCF564BFCA0D7442C54B02912401654004B0670C7465289502
+          AEAF974F0EFEBAF48DDB81E4D3FBDA61671B8C80DC8B4930582FE06FB237DB4D
+          E71D8E01175C9AD19329F1210C40489A609267401232366C7D574795B6307A0C
+          687325D007DCDD2A441AB0C546126F9B8808AA8518137B5C1DA1B5E9069413F8
+          CD6D5D6B40D08430408216CDB0A521E8F82E44B520C6FA60D727F49B1E805B0B
+          FD3FBD5AC7E0FE94C651A0A2640A765A0CB11A00414542B9EE50F5F53220EE46
+          3D28AEADABC103398D510206C4181050242A221069C4FA7FB6DAB9DDF0BF059A
+          EECCADBFCF7FA11F9ADABFC73994DB2B104560042199AEAC62042258AB4069CB
+          FCF8F6E68DF380765742BFF65BD57BC3D1E985A06EEE1BD86750F6D789C56EA3
+          E1A6A7B876D7D95AAC7BA780C60FDD03D206C8CF8DEA467B24C554C37DA4E2F1
+          B0AB22DA89708D21080D772BB07C07AEEEF053B1E18D7FED97FF02A2BC9B8166
+          E1190005B840E6F3AE07DEB998EE5B2A667A77E6D3FDF25D3AB773A133B7349B
+          EA7917C8DA3A15BE7C90622A87FA3EDD0F806018AAFDAB803D16D73616400361
+          4C2B24DCB3FE03F304B94D918F11270000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          6100000047744558745469746C6500436F6E646974696F6E616C466F726D6174
+          74696E7349636F6E536574547261666669634C6967687473333B436F6E646974
+          696F6E616C466F726D617474696E673B4DFCA3D9000002EB49444154785E5D53
+          6F48536F143EEF7627685991058549C36CA985454490CD597D8A82FC4384F8A1
+          A2B0D035B5BEE497FA90066626044260189893A00F15094EC2922611A39A12A6
+          3FB7F99BD3253A3767B9393777DFB7F3BE779A74EECECE3D7F9EE73CEFBD5C70
+          F95F084723E86AE3FDFCE2EA26FDD3DAE682AFB75A0C511E795E557FAC04FB12
+          3A71F8CCE09833C3CD47060067025C663A945ED3A47FDBF0AC9859BE36B0414F
+          1B73CC75F188F93D56DF5EC46E341EEF3E5F99B70B01AA315F27E03C08F0E5BA
+          23B9B75A4EF83ADFD5B021EF13F6D155C72CA3D758F7F025D63352C1FA9DB7D9
+          E0542B7BDE6B62D50FF4B3A5D70F683989A9311FC8DEBC6DC9A7CB759F0BF30B
+          0EA667A44220E402CA647120C6008D89480881B48D5930ED5984BE81819EB6BB
+          B6526CC6C8D53B47AFECC9CC68371872617E6902C11484AD81C5BF5242D2B464
+          2D58ADA3E0189BBC6A7E68EF90240D29D36569613E3C053295D7865759283220
+          4E446E81B0077459BBC1EDF69663DA250190C31B360344681498185206293A41
+          350817A4D81391E295B2990251B13CFED624949C4649586C17A66C52404281C8
+          84AFF2534D0864C6B6F01D523C2ECF8796425B89860F5001123F854C5145D6D5
+          0881700417AED05F3C55C596E9907F6E09C1042895D119B2D3C43D15A4A24645
+          4DA8F0FB22105D8E0FF315526831FA7ADC1138B57DE70E04F235CA51D8BFC761
+          4CBC4A3510187706617121FA125B2B2AEB2BB7D9EB0DFC3731BE006A2209CC9A
+          028C3246BE5D51AF8109D76FF0FC1FE8EBED709AB11457057D91D04FE7E2C541
+          DBB4DF311204822404545C8120E1A6226A017662DF6E9B0DB87F046BB11C29AD
+          DECF54D8973F757B86866D3EFDB7CFD3EFFB2D1E98F546418E4990A44981F88A
+          0433DE08F45B26C1FE69E6C388CD57F0DD3AE3E038CA95D9A71E0B75892F2DF5
+          645966E5D98A7DD622634EB0C494C3CE19B383672A74D6C20BDA2AEC6F4ACC91
+          2F9E66283266032936E502614C487ED33ACA8992122E29C4A215478F71471083
+          75F6070B79B97E3856EEF50000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000001B744558745469746C65004164643B506C75733B426172
+          733B526962626F6E3B9506332F0000004749444154785EE592C90900200C046D
+          D0A6ACCAEE4604E32B8AB8011F3E0602590672244062DBCCA532E8F5D7024017
+          AC98C11B4205C6D10896F50486B744235CA09FF1FD274A34995FABF9E946D7E8
+          0000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000029744558745469746C650052656D6F76653B44656C6574
+          653B426172733B526962626F6E3B5374616E646172643B635648300000002B49
+          444154785EEDD03111000008C340C4E104D3B8091EE8C2711DB2FE9000A4CE00
+          06BA924D32F066A281015E5FEF3B94FC8DC40000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000021744558745469746C65004170706C793B4F4B3B436865
+          636B3B426172733B526962626F6E3B6463C8680000009449444154785EC59341
+          0A83400C4547BAEAB6E0097A912E2DB8D2BBB8F1201EC19BD82B74E3294AC159
+          C52F2464182498B6D0C5239B798F309040445FF1FB40370E4728787E14A8C004
+          2EBE80CA0B20F0008523A032CF3B08B97CF2C81BA97C054F703B220B229FC1CC
+          8FDE1AB1E57C8316C424D2677295CB7B7FD0680498B206AC4894B53D0189BC40
+          0D823720943C4DFE7F8D2B585260AAC36B7FD80000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D22D0
+          A1D0BBD0BED0B95F312220786D6C6E733D22687474703A2F2F7777772E77332E
+          6F72672F323030302F7376672220786D6C6E733A786C696E6B3D22687474703A
+          2F2F7777772E77332E6F72672F313939392F786C696E6B2220783D2230707822
+          20793D22307078222076696577426F783D223020302033322033322220737479
+          6C653D22656E61626C652D6261636B67726F756E643A6E657720302030203332
+          2033323B2220786D6C3A73706163653D227072657365727665223E262331333B
+          262331303B3C7374796C6520747970653D22746578742F637373223E2E526564
+          7B66696C6C3A234431314331433B7D3C2F7374796C653E0D0A3C706F6C79676F
+          6E2069643D2244656C6574652220636C6173733D225265642220706F696E7473
+          3D2232382C362032362C342031362C313420362C3420342C362031342C313620
+          342C323620362C32382031362C31382032362C32382032382C32362031382C31
+          3620222F3E0D0A3C2F7376673E0D0A}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000011744558745469746C650052657365743B556E646F3B13
+          8116FF0000009249444154785EC5D3B10D84201C467116210E61E50E37073513
+          5C7113D961C71857DABB047E26AF30FE2984BBC4E217029A9708E84A293FF94F
+          E0F559DEE2E0254A920D8935CF3B2650884C32333778365503F8326609322048
+          3E457C358055467117E329124D00604FAC402099C0CDC84060BB06AA5A03897A
+          10D7FA09874820F76CE2C1CBDC7B8CE8BF4868BFCACFFF8D3BB5DA60B784058A
+          2D0000000049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000011744558745469746C6500446F776E3B4172726F773BBD
+          FC82580000021E49444154785E6591316814411885BF99DDBD530435510B0BC3
+          555E95144A8C46F48AEBA2A43016F65A182CB4104CAF9D8D6550B4B2B4508895
+          0A625288A26050E4AC0425C110C9C588DEEDEECCEFF90FC31679ECEE3FF398FF
+          EDFBE799B987CB2F8DB52D2F20FA0A4E40BCE009A4F75AF08272225016F9E2FD
+          2B13EDF47F73FBD821D0C328C4104E0736D05E79A50B272C2C7E3D0524A90079
+          E1F8F0FD37C1016050886EA23691A4797057DC9B543C7CFAB2C6FAAF1C412058
+          0551ABCA89AE4DA840BFBB151549F76EAC327BAEC5DFBE0BA43188F794AED406
+          630C6992626CB405F52CE1F6FCB3E0C0791F6C63102318449BEF2C7488B83AD5
+          24AB6720AA1FEEC27B6DB2DEABADF0B79884F3ACAC6C70E6EC513A9D55BC4477
+          5552DE4910709A110A2F425114F4F2FEA03ADEAD09CE09BD5E9FBC9F23311901
+          ED03AC739A2C106C3D78FA911BF7DE52964ED3C952CBF5F937DC7DB23CE04A84
+          00EF258EE0ABAC314C4F8ED0FDB1CEE1F649F24268B627D95AFFC9F956036B6D
+          8CB7BA03E784A860AC65FFF01E2E4D8FF2FAF10B7AA51FD4E7CCCE8C313CB41B
+          6393102FA61A411D082132046B138E1F69307AC0F079E93DE32375C6C71A2469
+          169A0540AA1182928041950D50ABD5B97CE10443DD6F5C9C99A056DF01860815
+          F11204527141354BACE61B3E967D83516E5D9B22491275054284203111493737
+          375FCDDD7C745A88EA02FA5491C5855021EFFF59020A03EC0432C0B21DC1F876
+          085000BD7F8CA0608FE53C7C9B0000000049454E44AE426082}
+      end>
+  end
+  object frxImpressao: TfrxReport
+    Tag = 1
+    Version = '2022.1.3'
+    DotMatrixReport = False
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.AllowEdit = False
+    PreviewOptions.Buttons = [pbPrint]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.Author = 'EasyOne'
+    ReportOptions.CreateDate = 44209.307053020800000000
+    ReportOptions.Name = 'Impress'#227'o Ticket'
+    ReportOptions.LastChange = 45701.814393622680000000
+    ReportOptions.Picture.Data = {
+      055449636F6E0000010001004040000001002000284200001600000028000000
+      4000000080000000010020000000000000400000130B0000130B000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D004C433D05
+      4C433D1B4C433D464C433D7F4C433DB14C433DD14C433DF14C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DF14C433DD14C433DB14C433D7F
+      4C433D464C433D1B4C433D054C433D004C433D00000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000004C433D004C433D024C433D224C433D644C433DA7
+      4C433DD54C433DF24C433DFD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFD
+      4C433DF24C433DD54C433DA74C433D644C433D224C433D024C433D0000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000004C433D004C433D094C433D394C433D964C433DDD4C433DFD4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFD4C433DDD4C433D964C433D394C433D09
+      4C433D0000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000004C433D00
+      4C433D044C433D354C433DA14C433DEE4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF4D433DFF
+      4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DEE4C433DA1
+      4C433D354C433D044C433D000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D004C433D22
+      4C433D904C433DEB4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4D433DFF4D433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF4D433DFF
+      4D433DFF4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DEB4C433D904C433D224C433D004C433D00000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000004C433D004C433D054C433D504C433DD5
+      4C433DFE4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF4D433DFF
+      4D433DFF4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C423DFF4C423DFF
+      4C423DFF4C423DFF4C423DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFE4C433DD54C433D504C433D054C433D000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000004C433D004C433D004C433D104C433D8B4C433DF14C433DFF
+      4C433DFF4C433DFF4C433DFF4D433DFF4F443DFF4D433DFF4D433DFF4D433DFF
+      4C433DFF4C423DFF4B413CFF4A413BFF4A413BFF4E453FFF554C46FF574E48FF
+      574E48FF564D47FF524943FF4C433DFF4B413BFF4B413BFF4B423CFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DF14C433D8B4C433D104C433D004C433D00
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000004C433D004C433D004C433D234C433DAF4C433DFB4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4D433DFF51463DFF4D433DFF4C433DFF4B423CFF
+      4B413BFF524943FF69605AFF867E79FF9D9792FFB2ADA8FFC7C1BCFFCCC6C1FF
+      CCC5C1FFC9C3C0FFBEB8B4FFAAA5A0FF9A928EFF7A726DFF5E554FFF4E443FFF
+      4B413BFF4C423DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFB4C433DAF4C433D234C433D00
+      4C433D0000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      4C433D004C433D004C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4B423CFF4B423CFF5E5650FF
+      8D8781FFC1BCB6FFE5E2DDFFF5F1EDFFFBF6F4FFFBF7F6FFFAF6F5FFF9F6F2FF
+      F8F5F3FFF8F5F4FFF8F5F4FFF8F5F4FFF5F2F0FFECE9E6FFD5D1CDFFABA6A1FF
+      7C746FFF584F49FF4B413CFF4C423DFF4D433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DBD4C433D23
+      4C433D004C433D00000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000004C433D00
+      4C433D004C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4D433DFF4C423DFF4B423CFF605853FF99938EFFD7D4CEFF
+      F7F4EFFFFCF9F5FFFAF8F3FFF9F7F2FFF8F6F2FFF7F6F3FFF7F5F4FFF7F5F3FF
+      F7F5F3FFF5F4F2FFF4F3F2FFF4F3F2FFF4F2F0FFF3F1F0FFF4F2F0FFF4F2EFFF
+      EAE7E3FFC7C3BEFF88817BFF564C47FF4B413CFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DBD
+      4C433D234C433D004C433D000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000004C433D004C433D00
+      4C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF
+      4D433DFF4C433DFF4B423CFF504742FF87807BFFD6D3D0FFF8F6F3FFFBF9F5FF
+      FAF8F4FFF9F8F3FFF9F8F4FFFBF9F6FFFCFAF7FFFAFAF8FFF9F9F7FFFAF9F7FF
+      F9F8F6FFF8F7F6FFF8F8F7FFF8F7F6FFF7F5F4FFF5F2F1FFF3F1EFFFF2F0EDFF
+      F1F0ECFFF1F0EBFFEDEAE4FFBCB6B1FF6F6762FF4D433EFF4C423DFF4D433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DBD4C433D234C433D004C433D0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000004C433D004C433D10
+      4C433DAF4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF4D433DFF
+      4C433DFF4B413CFF615853FFACA7A2FFEDEBE9FFF9F8F6FFF8F6F4FFF8F6F4FF
+      FAF8F6FFFBFAF8FFF6F5F3FFE6E4E1FFD1CECBFFB8B4B1FFA39E9BFF9C9793FF
+      9D9894FFA5A19DFFB9B5B3FFD0CDCBFFE3DFDFFFF2EEEEFFF6F5F2FFF2F2EEFF
+      F0F0EBFFF0EFEAFFF1F0EAFFF3F1ECFFDDDAD5FF908984FF514842FF4B423CFF
+      4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DAF4C433D104C433D0000000000000000000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D054C433D8B
+      4C433DFC4C433DFF4C433DFF4C433DFF4D433DFF4D443DFF4D433DFF4C433DFF
+      4C433DFF736B66FFCECBC6FFF7F6F3FFF6F6F4FFF6F5F4FFF7F6F5FFFAF9F7FF
+      ECE9E8FFBFBBB8FF8B8581FF69615CFF564D47FF4F4640FF4C423DFF4B413CFF
+      4B413CFF4C433DFF4F4640FF554C47FF665D59FF817A75FFADA8A3FFD7D5D0FF
+      F0F0EBFFF2F2EEFFF1F0ECFFF1EFEBFFF2F0EDFFEBE8E4FFA39D97FF584F49FF
+      4B423CFF4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFC4C433D8B4C433D054C433D00000000000000000000000000
+      000000000000000000000000000000004C433D004C433D004C433D5C4C433DF2
+      4C433DFF4C433DFF4C433DFF4D433DFF50453CFF4E443DFF4C423DFF4D433EFF
+      85807BFFE0DED9FFFAF8F5FFF7F6F4FFF6F5F4FFF8F7F6FFF3F2F0FFC2BEBCFF
+      77706BFF524943FF4A413BFF4A413CFF4B423DFF4B423DFF4C423CFF4D423CFF
+      4D423CFF4C423CFF4C423CFF4B423DFF4A413CFF4A413BFF4D443EFF615953FF
+      958E8AFFD8D5D1FFF3F1EFFFF1EFEDFFF0EEECFFF0EEEBFFEDEBE5FFB5AFA8FF
+      5C534DFF4B423CFF4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DF24C433D5C4C433D004C433D000000000000000000
+      000000000000000000000000000000004C433D004C433D234C433DD64C433DFF
+      4C433DFF4C433DFF4C433DFF4E443DFF4E443DFF4C433DFF4D433EFF8A8480FF
+      E7E7E4FFF9F9F6FFF7F6F4FFF7F6F4FFF9F8F7FFE0DEDCFF908B87FF564D48FF
+      4B413BFF4B423DFF4D423CFF554539FF5F4837FF6D4B2FFF824F22FF865022FF
+      844E22FF834D22FF764A27FF5F4635FF594537FF51433AFF4B423DFF4B413CFF
+      4C423DFF675F59FFB1ADA8FFEBEAE7FFF0EFEDFFEEECEAFFEEEDE9FFEFECE8FF
+      B5AFAAFF59504AFF4B423CFF4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DD64C433D234C433D000000000000000000
+      0000000000000000000000004C433D004C433D034C433D8F4C433DFF4C433DFF
+      4C433DFF4C433DFF4E443DFF4E443DFF4C433DFF4B413CFF7E7673FFE8E6E4FF
+      F9FAF7FFF7F8F5FFF8F7F5FFF9F7F5FFD3CFCCFF736B66FF4C423CFF4B423DFF
+      4C423DFF5E4A39FF8A592AFFAC611EFFB45F1AFFB85E15FFBA5F10FFB65C0FFF
+      B3580FFFB1560FFFAC5511FFA35215FF9E5219FF8F501FFF6A4930FF544439FF
+      4B423EFF4B413CFF524944FF938D88FFE1DFDCFFEFEEEDFFEDECEAFFEFEDEAFF
+      EFEDE7FFA9A39DFF534A44FF4C423DFF4D433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433D8F4C433D034C433D0000000000
+      00000000000000004C433D004C433D004C433D384C433DEA4C433DFF4C433DFF
+      4C433DFF4D433DFF4F453DFF4D433DFF4B413CFF6A625DFFDBD7D6FFFDFAF9FF
+      FAF9F6FFF9F9F7FFF9F7F6FFBFB9B7FF645B57FF4B413CFF4B423DFF5B4A3AFF
+      896032FFBC7021FFCE7017FFCC6913FFC76313FFC26111FFBC5F11FFB75C11FF
+      B35712FFB05611FFAE5511FFAE5412FFAD5312FFAE5312FFAC5515FF935120FF
+      684931FF4E433CFF4B423DFF4D443EFF807974FFDCDAD6FFF1EFEDFFEFEEEBFF
+      F1F0ECFFEDECE7FF99938DFF4E443FFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DEA4C433D384C433D004C433D00
+      00000000000000004C433D004C433D0A4C433DAC4C433DFF4C433DFF4C433DFF
+      4C433DFF4D433DFF4D433DFF4C423DFF534A44FFBAB6B2FFFEFCFAFFFCFAF8FF
+      FBF9F7FFFBF9F7FFBAB5B2FF5A514CFF4A413CFF4D433DFF71583AFFBB7F2AFF
+      DC8619FFD87913FFD27114FFCC6B14FFC76514FFC46314FFBE6012FFB85D13FF
+      B35913FFB05613FFAF5512FFAD5413FFAC5313FFAC5313FFAE5513FFB45711FF
+      AE5817FF834E27FF564438FF4B423DFF4B423CFF7B746EFFDFDCD8FFF3F1EFFF
+      F0F0EDFFF2F3EFFFE6E4E0FF7A726DFF4B413CFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DAC4C433D0A4C433D00
+      00000000000000004C433D004C433D394C433DEE4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4B413CFF87807BFFF5F3F1FFFDFCFAFFFCFBF9FF
+      FEFCFAFFCAC6C3FF5D544FFF4A413CFF51463DFF8C6C3CFFDE9B31FFEC991EFF
+      E38A15FFD87C13FFD27312FFCD6C14FFC66613FFC16212FFBD6011FFB75C10FF
+      B25811FFB05411FFAC5311FFA95311FFA95212FFA95313FFAB5512FFAF5612FF
+      B65812FFB95B11FF9B521BFF5C4435FF4C423DFF4B423CFF847D77FFE6E4DFFF
+      F2F2EEFFF1F2EEFFF4F4F1FFCAC6C2FF5C534DFF4B423CFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DEE4C433D394C433D00
+      000000004C433D004C433D014C433D954C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C423CFF5C534DFFD2CFCCFFFFFFFDFFFDFCFAFFFEFDFBFF
+      E6E2E0FF716964FF4A413BFF4C423DFF8A6E3FFFEBAD36FFF5AB28FFE69C23FF
+      D69231FFCE8D3CFFC9873DFFC6833CFFC27F39FFBD7B38FFB87735FFB37231FF
+      B06F32FFAD6B33FFA86A33FFA46833FFA26631FFA1652FFFA1632BFFA46228FF
+      A95E21FFAB5713FFB7560EFF98501EFF564439FF4B423DFF4E453FFFA19B95FF
+      F1F1ECFFF1F3EFFFF2F2F0FFF1F1EEFF9B9590FF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433D954C433D01
+      4C433D004C433D004C433D234C433DDC4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4B413CFF8F8984FFFAF9F7FFFFFDFBFFFEFDFBFFF7F6F4FF
+      938C88FF4C433DFF4B423DFF6F5C40FFE0AC43FFF8BB31FFEDB02DFFE6C477FF
+      EFE4C8FFF4EBDAFFF4ECDCFFF4EBDCFFF3EBDAFFF3EBD8FFF1E9D5FFF0E7D0FF
+      EFE6CFFFEEE5CFFFEDE5CEFFEBE3CDFFE9E0CAFFE7DFC7FFE5DCC2FFE3D9BFFF
+      DED1B7FFC3A37EFFA25D24FFB55611FF8A4F25FF51433BFF4B423CFF5C534DFF
+      CDC9C4FFF5F5F2FFF2F3F0FFF4F4F2FFDCD9D5FF665D58FF4B413CFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DDC4C433D23
+      4C433D004C433D004C433D644C433DFE4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C423DFF574E48FFCCC9C6FFFFFFFEFFFFFDFBFFFFFEFDFFCBC7C4FF
+      574E48FF4B423CFF54483DFFC09947FFFAC542FFF2BE33FFEBC663FFFBF6DFFF
+      FFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFCFFFFFFF9FF
+      FFFFF7FFFFFFF7FFFFFFF7FFFFFFF9FFFFFFF9FFFFFFF9FFFFFFF8FFFFFFF8FF
+      FFFFFAFFFBFBF3FFCDB090FFB7601CFFBD5C16FF814F2AFF4F433BFF4A413BFF
+      877F79FFEFEDEAFFF3F3F1FFF3F2F1FFF5F2F0FF9B948FFF4B423CFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFE4C433D64
+      4C433D004C433D064C433DAA4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4A413BFF78716CFFF3F1EFFFFFFFFDFFFDFDFBFFF9F9F6FF8E8782FF
+      4A413BFF4B423DFF836D41FFEFC247FFF8CA41FFEEC345FFF3E4B0FFFFFEFDFF
+      F9F7F5FFDCDAD4FFD7D4CEFFD8D5CFFFD9D6CFFFD9D7D0FFD9D7CEFFD6D3C8FF
+      D2CEC2FFD0CCC0FFD0CCC3FFD0CCC5FFCDCAC3FFC7C4BEFFC6C2BBFFCECAC3FF
+      EBEAE1FFFEFFF8FFF3E8D4FFC07839FFC25F14FFB15D1DFF624836FF4B423DFF
+      574E48FFC8C4BEFFF6F5F3FFF3F2F1FFF5F5F3FFCCC8C4FF574E49FF4C423DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DAA
+      4C433D064C433D244C433DDD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4D433EFFA8A3A0FFFFFFFDFFFEFFFCFFFFFFFDFFDFDDDAFF625954FF
+      4B413CFF51473EFFBE9F48FFF8D046FFF4CD41FFEDCE58FFF6F2D5FFFFFFFFFF
+      DEDBD9FF685F59FF59504AFF5B524CFF5B524CFF5B524CFF5B524CFF5A514BFF
+      584F49FF584E48FF574E48FF584E49FF574D48FF544B45FF544A45FF554C46FF
+      9B958EFFFBFCF6FFF5F3E1FFC5894BFFC36016FFBF6119FF8C5329FF4F433BFF
+      4A413BFF8F8883FFF3F1EEFFF3F3F1FFF3F4F1FFE9E7E4FF746C67FF4A413BFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DDD
+      4C433D244C433D544C433DF64C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C423DFF59504BFFD5D2D0FFFFFFFFFFFEFFFCFFFFFFFEFFB6B0ACFF4E453FFF
+      4B413DFF726143FFE7C34FFFF4D247FFF2D144FFEFD760FFF8F6DCFFFFFFFFFF
+      D8D6D3FF584F4AFF4B413CFF4C423CFF4C423CFF4C423CFF4B413BFF4A403BFF
+      4B413CFF4B413CFF4C423DFF4C423DFF4C423DFF4C423DFF4C423DFF49403AFF
+      8C857FFFFAF9F4FFF6F5E4FFC79054FFC36017FFC16019FFAD5B20FF5C4638FF
+      4A413CFF655C56FFDFDBD6FFF5F4F2FFF2F3F0FFF5F3F1FF9B938FFF4B423CFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DF6
+      4C433D544C433D8A4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4B413BFF6E6661FFEDECEAFFFFFFFDFFFEFFFCFFFCFCF9FF908883FF4A403BFF
+      4A413DFF958149FFF7D352FFF3D349FFF2D444FFEFDA63FFF9F7DFFFFFFFFFFF
+      D8D6D3FF59504BFF4C423DFF4C433DFF4C433DFF4B413CFF5C534EFF96908CFF
+      9F9996FF5D544FFF4B423CFF4C433DFF4C433DFF4C433DFF4C433DFF4A403BFF
+      8D8680FFFBF9F3FFF7F6E5FFC89257FFBF5F16FFBE601AFFBD5F1DFF80502DFF
+      4C423CFF514842FFBEB9B3FFF7F6F3FFF3F3F1FFF8F5F4FFC2BCB9FF524943FF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433D8A4C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4A403BFF857F7AFFFAFAF8FFFEFFFCFFFFFFFDFFEFEEEBFF736B65FF4A413BFF
+      4F453EFFB49E4FFFF6D950FFF2D54AFFF3D646FFF0DE68FFFAF8E4FFFFFFFFFF
+      D4D2D0FF584F49FF4C423DFF4C433DFF4B413BFF6B635EFFCCC9C6FFFCFBFBFF
+      FDFDFCFFC2BFBCFF605752FF4B413CFF4D433DFF4C433DFF4C433DFF4A403BFF
+      8C857EFFFAF7F1FFF7F6E5FFC6935BFFBB5D16FFBC5E19FFBE5F1BFF955628FF
+      4E433CFF4B413CFF9B938DFFF7F4F2FFF3F3F1FFF6F5F4FFDBD8D4FF615853FF
+      4B423CFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DBD4C433DD44C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C423CFFA39E99FFFFFEFDFFFFFEFDFFFFFFFFFFE3E1DEFF615852FF4A413CFF
+      5C503FFFD3BD54FFF6DD50FFF3D94CFFF3DA49FFF1E071FFFCF9EAFFFFFFFFFF
+      C2BFBDFF524944FF4C423DFF4B423CFF716964FFD6D4D2FFFFFFFFFFFFFFFEFF
+      FFFFFFFFFEFEFEFFC0BCB9FF5C534EFF4B413CFF4C433DFF4C433DFF4A403BFF
+      878079FFF7F4ECFFF7F5E4FFC7935FFFB75816FFB95B1AFFBB5E1BFFA05825FF
+      54443BFF4A413BFF7E756FFFEFECE9FFF5F4F3FFF6F5F4FFEBE9E6FF716863FF
+      4A413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DD44C433DF94C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4E453FFFB9B5B2FFFFFFFFFFFFFEFDFFFFFFFFFFD8D4D1FF59504AFF4A403CFF
+      6F6140FFE8D257FFF6E052FFF4DF4FFFF3DF4DFFF4E57AFFFEFCEDFFF4F3F2FF
+      8F8986FF4C423DFF4C433DFF7C746FFFDDDBD9FFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFDFDFCFFBEBAB8FF5F5651FF4B413CFF4C433DFF4A403BFF
+      7F7770FFF1ECE2FFF4F0DDFFC59363FFAF5315FFB4571BFFB75A1BFFAE5920FF
+      624735FF4A413CFF6E655FFFE9E6E3FFF5F5F5FFF5F4F3FFEFEDECFF7C746FFF
+      4A413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DF94C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      514842FFC5C1BEFFFFFFFFFFFFFEFDFFFFFFFFFFCCC6C3FF564C46FF4A403CFF
+      746744FFEDDB5CFFF7E456FFF5E453FFF5E452FFF6EB7EFFF7F6E6FFA09A97FF
+      504742FF4C423CFF807872FFE6E4E2FFFFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFC4C1BEFF625954FF4B413CFF4B413BFF
+      716862FFDFD8CBFFF0E8D2FFBF9063FFA54F16FFAD531AFFB2561BFFB0571DFF
+      71482DFF4A413CFF675E59FFE5E2E0FFF4F4F4FFF3F4F2FFF1F0EEFF877F7BFF
+      4B413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C423DFF
+      564D47FFD0CDCAFFFFFFFEFFFFFEFDFFFFFFFFFFC1BBB7FF524842FF4A403CFF
+      776A47FFF0DE61FFF8E85AFFF7E857FFF7E955FFF8ED7AFFC1BCA5FF564D48FF
+      4A403BFF716963FFE2E0DDFFFFFFFFFFFEFEFCFFFFFEFDFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFDFFC3BFBCFF5E5550FF4B413BFF
+      514842FF8A8076FFD5CAB5FFB68A60FF9C4B15FFA95119FFAE541AFFAF571DFF
+      73482DFF4A413CFF655C56FFE3E0DDFFF4F4F4FFF3F4F2FFF2F1EFFF89827DFF
+      4B413CFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C423DFF
+      59504AFFD5D1CEFFFFFFFEFFFFFEFDFFFFFFFFFFC0BBB7FF524842FF4A403CFF
+      786C48FFF1E264FFFAEB5DFFF8EB59FFF9EC59FFF6E970FF8B7F64FF4A403CFF
+      514742FFBAB6B1FFFFFFFFFFFFFEFDFFFFFEFDFFFFFEFEFFFFFFFFFFF1EFEEFF
+      CECAC5FFF6F4F3FFFFFFFEFFFFFEFDFFFFFFFEFFFDFDFDFFBCB8B5FF5B524CFF
+      4B413CFF4D433DFF7E7467FF98724FFF964815FFA54F17FFAC5218FFAC561DFF
+      6C4830FF4A413CFF645C56FFE2DFDDFFF5F4F3FFF5F4F2FFF3F0EDFF857D78FF
+      4B413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      524843FFC5C1BEFFFFFFFFFFFFFEFDFFFFFFFFFFCAC4C0FF554B45FF4A403CFF
+      756A48FFF0E266FFFAEE5EFFF9ED5BFFFAEE5AFFF7EA6FFF897E60FF4A403CFF
+      544B45FFC3BFBBFFFFFFFFFFFFFEFDFFFFFEFDFFFFFEFFFFFFFDFEFFACA5A1FF
+      564C46FFA09994FFF7F6F5FFFEFEFDFFFEFEFDFFFFFFFFFFFDFCFCFFB6B1AEFF
+      564D48FF4B423CFF4E443FFF5E4835FF8F4818FFA34C16FFA95116FFA5551DFF
+      5E4637FF4A413CFF665D58FFE3E0DEFFF5F3F1FFF6F4F2FFF3EDEAFF7D7570FF
+      4A413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4E453FFFB9B4B0FFFFFFFFFFFFFEFDFFFFFFFFFFD9D5D2FF5A504AFF4A403CFF
+      706445FFEEDF68FFFCF061FFFAF05CFFFAF05AFFFDF581FFB3AD94FF4E443FFF
+      4B413CFF736B66FFE2E0DEFFFFFFFFFFFFFEFDFFFFFFFFFFEFEEEDFF726964FF
+      49403AFF534A44FFB4AFABFFFEFDFAFFFFFDFCFFFFFEFEFFFFFFFFFFFBFAFAFF
+      A8A3A0FF514842FF4B423DFF4F433BFF71462AFF9A4B18FFA95115FF975322FF
+      54453BFF4A413CFF6E6560FFE7E3E1FFF4F2F0FFF6F3F1FFEEE9E6FF726A65FF
+      4A413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C423CFFA09995FFFEFDFCFFFFFEFDFFFFFFFFFFE7E5E3FF675F59FF4A403CFF
+      5F5441FFDBCE65FFFDF263FFFBF15BFFFBF15BFFFDF792FFE9E7DBFF766E6AFF
+      4B413BFF4C423DFF79716CFFD9D6D3FFFEFDFCFFFAFAF9FFAFAAA6FF534943FF
+      4C423DFF4B423CFF5F5650FFCDC9C6FFFFFFFEFFFFFEFEFFFEFEFFFFFEFFFFFF
+      F6F5F5FF9B9591FF504641FF4B423DFF4F433CFF724729FFA25119FF87502BFF
+      4E433DFF4A413BFF7F7671FFEDE9E7FFF3F1EFFFF7F3F1FFE0D9D5FF635A55FF
+      4B423CFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DF94C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4A403BFF837C76FFF9F8F6FFFFFEFDFFFFFFFEFFF7F6F4FF827A75FF4A403BFF
+      50463EFFBCAF5EFFFEF464FFFBF25DFFFCF25FFFFBF598FFFFFFF7FFD9D7D5FF
+      6D655FFF4B423CFF4B423CFF645B56FF9C9691FF97918CFF574E48FF4C423DFF
+      4D433DFF4D433DFF4B413BFF726A64FFE5E3E1FFFFFFFEFFFFFEFDFFFEFEFEFF
+      FFFFFFFFF3F2F1FF98928EFF504641FF4B423DFF4F433CFF6C4930FF5E4738FF
+      4C433EFF4B413CFF98908BFFF2EEECFFF1EFEDFFF6F4F1FFCCC5C1FF554C46FF
+      4C423DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DF94C433DD44C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4B413CFF6B625BFFE9E7E3FFFFFFFEFFFFFEFDFFFFFFFEFFA49E99FF4C423CFF
+      4A413CFF978B53FFFCF269FFFCF360FFFCF260FFF9F498FFFFFEF6FFFFFFFFFF
+      A6A19DFF4B423CFF4C433DFF4B423CFF4B423CFF4C423CFF4C423DFF4D433DFF
+      4D433DFF4D433DFF4C433DFF4C423CFF8C8681FFF3F2F0FFFFFEFCFFFFFEFEFF
+      FFFFFFFFFFFFFFFFF3F2F1FF99938FFF514742FF4C423DFF4C433DFF4C433DFF
+      4C433DFF4F4640FFB2ABA7FFEFEDEAFFEEECEAFFF3F2EFFFACA6A1FF4E443EFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DD44C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C423DFF544A44FFC8C3BFFFFFFFFFFFFFFEFEFFFFFFFFFFD2CFCBFF59504AFF
+      4A413CFF6B6146FFE6DC69FFFEF562FFFBF35FFFF8F397FFFEFEF6FFFFFFFFFF
+      AAA5A1FF4A403AFF4A413BFF4A413BFF4A413BFF4A413BFF4B413BFF4B413BFF
+      4B413CFF4B413CFF4B423CFF4C423CFF504641FFA29D9AFFFAF9F8FFFFFEFEFF
+      FFFEFEFFFFFFFEFFFFFFFFFFF4F3F2FF9F9995FF524843FF4C423DFF4C433DFF
+      4C423CFF5C534DFFCBC6C2FFECE8E6FFEDEAE8FFECE9E5FF837A75FF4A413BFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DBD4C433D8A4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4B413BFF98918CFFFDFCFBFFFEFEFEFFFFFFFFFFF6F5F4FF807873FF
+      4A403BFF4F453EFFB9AE5FFFFEF667FFFBF45DFFF7F38FFFFEFEF4FFFFFFFFFF
+      C7C4C1FF706862FF6C655FFF726A65FF726B66FF706863FF6E6660FF6B635EFF
+      665E59FF635B56FF635A55FF524943FF4B413CFF564D47FFB5B1ADFFFDFCFBFF
+      FFFEFCFFFFFEFDFFFFFEFEFFFFFFFFFFF4F3F3FF9C9693FF514842FF4C423DFF
+      4B413CFF706862FFD6D1CCFFE5E1DEFFEDE8E5FFD6D0CCFF5F5651FF4B423CFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433D8A4C433D544C433DF64C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4B413CFF6B625DFFE8E6E4FFFFFEFFFFFFFEFEFFFFFFFFFFBBB6B3FF
+      514742FF4B413CFF73684AFFE5DC6AFFFCF45DFFF6EF75FFFBFADAFFFFFFFDFF
+      FCFBFBFFF0EFEFFFEFEEEEFFF3F1F1FFF3F1F1FFF1EFEEFFEFEDEDFFECEAE9FF
+      E6E5E4FFE2E0E0FFE3E1E0FFA09B98FF4F4641FF4B413CFF5A514BFFBCB8B5FF
+      FDFDFAFFFFFEFBFFFFFEFDFFFFFEFEFFFFFFFFFFF5F4F3FF9D9793FF504641FF
+      4C423CFF564D47FF928A85FFD7D3CEFFE8E4E0FFA19894FF4D433EFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DF6
+      4C433D544C433D244C433DDD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4F453FFFAEA9A5FFFFFEFDFFFFFEFDFFFFFFFEFFEFEEECFF
+      78716CFF4A413BFF4D433DFF9E945BFFFAEF6AFFF8EE5EFFF5F087FFFAF9D0FF
+      FEFEF3FFFFFFF8FFFFFFF8FFFFFEF7FFFFFEF7FFFFFFF7FFFFFFF7FFFFFFF7FF
+      FFFFF8FFFFFFF8FFFFFFFAFFF0EFE8FF81796EFF4B413CFF4B413CFF5D544FFF
+      C8C6C2FFFFFFFDFFFFFEFCFFFFFEFDFFFFFFFFFFFFFFFFFFF1F0F0FF8B8581FF
+      4C433DFF4B423CFF504741FF9A938EFFC5BFBAFF635954FF4B423CFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DDD
+      4C433D244C433D064C433DAA4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4B413CFF6C645EFFE6E4E1FFFFFFFEFFFFFEFDFFFFFFFFFF
+      C8C5C2FF59504BFF4A413CFF5F5445FFCFC46EFFFCF069FFF9EF61FFF7EF7BFF
+      F8F29CFFF8F4A6FFF7F3A5FFF6F2A3FFF5F2A1FFF5F19FFFF6EF9EFFF5EE9EFF
+      F4EC9DFFF3EC9DFFF3EB9EFFF6ED9EFFD9CC78FF746646FF4C423DFF4B413CFF
+      69615CFFD7D5D1FFFFFFFEFFFFFEFDFFFFFEFDFFFFFEFEFFFFFFFFFFE8E7E6FF
+      807975FF4C423CFF4B423CFF574D48FF6B625CFF4D443EFF4C433DFF4C433DFF
+      4C433DFF4D433EFF4D433EFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DAA
+      4C433D064C433D004C433D644C433DFE4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4D433EFFA39E9AFFFEFDFCFFFFFEFDFFFFFEFDFF
+      FBFBFAFFA6A19DFF504641FF4B413CFF6F654CFFD9CE72FFFDF470FFF9F269FF
+      F7EF6BFFF7EE6CFFF5ED6BFFF4EB68FFF3E965FFF2E763FFF3E562FFF3E361FF
+      F3E05FFFF2DE5DFFF0DC5BFFF2DB5AFFF7DD57FFD9BF56FF6B5D43FF4A413DFF
+      4B413CFF736B66FFE0DFDCFFFFFFFEFFFFFEFDFFFFFEFDFFFFFFFFFFFFFFFFFF
+      E4E3E2FF7A736FFF4B423CFF4C423DFF4B423CFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4D433EFF4E453FFF4D433EFF4C433DFF4C433DFF4C433DFE4C433D64
+      4C433D004C433D004C433D234C433DDC4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4B423CFF605751FFD5D3D0FFFFFFFFFFFFFEFDFF
+      FFFFFEFFF4F3F2FF918B86FF4D433EFF4B413CFF6D644CFFCAC270FFF7F275FF
+      F7F16BFFF6EE68FFF4ED66FFF4EA64FFF3E762FFF2E560FFF1E25EFFF2E05CFF
+      F3DE5AFFF3DD59FFF2D957FFF2D754FFF3D653FFF6D755FFCCB250FF6E5F41FF
+      4C423DFF4B423CFF7D7671FFE8E7E4FFFFFFFDFFFFFDFCFFFFFEFDFFFFFEFEFF
+      FFFFFFFFE2E0DEFF79716CFF4B413CFF4C433DFF4D433DFF4C433DFF4C433DFF
+      4C433DFF4D433DFF4E453FFF4D433EFF4C433DFF4C433DFF4C433DDC4C433D23
+      4C433D004C433D004C433D014C433D954C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4D433DFF4D433DFF4B413CFF7A736DFFEAE9E6FFFFFFFFFF
+      FFFEFDFFFFFFFFFFEEEDECFF8D8682FF4E443FFF4A413CFF5E5445FFA9A062FF
+      EAE270FFF8F16AFFF5EC65FFF3E762FFF2E560FFF0E35DFFEFE05BFFF0DE5AFF
+      F1DB58FFF1D957FFF1D755FFF2D554FFF2D453FFF2D651FFF5DA50FFC7AD4DFF
+      5D503FFF4B423DFF4C433DFF8B8580FFF0EEECFFFFFFFDFFFFFEFCFFFFFEFDFF
+      FFFFFFFFFFFFFFFFE1DFDDFF7D7571FF4D443EFF4C423DFF4D433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4D433DFF4C433DFF4C433DFF4C433D954C433D01
+      4C433D00000000004C433D004C433D394C433DEE4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4D433DFF4D433DFF4C433DFF4D443EFF96908BFFF6F5F4FF
+      FEFFFEFFFEFEFEFFFFFFFFFFF0EFEDFF98928EFF524943FF4A403CFF4F463FFF
+      7A714EFFBCB262FFE9DD6AFFF3E862FFF2E75CFFF1E459FFF0E256FFF0DF55FF
+      F0DC55FFF1DA54FFF3D953FFF2D853FFEED354FFDEC653FFC4AE4EFF827244FF
+      51473EFF4C423DFF4B413CFF4F4540FF96908CFFF4F3F0FFFFFEFCFFFFFEFDFF
+      FFFFFFFFFFFEFEFFFFFFFFFFEAE8E8FF928C88FF504641FF4C423DFF4D433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DEE4C433D394C433D00
+      00000000000000004C433D004C433D0A4C433DAC4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4D433DFF4D433BFF4C423BFF524842FFAAA6A0FF
+      FBFBFAFFFFFFFEFFFFFFFEFFFFFFFFFFF6F5F5FFADA8A4FF5B524CFF4A413BFF
+      4A413CFF534940FF766C4BFFA89D59FFC0B55EFFCABE59FFD1C455FFD5C555FF
+      D5C354FFCFBB53FFC4B053FFB6A451FF938349FF6C5E42FF564B3FFF4B413DFF
+      4A413BFF544A45FF605751FF4C423CFF514742FFA39E99FFF9F8F6FFFFFEFDFF
+      FFFEFEFFFFFEFDFFFFFEFDFFFFFFFFFFF3F2F1FF999390FF504641FF4C423DFF
+      4D433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DAC4C433D0A4C433D00
+      00000000000000004C433D004C433D004C433D384C433DEA4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4D433BFF4D433CFF4B423CFF5B524CFF
+      C2BEBAFFFEFEFDFFFFFEFDFFFFFEFEFFFFFFFFFFFCFBFBFFCAC7C4FF77706BFF
+      514742FF4A403BFF4A403CFF4D433DFF52483FFF5A4F40FF605641FF635841FF
+      635841FF5D523FFF554A3EFF4F453DFF4B423DFF4A413CFF4A403BFF4F4540FF
+      6B635DFFB5B1ADFFD7D4D2FF706863FF4A403AFF544A45FFACA7A3FFFBFAF8FF
+      FFFEFCFFFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFFF5F4F4FFA19C98FF534A44FF
+      4C423CFF4D433DFF4C433DFF4C433DFF4C433DEA4D433E3800000000978B8300
+      9388800000000000000000004C433D004C433D034C433D8F4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433CFF4B413CFF
+      5F5651FFBFBBB8FFFCFBFAFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFFFEEEDECFF
+      BCB8B5FF807975FF5A514BFF4C423DFF4A403BFF4A403CFF4A403CFF4A403CFF
+      4A403CFF4A413CFF4A413CFF4A403BFF4C423DFF584F49FF7A736EFFB2AEA9FF
+      E7E6E4FFFEFDFDFFFFFFFFFFD4D1CFFF6A625DFF4A413BFF554C46FFB5B1ACFF
+      FEFCFBFFFFFEFDFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFF8F7F7FFA7A29EFF
+      534A44FF4C423DFF4D433DFF4C433DFF4C433D8F50474104BCB0A701968B8300
+      958981000000000000000000000000004C433D004C433D234C433DD64C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4D433DFF4D433DFF4D433DFF
+      4B413CFF5A514CFFACA7A3FFF5F4F3FFFFFFFFFFFFFEFFFFFFFEFFFFFFFFFFFF
+      FFFFFFFFF6F5F5FFD6D3D0FFA5A09CFF827C77FF6A625DFF625A54FF605751FF
+      605752FF625953FF665E59FF7E7873FFA29C98FFCFCCCAFFF4F2F1FFFEFEFEFF
+      FFFFFFFFFFFFFFFFFFFEFDFFFFFFFFFFCFCCC9FF5F5650FF4A403BFF5E5650FF
+      CBC7C5FFFFFFFDFFFFFDFBFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFF7F6F6FF
+      A09B97FF524843FF4C433DFF4C433DD64C433D234C433D000000000000000000
+      000000000000000000000000000000004C433D004C433D004C433D5C4C433DF2
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4D433DFF4B423CFF524943FF8B8480FFD8D5D3FFFCFBFBFFFFFFFFFFFFFFFFFF
+      FFFEFFFFFFFFFFFFFFFFFFFFFFFFFEFFF7F7F6FFEBEAE9FFE5E4E2FFE3E1DFFF
+      E3E1DFFFE5E3E1FFE9E7E6FFF5F5F4FFFFFEFEFFFFFFFFFFFFFFFEFFFFFEFDFF
+      FFFEFDFFFFFFFFFFFFFFFEFFEDECEAFFAFABA7FF5B524CFF4C423DFF4B413CFF
+      6A625DFFD6D3D0FFFFFFFDFFFFFEFDFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFF
+      F4F3F2FF847C76FF4B413BF24C433D5C4C433D004C433D000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D054C433D8B
+      4C433DFC4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4D433DFF4C423DFF4B423CFF605752FFA09A95FFE0DEDCFFFDFCFCFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFEFDFFFFFEFDFFFFFEFDFFFFFFFEFF
+      FFFEFDFFECEBE8FFB5B1ADFF736C66FF504741FF4C423DFF4D433DFF4C433DFF
+      4B413CFF6C635EFFD1CECAFFFFFEFCFFFFFEFCFFFFFEFEFFFFFFFFFFFFFFFFFF
+      DBD7D4FF6C625DFC4A403B8B4C433D054C433D00000000000000000000000000
+      0000000000000000000000000000000000000000000000004C433D004C433D10
+      4C433DAF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4B423CFF4D433DFF665D58FF9C9692FF
+      D1CECCFFF2F1F0FFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFEFFFBFAF9FFE1DFDDFF
+      AAA5A1FF716A64FF504741FF4B413BFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4B413CFF675E59FFCECBC7FFFFFEFDFFFFFFFFFFFEFEFDFFDBD7D4FF
+      746B66FF4B413BAF4C423D104C433D0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000004C433D004C433D00
+      4C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4B423CFF4B423CFF
+      59504AFF78706BFFA09A96FFC1BEBBFFD7D4D2FFE2E0DEFFEAE7E6FFEEECEAFF
+      EDEBE9FFEAE8E7FFE5E3E2FFDEDCD9FFCDCAC7FFAFAAA6FF8E8782FF645C56FF
+      4D443EFF4B413BFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4B413CFF655C57FFAEA9A4FFC8C4C0FF9F9A95FF685F5AFF
+      4B423CBD4C423D234C423D004C433D0000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000004C433D00
+      4C433D004C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C423DFF4B413BFF4B423CFF524943FF584F4AFF615852FF6B625CFF726963FF
+      706762FF6C635DFF655C56FF5C534EFF554C46FF4D443EFF4A413BFF4B423CFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4B423CFF4F4540FF544A45FF4C423CFF4B413BBD
+      4C433D234C423D004C433D000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      4C433D004C433D004C433D234C433DBD4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C423DFF4B423CFF4B413CFF4B413BFF
+      4B413BFF4B413CFF4B423CFF4B423CFF4C423DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C423DFF4C433DBD4C433D23
+      4C433D004C433D00000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000004C433D004C433D004C433D234C433DAF4C433DFB4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFB4C433DAF4C433D234C433D00
+      4C433D0000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000004C433D004C433D004C433D104C433D8B4C433DF14C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DF14C433D8B4C433D104C433D004C433D00
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000004C433D004C433D054C433D504C433DD5
+      4C433DFE4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFE4C433DD54C433D504C433D054C433D000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D004C433D22
+      4C433D904C433DEB4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DEB4C433D904C433D224C433D004C433D00000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000004C433D00
+      4C433D044C433D364C433D9A4C433DEA4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DEA4C433D9A
+      4C433D364C433D044C433D000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000004C433D004C433D044C433D364C433D964C433DD94C433DFA4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFA4C433DD94C433D964C433D364C433D04
+      4C433D0000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000004C433D004C433D034C433D1B4C433D5F4C433DAB
+      4C433DDE4C433DF64C433DFE4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFF4C433DFE
+      4C433DF64C433DDE4C433DAB4C433D5F4C433D1B4C433D034C433D0000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000004C433D004C433D004C433D07
+      4C433D244C433D544C433D894C433DB04C433DD14C433DF14C433DFF4C433DFF
+      4C433DFF4C433DFF4C433DFF4C433DFF4C433DF14C433DD14C433DB04C433D89
+      4C433D544C433D244C433D074C433D004C433D00000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000FFFFFC00003FFFFFFFFFE0000007FFFFFFFF80000001FFFFFFFE0000
+      00007FFFFFFC000000003FFFFFF0000000000FFFFFE00000000007FFFFC00000
+      000003FFFF800000000001FFFF000000000000FFFE0000000000007FFC000000
+      0000003FF80000000000001FF80000000000001FF00000000000000FE0000000
+      00000007E000000000000007C000000000000003C00000000000000380000000
+      0000000180000000000000018000000000000001000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000800000000000000180000000
+      000000018000000000000001C000000000000003C000000000000003E0000000
+      00000007E000000000000003F00000000000000FF80000000000001FF8000000
+      0000001FFC0000000000003FFE0000000000007FFF000000000000FFFF800000
+      000001FFFFC00000000003FFFFE00000000007FFFFF0000000000FFFFFFC0000
+      00003FFFFFFE000000007FFFFFFF80000001FFFFFFFFE0000007FFFFFFFFFC00
+      003FFFFF}
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    ShowProgress = False
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 608
+    Top = 274
+    Datasets = <>
+    Variables = <
+      item
+        Name = ' New Category1'
+        Value = Null
+      end
+      item
+        Name = 'nrazao'
+        Value = Null
+      end
+      item
+        Name = 'nfantasia'
+        Value = Null
+      end
+      item
+        Name = 'nendereco'
+        Value = Null
+      end
+      item
+        Name = 'nnumero'
+        Value = Null
+      end
+      item
+        Name = 'nbairro'
+        Value = Null
+      end
+      item
+        Name = 'ncep'
+        Value = Null
+      end
+      item
+        Name = 'ntelefone'
+        Value = Null
+      end
+      item
+        Name = 'nfone1'
+        Value = Null
+      end
+      item
+        Name = 'nfone2'
+        Value = Null
+      end
+      item
+        Name = 'nemail'
+        Value = Null
+      end
+      item
+        Name = 'ncnpj'
+        Value = Null
+      end
+      item
+        Name = 'nie'
+        Value = Null
+      end
+      item
+        Name = 'wlogo'
+        Value = Null
+      end
+      item
+        Name = 'ncidade'
+        Value = Null
+      end
+      item
+        Name = 'filtro'
+        Value = Null
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Courier New'
+      Font.Style = []
+      HGuides.Strings = (
+        '120,94496'
+        '147,40167'
+        '173,85838'
+        '200,31509'
+        '230,55133'
+        '257,00804')
+      VGuides.Strings = (
+        '529,1342'
+        '86,92919'
+        '196,53556'
+        '328,81911'
+        '49,13389'
+        '275,90569'
+        '495,11843'
+        '86,92919'
+        '480,00031'
+        '117,16543'
+        '495,11843')
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 76.000000000000000000
+      PaperSize = 256
+      LeftMargin = 14.000000000000000000
+      RightMargin = 14.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+      OnBeforePrint = 'Page1OnBeforePrint'
+      object DadosTicket: TfrxMasterData
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
+        Height = 287.244094490000000000
+        Top = 18.897650000000000000
+        Width = 687.874460000000000000
+        DataSetName = 'frxImpressaoTicket'
+        RowCount = 1
+        object frxImpressaoTicketvalor: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 398.630180000000000000
+          Top = 58.574830000000000000
+          Width = 105.826840000000000000
+          Height = 18.897650000000000000
+          DataSetName = 'frxImpressaoTicket'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."valor"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketvalor_real: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 7.559060000000000000
+          Top = 101.149660000000000000
+          Width = 676.535870000000000000
+          Height = 18.897650000000000000
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            
+              '#####([frxImpressaoTicket."valor_real"])########################' +
+              '#')
+          ParentFont = False
+        end
+        object frxImpressaoTicketmatricula: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 65.929190000000000000
+          Top = 123.047310000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'matricula'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."matricula"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketcodigointerno: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 175.094620000000000000
+          Top = 123.047310000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'codigointerno'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."codigointerno"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketsecretaria: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 319.039580000000000000
+          Top = 123.047310000000000000
+          Width = 362.834880000000000000
+          Height = 18.897650000000000000
+          DataField = 'secretaria'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."secretaria"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketdataemissao: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 26.692950000000000000
+          Top = 151.063080000000000000
+          Width = 105.826840000000000000
+          Height = 18.897650000000000000
+          DataField = 'dataemissao'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."dataemissao"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketmesdesconto: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 245.905690000000000000
+          Top = 151.063080000000000000
+          Width = 177.637910000000000000
+          Height = 18.897650000000000000
+          DataField = 'mesdesconto'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."mesdesconto"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketmespagamento: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 483.779840000000000000
+          Top = 151.063080000000000000
+          Width = 200.315090000000000000
+          Height = 18.897650000000000000
+          DataField = 'mespagamento'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."mespagamento"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketfornecedor: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 55.929190000000000000
+          Top = 177.519790000000000000
+          Width = 381.732530000000000000
+          Height = 18.897650000000000000
+          DataField = 'fornecedor'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."fornecedor"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketcodigo_ticket: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 457.000310000000000000
+          Top = 177.519790000000000000
+          Width = 102.047310000000000000
+          Height = 18.897650000000000000
+          DataField = 'codigo_ticket'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."codigo_ticket"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketassociado: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 75.165430000000000000
+          Top = 205.756030000000000000
+          Width = 566.929500000000000000
+          Height = 18.897650000000000000
+          DataField = 'associado'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."associado"]')
+          ParentFont = False
+        end
+        object frxImpressaoTicketmatricula1: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 411.968770000000000000
+          Top = 253.212740000000000000
+          Width = 207.874150000000000000
+          Height = 13.228346460000000000
+          DataField = 'nmusuario'
+          DataSetName = 'frxImpressaoTicket'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxImpressaoTicket."nmusuario"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+    end
+  end
+  object mdPesquisa: TdxMemData
+    Indexes = <>
+    SortOptions = []
+    Left = 592
+    Top = 228
+    object mdPesquisaid_lancamento_bancario: TIntegerField
+      FieldName = 'id_lancamento_bancario'
+    end
+    object mdPesquisadata_emissao: TDateField
+      FieldName = 'data_emissao'
+    end
+    object mdPesquisadata_competencia: TDateField
+      FieldName = 'data_competencia'
+    end
+    object mdPesquisanumero: TStringField
+      FieldName = 'numero'
+      Size = 40
+    end
+    object mdPesquisavalor: TFloatField
+      FieldName = 'valor'
+    end
+    object mdPesquisatipo_movimento: TStringField
+      FieldName = 'tipo_movimento'
+      Size = 10
+    end
+    object mdPesquisasituacao: TStringField
+      FieldName = 'situacao'
+      Size = 45
+    end
+    object mdPesquisahistorico: TStringField
+      FieldName = 'historico'
+      Size = 500
+    end
+    object mdPesquisaconciliado: TStringField
+      FieldName = 'conciliado'
+      Size = 10
+    end
+    object mdPesquisacheque: TStringField
+      FieldName = 'cheque'
+      Size = 10
+    end
+    object mdPesquisanhistorico: TStringField
+      FieldName = 'nhistorico'
+      Size = 100
+    end
+    object mdPesquisanbanco: TStringField
+      FieldName = 'nbanco'
+      Size = 100
+    end
+    object mdPesquisatem_anexo: TIntegerField
+      FieldName = 'tem_anexo'
+    end
+  end
+  object TabConta: TClientDataSet
+    PersistDataPacket.Data = {
+      C80000009619E0BD010000001800000007000000000003000000C8000869645F
+      636F6E7461040001000000000006636F6469676F040001000000000007616765
+      6E6369610100490000000100055749445448020002000A0005636F6E74610100
+      490000000100055749445448020002000A000B636F7272656E74697374610100
+      4900000001000557494454480200020050000562616E636F0100490000000100
+      055749445448020002003C00096E706573717569736101004900000001000557
+      4944544802000200C8000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 56
+    Top = 451
+    object TabContaid_conta: TIntegerField
+      FieldName = 'id_conta'
+    end
+    object TabContacodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object TabContaagencia: TStringField
+      FieldName = 'agencia'
+      Size = 10
+    end
+    object TabContaconta: TStringField
+      FieldName = 'conta'
+      Size = 10
+    end
+    object TabContacorrentista: TStringField
+      FieldName = 'correntista'
+      Size = 80
+    end
+    object TabContabanco: TStringField
+      FieldName = 'banco'
+      Size = 60
+    end
+    object TabContanpesquisa: TStringField
+      FieldName = 'npesquisa'
+      Size = 200
+    end
+  end
+  object dsconta: TUniDataSource
+    DataSet = TabConta
+    Left = 56
+    Top = 424
+  end
+  object TabCusto: TClientDataSet
+    PersistDataPacket.Data = {
+      630000009619E0BD01000000180000000300000000000300000063000869645F
+      637573746F04000100000000000964657363726963616F010049000000010005
+      5749445448020002003C0005637573746F010049000000010005574944544802
+      00020050000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 112
+    Top = 451
+    object TabCustoid_custo: TIntegerField
+      FieldName = 'id_custo'
+    end
+    object TabCustodescricao: TStringField
+      FieldName = 'descricao'
+      Size = 60
+    end
+    object TabCustocusto: TStringField
+      FieldName = 'custo'
+      Size = 80
+    end
+  end
+  object dsCusto: TUniDataSource
+    DataSet = TabCusto
+    Left = 112
+    Top = 424
+  end
+  object TabHistorico: TClientDataSet
+    PersistDataPacket.Data = {
+      6B0000009619E0BD0100000018000000030000000000030000006B000C69645F
+      686973746F7269636F04000100000000000964657363726963616F0100490000
+      000100055749445448020002003C00096E706573717569736101004900000001
+      000557494454480200020064000000}
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'id_historico'
+        DataType = ftInteger
+      end
+      item
+        Name = 'descricao'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'npesquisa'
+        DataType = ftString
+        Size = 100
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 168
+    Top = 451
+    object TabHistoricoid_historico: TIntegerField
+      FieldName = 'id_historico'
+    end
+    object TabHistoricodescricao: TStringField
+      FieldName = 'descricao'
+      Size = 60
+    end
+    object TabHistoriconpesquisa: TStringField
+      FieldName = 'npesquisa'
+      Size = 100
+    end
+  end
+  object dsHistorico: TUniDataSource
+    DataSet = TabHistorico
+    Left = 168
+    Top = 424
+  end
+end

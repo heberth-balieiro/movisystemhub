@@ -1,0 +1,1712 @@
+inherited FrmRelAssociado: TFrmRelAssociado
+  Caption = 'Relat'#243'rio Associado'
+  ClientHeight = 424
+  OnShow = FormShow
+  ExplicitHeight = 424
+  TextHeight = 17
+  inherited PanelButton: TPanel
+    Top = 399
+    ExplicitTop = 399
+  end
+  inherited PanelClient: TPanel
+    Height = 359
+    ExplicitHeight = 359
+  end
+  inherited cxGroupBox1: TcxGroupBox
+    ExplicitHeight = 359
+    Height = 359
+    inherited BtnImprimir: TStyledBitBtn
+      Left = 114
+      Top = 318
+      TabOrder = 3
+      ExplicitLeft = 114
+      ExplicitTop = 318
+    end
+    inherited BtnCancelar: TStyledBitBtn
+      Top = 318
+      TabOrder = 4
+      OnClick = btnCancelarClick
+      ExplicitTop = 318
+    end
+    object cxGroupBox2: TcxGroupBox
+      AlignWithMargins = True
+      Left = 4
+      Top = 76
+      Margins.Left = 0
+      Margins.Right = 0
+      Align = alTop
+      Caption = 'Filtros principais'
+      PanelStyle.Active = True
+      Style.TextColor = clNavy
+      Style.TextStyle = [fsBold]
+      Style.TransparentBorder = True
+      TabOrder = 1
+      Transparent = True
+      Height = 168
+      Width = 442
+      object Label1: TLabel
+        Left = 4
+        Top = 21
+        Width = 49
+        Height = 17
+        Caption = 'Situa'#231#227'o'
+      end
+      object Label17: TLabel
+        Left = 123
+        Top = 21
+        Width = 41
+        Height = 17
+        Caption = 'Cidade'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label40: TLabel
+        Left = 4
+        Top = 70
+        Width = 46
+        Height = 17
+        Caption = 'Lota'#231#227'o'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label21: TLabel
+        Left = 4
+        Top = 119
+        Width = 58
+        Height = 17
+        Caption = 'Secretaria'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object cxSituacao: TcxComboBox
+        Left = 4
+        Top = 39
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Ativo'
+          'Inadimplente'
+          'Suspenso'
+          'Inativo'
+          'Cancelado'
+          'Afastado')
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 0
+        Text = 'ATIVO'
+        Width = 120
+      end
+      object cxCidade: TcxLookupComboBox
+        Left = 123
+        Top = 39
+        Cursor = crIBeam
+        Properties.Alignment.Horz = taLeftJustify
+        Properties.CaseSensitiveSearch = True
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.DropDownRows = 10
+        Properties.DropDownWidth = 400
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_cidade'
+        Properties.ListColumns = <
+          item
+            FieldName = 'ncidade'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsCidade
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 1
+        Width = 315
+      end
+      object cxLotacao: TcxLookupComboBox
+        Left = 4
+        Top = 88
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_lotacao'
+        Properties.ListColumns = <
+          item
+            FieldName = 'nlotacao'
+          end>
+        Properties.ListOptions.GridLines = glNone
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsLotacao
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 2
+        Width = 434
+      end
+      object cxsecretaria: TcxLookupComboBox
+        Left = 4
+        Top = 137
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.ImmediatePost = True
+        Properties.IncrementalFilteringOptions = [ifoHighlightSearchText, ifoUseContainsOperator]
+        Properties.KeyFieldNames = 'id_secretaria'
+        Properties.ListColumns = <
+          item
+            FieldName = 'nsecretaria'
+          end>
+        Properties.ListOptions.GridLines = glNone
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dsSecretaria
+        EditValue = 0
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 3
+        Width = 434
+      end
+    end
+    object cxGroupBox3: TcxGroupBox
+      Left = 4
+      Top = 247
+      Align = alTop
+      Caption = 'Filtros opcionais'
+      PanelStyle.Active = True
+      Style.TextColor = clNavy
+      Style.TextStyle = [fsBold]
+      Style.TransparentBorder = True
+      TabOrder = 2
+      Transparent = True
+      Height = 69
+      Width = 442
+      object Label2: TLabel
+        Left = 4
+        Top = 21
+        Width = 68
+        Height = 17
+        Caption = 'S'#243'cio deste'
+      end
+      object Label10: TLabel
+        Left = 192
+        Top = 21
+        Width = 102
+        Height = 17
+        Caption = 'Anivers'#225'rio (M'#234's)'
+      end
+      object cxdata1: TcxDateEdit
+        Left = 4
+        Top = 39
+        Properties.ButtonGlyph.SourceDPI = 96
+        Properties.ButtonGlyph.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000014744558745469746C6500446174653B43616C656E6461
+          723BDF38D8A6000001D149444154785E8553316E5341107D9B7C5120C325C046
+          5434544E1C51240484284002F9021C818A2E4A68728470015A44811134360810
+          4D2863B80305C2B2FEDFDDC9BC99FD76EC26238FDF9BD99DB733BBFA1580A0BE
+          A9BE81A505ACDA7A5ED4B37AAC583C7EF6F8B32AECE49C91B38028EA89313D39
+          1762F23D758C93E1F79FBB265005ECDC7EF210102FD60A20298F1192C8135254
+          54CF91EB11DFDE7D1AB0D646C822B671FEE7CC05929FCA9C903B2EF866E71ACF
+          A2858A206CBBAE917862B4F61553C1568CF9926B14252F04C2AFA787E80FEFE0
+          6A9DFD9AD89112515C31F17969EFDF9E023FEEBA40E4A95E4737A384FF4A24C1
+          30247F8BA621412B10EDB4AC3EFAFADBAAF6B6BAF8A89CF9FDED2E3E8CA7B6FE
+          E85E0FB42280CA83B603E17D14CED98DF9D3724DC8DB0E2EDC41533AE0FEDD7E
+          17C222F2AD1BB63B59473729AC5C108402F182409D7CFE2CF8FBEA858D70FDF5
+          0946638E23B83FE861349982B6AF3C6CAC0930A0401984291FC554513ACA248A
+          BCC8B07A07B5065C4819E81C9C9402C1DE36C76111B48B5B2EA04108405CDE81
+          07FE8462B834293D052E4281CCC49BB8EC20CE66FF262F8F46038817F85F21C2
+          9265BEE5F5FCFF170205E66F8E9F3F50BCB2F619874B3EE79AB5E71DE48B3460
+          34A2F10000000049454E44AE426082}
+        Properties.ClearKey = 16452
+        Properties.DateButtons = []
+        Properties.ImmediatePost = True
+        Properties.SaveTime = False
+        Properties.ShowTime = False
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 0
+        Width = 95
+      end
+      object cxdata2: TcxDateEdit
+        Left = 98
+        Top = 39
+        Properties.ButtonGlyph.SourceDPI = 96
+        Properties.ButtonGlyph.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C00000014744558745469746C6500446174653B43616C656E6461
+          723BDF38D8A6000001D149444154785E8553316E5341107D9B7C5120C325C046
+          5434544E1C51240484284002F9021C818A2E4A68728470015A44811134360810
+          4D2863B80305C2B2FEDFDDC9BC99FD76EC26238FDF9BD99DB733BBFA1580A0BE
+          A9BE81A505ACDA7A5ED4B37AAC583C7EF6F8B32AECE49C91B38028EA89313D39
+          1762F23D758C93E1F79FBB265005ECDC7EF210102FD60A20298F1192C8135254
+          54CF91EB11DFDE7D1AB0D646C822B671FEE7CC05929FCA9C903B2EF866E71ACF
+          A2858A206CBBAE917862B4F61553C1568CF9926B14252F04C2AFA787E80FEFE0
+          6A9DFD9AD89112515C31F17969EFDF9E023FEEBA40E4A95E4737A384FF4A24C1
+          30247F8BA621412B10EDB4AC3EFAFADBAAF6B6BAF8A89CF9FDED2E3E8CA7B6FE
+          E85E0FB42280CA83B603E17D14CED98DF9D3724DC8DB0E2EDC41533AE0FEDD7E
+          17C222F2AD1BB63B59473729AC5C108402F182409D7CFE2CF8FBEA858D70FDF5
+          0946638E23B83FE861349982B6AF3C6CAC0930A0401984291FC554513ACA248A
+          BCC8B07A07B5065C4819E81C9C9402C1DE36C76111B48B5B2EA04108405CDE81
+          07FE8462B834293D052E4281CCC49BB8EC20CE66FF262F8F46038817F85F21C2
+          9265BEE5F5FCFF170205E66F8E9F3F50BCB2F619874B3EE79AB5E71DE48B3460
+          34A2F10000000049454E44AE426082}
+        Properties.ClearKey = 16452
+        Properties.DateButtons = []
+        Properties.ImmediatePost = True
+        Properties.SaveTime = False
+        Properties.ShowTime = False
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 1
+        Width = 95
+      end
+      object cxaniversario: TcxComboBox
+        Left = 192
+        Top = 39
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Todos os meses'
+          'Janeiro'
+          'Fevereiro'
+          'Mar'#231'o'
+          'Abril'
+          'Maio'
+          'Junho'
+          'Julho'
+          'Agosto'
+          'Setembro'
+          'Outubro'
+          'Novembro'
+          'Dezembro')
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 2
+        Text = 'TODOS OS MESES'
+        Width = 246
+      end
+    end
+    object cxGroupBox4: TcxGroupBox
+      Left = 4
+      Top = 4
+      Align = alTop
+      Caption = 'Modelo do relat'#243'rio'
+      PanelStyle.Active = True
+      Style.TextColor = clNavy
+      Style.TextStyle = [fsBold]
+      Style.TransparentBorder = True
+      TabOrder = 0
+      Transparent = True
+      Height = 69
+      Width = 442
+      object Label3: TLabel
+        Left = 4
+        Top = 21
+        Width = 190
+        Height = 17
+        Caption = 'Selecione o modelo do relat'#243'rio'
+      end
+      object Label4: TLabel
+        Left = 318
+        Top = 21
+        Width = 79
+        Height = 17
+        Caption = 'Ordernar por'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object cxModeloRelatorio: TcxComboBox
+        Left = 4
+        Top = 39
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          '1 - Listagem simples'
+          '2 - Listagem completa'
+          '3 - Listagem agrupada por cidade'
+          '4 - Listagem agrupada por secretaria'
+          '5 - Listagem agrupada por lota'#231#227'o'
+          '6 - Listagem de aniversariante'
+          '7 - Listagem por data de associa'#231#227'o')
+        Properties.OnChange = cxModeloRelatorioPropertiesChange
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 0
+        Text = '1 - LISTAGEM SIMPLES'
+        Width = 315
+      end
+      object cxordernar: TcxComboBox
+        Left = 318
+        Top = 39
+        Properties.CharCase = ecUpperCase
+        Properties.ClearKey = 16452
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Matr'#237'cula'
+          'Nome'
+          'Situa'#231#227'o'
+          'Cidade')
+        StyleFocused.BorderColor = clNavy
+        StyleFocused.Color = 15855596
+        TabOrder = 1
+        Text = 'MATR'#205'CULA'
+        Width = 120
+      end
+    end
+    object BtnFiltro: TStyledBitBtn
+      Left = 225
+      Top = 318
+      Width = 110
+      Height = 37
+      Caption = 'Limpar | F3'
+      TabOrder = 5
+      OnClick = BtnFiltroClick
+      StyleFamily = 'Bootstrap'
+    end
+  end
+  inherited Ds: TUniDataSource
+    DataSet = QryFiltro
+    Left = 416
+    Top = 56
+  end
+  inherited cxStyle: TcxStyleRepository
+    PixelsPerInch = 96
+    inherited CxGridPedido: TcxGridTableViewStyleSheet
+      BuiltIn = True
+    end
+    inherited GridTableDependente: TcxGridTableViewStyleSheet
+      BuiltIn = True
+    end
+  end
+  inherited frxDB: TfrxDBDataset
+    UserName = 'frxDB'
+    FieldAliases.Strings = (
+      'id_socio=id_socio'
+      'codigo=codigo'
+      'matricula=matricula'
+      'situacao=situacao'
+      'nome=nome'
+      'apelido=apelido'
+      'telefone=telefone'
+      'celular=celular'
+      'whatsapp=whatsapp'
+      'cpf=cpf'
+      'email=email'
+      'socio_deste=socio_deste'
+      'sexo=sexo'
+      'nascimento=nascimento'
+      'nomesecretaria=nomesecretaria'
+      'nomelotacao=nomelotacao'
+      'nomecidade=nomecidade')
+    DataSet = QryFiltro
+    DataSource = nil
+    Left = 373
+    Top = 56
+  end
+  inherited frxPDFExport: TfrxPDFExport
+    Left = 136
+    Top = 0
+  end
+  inherited frxSVGExport: TfrxSVGExport
+    Left = 136
+    Top = 0
+  end
+  object TabSindLotacao: TClientDataSet
+    PersistDataPacket.Data = {
+      910000009619E0BD01000000180000000500000000000300000091000A69645F
+      6C6F746163616F040001000000000006636F6469676F04000100000000000964
+      657363726963616F010049000000010005574944544802000200BE0005617469
+      766F0100490000000100055749445448020002000500086E6C6F746163616F01
+      0049000000010005574944544802000200BE000000}
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'id_lotacao'
+        DataType = ftInteger
+      end
+      item
+        Name = 'codigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'descricao'
+        DataType = ftString
+        Size = 190
+      end
+      item
+        Name = 'ativo'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'nlotacao'
+        DataType = ftString
+        Size = 190
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 16
+    Top = 376
+    object TabSindLotacaoid_lotacao: TIntegerField
+      FieldName = 'id_lotacao'
+    end
+    object TabSindLotacaocodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object TabSindLotacaodescricao: TStringField
+      FieldName = 'descricao'
+      Size = 190
+    end
+    object TabSindLotacaoativo: TStringField
+      FieldName = 'ativo'
+      Size = 5
+    end
+    object TabSindLotacaonlotacao: TStringField
+      FieldName = 'nlotacao'
+      Size = 190
+    end
+  end
+  object dsLotacao: TUniDataSource
+    DataSet = TabSindLotacao
+    Left = 16
+    Top = 376
+  end
+  object TabSecretaria: TClientDataSet
+    PersistDataPacket.Data = {
+      790000009619E0BD01000000180000000400000000000300000079000D69645F
+      73656372657461726961040001000000000006636F6469676F04000100000000
+      000572617A616F01004900000001000557494454480200020078000B6E736563
+      7265746172696101004900000001000557494454480200020078000000}
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'id_secretaria'
+        DataType = ftInteger
+      end
+      item
+        Name = 'codigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'razao'
+        DataType = ftString
+        Size = 120
+      end
+      item
+        Name = 'nsecretaria'
+        DataType = ftString
+        Size = 120
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 120
+    Top = 376
+    object TabSecretariaid_secretaria: TIntegerField
+      FieldName = 'id_secretaria'
+    end
+    object TabSecretariacodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object TabSecretariarazao: TStringField
+      FieldName = 'razao'
+      Size = 120
+    end
+    object TabSecretariansecretaria: TStringField
+      FieldName = 'nsecretaria'
+      Size = 120
+    end
+  end
+  object dsSecretaria: TUniDataSource
+    DataSet = TabSecretaria
+    Left = 120
+    Top = 376
+  end
+  object TabCidade: TClientDataSet
+    PersistDataPacket.Data = {
+      7A0000009619E0BD0100000018000000040000000000030000007A000969645F
+      6369646164650400010000000000066369646164650100490000000100055749
+      44544802000200A0000275660100490000000100055749445448020002000200
+      076E636964616465010049000000010005574944544802000200C8000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 56
+    Top = 356
+    object TabCidadeid_cidade: TIntegerField
+      FieldName = 'id_cidade'
+    end
+    object TabCidadecidade: TStringField
+      FieldName = 'cidade'
+      Size = 160
+    end
+    object TabCidadeuf: TStringField
+      FieldName = 'uf'
+      Size = 2
+    end
+    object TabCidadencidade: TStringField
+      FieldName = 'ncidade'
+      Size = 200
+    end
+  end
+  object dsCidade: TUniDataSource
+    DataSet = TabCidade
+    Left = 56
+    Top = 356
+  end
+  object QryFiltro: TUniQuery
+    Connection = DM.Conn
+    Left = 364
+    Top = 279
+  end
+  object frxRelatorio: TfrxReport
+    Tag = 1
+    Version = '2022.1.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44209.307053020800000000
+    ReportOptions.LastChange = 46143.913040486110000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
+      'var'
+      
+        '  PNG, nFantasia, nCnpj, nEmail, nTelefone, nEnderecov, nNumero,' +
+        ' nBairro, nCep, nCidade: String;'
+      'begin'
+      '  nFantasia := VarToStr(<nfantasia>);'
+      '  nCnpj     := VarToStr(<ncnpj>);'
+      '  nEmail    := VarToStr(<nemail>);'
+      '  nTelefone := VarToStr(<ntelefone>);'
+      '  nEnderecov:= VarToStr(<nendereco>);'
+      '  nNumero   := VarToStr(<nnumero>);'
+      '  nBairro   := VarToStr(<nbairro>);'
+      '  nCep      := VarToStr(<ncep>);'
+      '  nCidade   := VarToStr(<ncidade>);'
+      '  PNG       := VarToStr(<wlogo>);'
+      ''
+      '  if PNG <> '#39#39' then'
+      
+        '    TfrxPictureView(Report.FindObject('#39'nlogo'#39')).Picture.LoadFrom' +
+        'File(PNG);'
+      ''
+      
+        '  TfrxMemoView(Report.FindObject('#39'nrazao'#39')).Text := nFantasia + ' +
+        #39' | '#39' + nCnpj;'
+      
+        '  TfrxMemoView(Report.FindObject('#39'ncontatos'#39')).Text := nEmail + ' +
+        #39' - '#39' + nTelefone;'
+      
+        '  TfrxMemoView(Report.FindObject('#39'nendereco'#39')).Text := nEndereco' +
+        'v + '#39', '#39' + nNumero + '#39' - '#39' + nBairro + '#39' | '#39' + nCep + '#39' - '#39' + nC' +
+        'idade;'
+      'end;'
+      ''
+      'begin'
+      'end.')
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 372
+    Top = 112
+    Datasets = <
+      item
+        DataSet = frxDB
+        DataSetName = 'frxDB'
+      end>
+    Variables = <
+      item
+        Name = ' New Category1'
+        Value = Null
+      end
+      item
+        Name = 'nrazao'
+        Value = Null
+      end
+      item
+        Name = 'nfantasia'
+        Value = Null
+      end
+      item
+        Name = 'nendereco'
+        Value = Null
+      end
+      item
+        Name = 'nnumero'
+        Value = Null
+      end
+      item
+        Name = 'nbairro'
+        Value = Null
+      end
+      item
+        Name = 'ncep'
+        Value = Null
+      end
+      item
+        Name = 'ntelefone'
+        Value = Null
+      end
+      item
+        Name = 'nfone1'
+        Value = Null
+      end
+      item
+        Name = 'nfone2'
+        Value = Null
+      end
+      item
+        Name = 'nemail'
+        Value = Null
+      end
+      item
+        Name = 'ncnpj'
+        Value = Null
+      end
+      item
+        Name = 'nie'
+        Value = Null
+      end
+      item
+        Name = 'wlogo'
+        Value = Null
+      end
+      item
+        Name = 'ncidade'
+        Value = Null
+      end
+      item
+        Name = 'filtro'
+        Value = Null
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 256
+      LeftMargin = 5.000000000000000000
+      RightMargin = 5.000000000000000000
+      TopMargin = 5.000000000000000000
+      BottomMargin = 5.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+      OnBeforePrint = 'Page1OnBeforePrint'
+      object Heade: TfrxHeader
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
+        Height = 181.417440000000000000
+        Top = 18.897650000000000000
+        Width = 755.906000000000000000
+        object nlogo: TfrxPictureView
+          AllowVectorExport = True
+          ShiftMode = smDontShift
+          Left = 1.779530000000000000
+          Width = 221.267780000000000000
+          Height = 131.338590000000000000
+          Center = True
+          Frame.Typ = []
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object Line10: TfrxLineView
+          AllowVectorExport = True
+          Top = 135.992270000000000000
+          Width = 755.905536220000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+        object Picture3: TfrxPictureView
+          AllowVectorExport = True
+          Left = 721.890230000000000000
+          Width = 32.000000000000000000
+          Height = 32.000000000000000000
+          AutoSize = True
+          Frame.Typ = []
+          Picture.Data = {
+            07544269746D617036100000424D361000000000000036000000280000002000
+            0000200000000100200000000000001000000000000000000000000000000000
+            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF3F1F0FFC8BFBAFFA4958CFF89766AFF776254FF735D
+            4FFF735D4FFF776254FF89766AFFA4958CFFC8BFBAFFF3F2F0FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFE5E0DEFFA2938AFF755F51FF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF755F51FFA2938AFFE5E0
+            DEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F6F5FFAA9D
+            94FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFFAA9D94FFF7F6F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E2DFFF857266FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF857266FFE6E2DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDED9D6FF7A6658FF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF918075FFBAAFA8FFD8D2CEFFEDEAE9FFF6F5
+            F4FFF6F5F4FFEEEBE9FFD8D2CEFFBBB0A9FF928176FF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF7A6658FFDFD9D6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E2DFFF7A6658FF735D4FFF735D4FFF735D
+            4FFF776254FFAFA39BFFECE9E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECE9E7FFAFA39BFF7762
+            54FF735D4FFF735D4FFF735D4FFF7A6658FFE6E2DFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF7F6F5FF857266FF735D4FFF735D4FFF735D4FFF9584
+            7AFFECE9E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECE9
+            E7FF95847AFF735D4FFF735D4FFF735D4FFF857266FFF7F6F5FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFAA9D94FF735D4FFF735D4FFF735D4FFFA89A91FFFDFD
+            FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFDFDFCFFA89A91FF735D4FFF735D4FFF735D4FFFAA9D94FFFFFFFFFFFFFF
+            FFFFFFFFFFFFE5E0DEFF735D4FFF735D4FFF735D4FFF735D4FFF7A6558FFA597
+            8EFFCFC7C3FFF6F5F4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F4FFCFC7
+            C3FFA5978EFF7A6558FF735D4FFF735D4FFF735D4FFF735D4FFFE5E0DEFFFFFF
+            FFFFFFFFFFFFA2938AFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF776254FFAC9F97FFF5F3F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F3F2FFAC9F97FF776254FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFA2938AFFFFFF
+            FFFFF3F1F0FF755F51FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF877468FFF4F2F1FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F2F1FF877468FF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF755F51FFF3F2
+            F0FFC8BFBAFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFFAC9F97FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFAC9F97FF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFC8BF
+            BAFFA4958CFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF8B796DFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFF99897FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFA495
+            8CFF89766AFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF7C675AFFE9E5E3FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F4FF8B786DFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF8976
+            6AFF786256FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFFCEC7C2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E5E2FF766153FF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF7762
+            54FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF928176FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB0A39CFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFFD3CCC8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFECEBFF745E50FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF786256FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFFA09288FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA2948AFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF7762
+            54FF89766AFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF745E51FFEEECEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEECEAFF745E
+            51FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF8976
+            6AFFA4958CFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF837064FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8370
+            64FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFA495
+            8CFFC8BFBAFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF745E50FFDAD5D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E1DFFF745E
+            50FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFC8BF
+            BAFFF3F1F0FF756152FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFFA99C93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7BEB8FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF755F51FFF3F1
+            F0FFFFFFFFFFA2938AFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF8E7D72FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADA097FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFA2938AFFFFFF
+            FFFFFFFFFFFFE5E0DEFF755F50FF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF745E50FFECEAE8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCFF826E62FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFE5E0DEFFFFFF
+            FFFFFFFFFFFFFFFFFFFFAA9D94FF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFFAA9D95FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8C0BAFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFAA9D94FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF7F6F5FF857266FF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF745E50FFD7D0CCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEDEAE8FF7C685BFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF857266FFF7F6F5FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E2DFFF7A6658FF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF786355FFD4CECAFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E3E1FF857266FF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF7A6658FFE6E2DFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDED9D6FF7A6658FF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFFA19289FFD8D2CEFFF3F1
+            F0FFF5F3F2FFDFDAD7FFAFA29AFF766153FF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF7A6658FFDED9D6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E2DFFF857266FF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF857266FFE6E2DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F6F5FFAA9D
+            94FF755F50FF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFFAA9D94FFF7F6F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFE5E0DEFFA2938AFF756152FF735D4FFF735D4FFF735D4FFF735D4FFF735D
+            4FFF735D4FFF735D4FFF735D4FFF735D4FFF735D4FFF755F51FFA2938AFFE5E0
+            DEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF3F1F0FFC8BFBAFFA4958CFF89766AFF786256FF735D
+            4FFF735D4FFF786256FF89766AFFA4958CFFC8BFBAFFF3F1F0FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF}
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object Picture4: TfrxPictureView
+          AllowVectorExport = True
+          Left = 721.890230000000000000
+          Top = 37.795300000000000000
+          Width = 32.000000000000000000
+          Height = 32.000000000000000000
+          AutoSize = True
+          Frame.Typ = []
+          Picture.Data = {
+            07544269746D617036100000424D361000000000000036000000280000002000
+            0000200000000100200000000000001000000000000000000000000000000000
+            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFCF9F4FFEEE1C9FFE2CDA6FFDBBE8DFFD5B57BFFD4B3
+            77FFD4B377FFD5B57BFFDBBE8DFFE2CDA6FFEEE1C9FFFCF9F4FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFF7F1E5FFE2CCA5FFD4B479FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B479FFE2CCA5FFF7F1
+            E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFBF7FFE4D0
+            ADFFD3B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B3
+            77FFE4D0ADFFFDFBF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F1E6FFD9BC88FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD9BC88FFF7F1E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5EDDFFFD6B77FFFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD6B77FFFF5EEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F1E6FFD6B77FFFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD6B77FFFF7F1E6FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFDFBF7FFD9BC88FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD9BC88FFFDFBF8FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFE4D0ADFFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD0B075FFC4A56FFFB99C6AFFB09566FFC1A36EFFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE4D0ADFFFFFFFFFFFFFF
+            FFFFFFFFFFFFF7F1E5FFD3B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD0AF75FFBEA16CFFB79E73FFD2C3A9FFEBE4D8FFFCFCFAFFD7CAB3FFC8A9
+            71FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B377FFF7F1E5FFFFFF
+            FFFFFFFFFFFFE2CCA4FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B276FFC4A5
+            6FFFBAA177FFDED3C0FFFDFCFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD1BD
+            9BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE2CCA5FFFFFF
+            FFFFFCF9F4FFD4B479FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD2B176FFBB9F6CFFD2C2
+            A8FFFBFAF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFE9
+            DFFFD3B276FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B479FFFCF9
+            F4FFEEE1C9FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD2B176FFBB9F6FFFE5DDCEFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFD
+            FCFFD4B378FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFEEE1
+            C9FFE2CDA6FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD3B276FFBDA271FFEDE7DCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFF7F1E7FFFCFAF6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D9
+            BBFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE2CD
+            A6FFDBBE8BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFC1A470FFE9E2D5FFFFFFFFFFFFFFFFFFFDFC
+            FAFFE6D3B0FFD4B378FFD7B881FFF0E6D2FFFFFFFFFFFAF7F1FFE4D0ABFFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFDBBE
+            8DFFD6B67BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFCBAB72FFDACEB9FFFFFFFFFFFFFFFFFFFCFAF7FFDDC4
+            95FFD4B377FFD4B377FFD4B377FFD4B377FFDCC191FFD4B479FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD5B5
+            7BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD3B276FFC9B48EFFFEFEFEFFFFFFFFFFFEFDFBFFDEC496FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFC6A872FFF2EDE5FFFFFFFFFFFFFFFFFFE8D6B6FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD6B67BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD3B276FFD4C3A5FFFFFFFFFFFFFFFFFFFBF9F7FFCAAC75FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD5B5
+            7BFFDBBE8BFFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFC9AA73FFF4F0EAFFFFFFFFFFFFFFFFFFFFFFFFFFCAB794FFCFAF74FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFDBBE
+            8DFFE2CDA6FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD3BF9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F6F2FFCCB282FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE2CD
+            A6FFEEE1C9FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B2
+            76FFE7DFD0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8D6B7FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFEEE1
+            C9FFFCF9F4FFD4B579FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            78FFFDFCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCC293FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B479FFFCF9
+            F4FFFFFFFFFFE2CCA4FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFEEE0C9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEDDFC6FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE2CCA5FFFFFF
+            FFFFFFFFFFFFF7F1E5FFD5B479FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B378FFE6D3B0FFF7F2E8FFFDFCFBFFE8D8B9FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B377FFF7F1E5FFFFFF
+            FFFFFFFFFFFFFFFFFFFFE4D0ADFFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFE4D0ADFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFDFBF7FFD9BC88FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD9BC88FFFDFBF7FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F1E6FFD6B77FFFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD6B77FFFF7F1E6FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5EDDFFFD6B77FFFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD6B77FFFF5EDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F1E6FFD9BC88FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD9BC88FFF7F1E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFBF7FFE4D0
+            ADFFD5B479FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD3B3
+            77FFE4D0ADFFFDFBF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFF7F1E5FFE2CCA4FFD4B579FFD4B377FFD4B377FFD4B377FFD4B377FFD4B3
+            77FFD4B377FFD4B377FFD4B377FFD4B377FFD4B377FFD4B479FFE2CCA4FFF7F1
+            E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFCF9F4FFEEE1C9FFE2CDA6FFDBBE8BFFD6B67BFFD4B3
+            77FFD4B377FFD6B67BFFDBBE8BFFE2CDA6FFEEE1C9FFFCF9F4FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF}
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object Picture2: TfrxPictureView
+          AllowVectorExport = True
+          Left = 721.890230000000000000
+          Top = 76.590600000000000000
+          Width = 32.000000000000000000
+          Height = 32.000000000000000000
+          AutoSize = True
+          Frame.Typ = []
+          Picture.Data = {
+            07544269746D617036100000424D361000000000000036000000280000002000
+            0000200000000100200000000000001000000000000000000000000000000000
+            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF9FAF4FFE0E7C9FFCBD7A6FFBCCB8BFFB1C37AFFAFC2
+            76FFAFC276FFB1C37AFFBCCB8BFFCBD7A6FFE0E7C9FFF9FAF4FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFF0F4E5FFCAD6A4FFB0C278FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB0C278FFCAD6A4FFF0F4
+            E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCF7FFCFDA
+            ACFFAFC176FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC1
+            76FFCFDAACFFFBFCF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F4E6FFB9C987FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFB9C987FFF1F4E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEDF1DFFFB3C57DFFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFACBF74FF9AAA
+            69FF9AAA69FFACBE74FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFB3C57DFFEDF1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F4E6FFB3C57DFFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFA9BB72FF9EAC73FFDFE4
+            D3FFE0E4D4FF9FAD76FFA8BA72FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFB3C57DFFF1F4E6FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFBFCF7FFB9C987FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFA6B870FFA9B585FFF3F5EEFFFFFF
+            FFFFFFFFFFFFF4F6F0FFABB788FFA5B770FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFB9C987FFFBFCF7FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFCDDAACFFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFA6B870FFB2BD92FFFAFBF9FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFCFCFAFFB5BF97FFA5B770FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCFDAACFFFFFFFFFFFFFF
+            FFFFFFFFFFFFF0F4E5FFAFC176FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFA9BB72FFB3BD92FFFCFCFBFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFB6C097FFA8BA72FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC176FFF0F4E5FFFFFF
+            FFFFFFFFFFFFCAD6A4FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFADBF74FFABB786FFFAFBF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFBFFADB98AFFACBF74FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCAD6A4FFFFFF
+            FFFFF9FAF4FFB0C278FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFA4B375FFF2F4ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F6F0FFA4B377FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB0C278FFF9FA
+            F4FFE0E7C9FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFA9BB72FFD6DBC5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9DFCAFFA8BA
+            72FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFE0E7
+            C9FFCBD7A5FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFB2BF8AFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB2BF
+            8BFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCBD7
+            A6FFBACB8BFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFADBF
+            74FFDBE0CCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDE2
+            CFFFACBF74FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFBCCB
+            8BFFB1C47AFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFADBE
+            7AFFFCFCFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F7EDFFCAD6A5FFB5C7
+            81FFB5C781FFCAD6A5FFF4F7EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFD
+            FCFFADBE7BFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB1C3
+            7AFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFC2CE
+            9CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F7EDFFB5C681FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFB5C681FFF4F7EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFC2CF9DFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFD3DD
+            B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCAD7A5FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFCAD6A5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFD4DDB6FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFB1C47AFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFD6E0
+            BAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB5C681FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFB5C681FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFD7E1BCFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB1C3
+            7AFFBACB8BFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFD5DF
+            B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAEBE7DFFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAEBE7DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFD5DFB7FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFBCCB
+            8BFFCBD7A5FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFC7D4
+            A0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBBC59CFFACBF74FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFACBF74FFBBC59CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFC8D5A0FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCBD7
+            A6FFE0E7C9FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB3C5
+            7EFFFBFCF9FFFFFFFFFFFFFFFFFFFFFFFFFFF1F3EBFF9EAC73FFA4B670FFACBF
+            74FFACBF74FFA4B670FF9EAC73FFF1F3EBFFFFFFFFFFFFFFFFFFFFFFFFFFFBFC
+            F9FFB3C57EFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFE0E7
+            C9FFF9FAF4FFB1C378FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFDCE5C4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F3EBFFB7C199FF9BA9
+            72FF9BA972FFB7C199FFF1F3EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE5
+            C4FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB0C278FFF9FA
+            F4FFFFFFFFFFCAD6A4FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFB3C57EFFF5F7EEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F7EEFFB3C5
+            7EFFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCAD6A4FFFFFF
+            FFFFFFFFFFFFF0F4E5FFB0C378FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFBDCC8EFFF8FAF3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAF3FFBDCC8EFFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC176FFF0F4E5FFFFFF
+            FFFFFFFFFFFFFFFFFFFFCDDAACFFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFB9CA88FFECF1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECF1DFFFB9CA88FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFCFDAACFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFBFCF7FFB9C987FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFC6D49EFFE4EAD1FFF6F8F1FFFFFF
+            FFFFFFFFFFFFF6F8F1FFE4EAD1FFC6D49EFFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFB9C987FFFBFCF7FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F4E6FFB3C57DFFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFB3C57DFFF1F4E6FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEDF1DFFFB3C57DFFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFB3C57DFFEDF1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F4E6FFB9C987FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFB9C987FFF1F4E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCF7FFCDDA
+            ACFFB0C378FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFAFC1
+            76FFCDDAACFFFBFCF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFF0F4E5FFCAD6A4FFB1C378FFAFC276FFAFC276FFAFC276FFAFC276FFAFC2
+            76FFAFC276FFAFC276FFAFC276FFAFC276FFAFC276FFB0C278FFCAD6A4FFF0F4
+            E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF9FAF4FFE0E7C9FFCBD7A5FFBACB8BFFB1C47AFFAFC2
+            76FFAFC276FFB1C47AFFBACB8BFFCBD7A5FFE0E7C9FFF9FAF4FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF}
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object nrazao: TfrxMemoView
+          AllowVectorExport = True
+          Left = 222.992270000000000000
+          Width = 495.118002830000000000
+          Height = 34.015770000000000000
+          DataSetName = 'db_pessoas'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 11498759
+          Font.Height = -21
+          Font.Name = 'Yu Gothic UI Semibold'
+          Font.Style = []
+          Frame.Typ = []
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Nome da Razao | CNPJ')
+          ParentFont = False
+          WordBreak = True
+          WordWrap = False
+        end
+        object ncontatos: TfrxMemoView
+          AllowVectorExport = True
+          Left = 222.992270000000000000
+          Top = 37.795300000000000000
+          Width = 495.118002830000000000
+          Height = 34.015770000000000000
+          DataSetName = 'db_pessoas'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 15440906
+          Font.Height = -19
+          Font.Name = 'Yu Gothic UI Semibold'
+          Font.Style = []
+          Frame.Typ = []
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Email | Telefone')
+          ParentFont = False
+          WordBreak = True
+          WordWrap = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object nendereco: TfrxMemoView
+          AllowVectorExport = True
+          Left = 222.992270000000000000
+          Top = 75.590600000000000000
+          Width = 495.118002830000000000
+          Height = 56.692950000000000000
+          DataSetName = 'db_pessoas'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 15440906
+          Font.Height = -19
+          Font.Name = 'Yu Gothic UI Semibold'
+          Font.Style = []
+          Frame.Typ = []
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Endere'#231'o')
+          ParentFont = False
+          WordBreak = True
+          Formats = <
+            item
+            end
+            item
+            end
+            item
+            end
+            item
+            end
+            item
+            end>
+        end
+        object Line3: TfrxLineView
+          AllowVectorExport = True
+          Top = 178.653680000000000000
+          Width = 755.905536220000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+        object Memo11: TfrxMemoView
+          Align = baCenter
+          AllowVectorExport = True
+          Left = 0.842610000000000000
+          Top = 136.063080000000000000
+          Width = 754.220780000000000000
+          Height = 20.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Listagem por Data de Associa'#231#227'o')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Top = 160.519790000000000000
+          Width = 105.826840000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object HdrMatricula: TfrxMemoView
+          AllowVectorExport = True
+          Left = 55.000000000000000000
+          Top = 160.519790000000000000
+          Width = 70.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Matr'#237'cula')
+          ParentFont = False
+        end
+        object HdrNome: TfrxMemoView
+          AllowVectorExport = True
+          Left = 128.000000000000000000
+          Top = 160.519790000000000000
+          Width = 210.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Nome')
+          ParentFont = False
+        end
+        object ndata: TfrxMemoView
+          AllowVectorExport = True
+          Left = 340.000000000000000000
+          Top = 160.519790000000000000
+          Width = 85.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Data Associa'#231#227'o')
+          ParentFont = False
+        end
+        object HdrTelefone: TfrxMemoView
+          AllowVectorExport = True
+          Left = 430.000000000000000000
+          Top = 160.519790000000000000
+          Width = 90.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Telefone')
+          ParentFont = False
+        end
+        object HdrWhatsApp: TfrxMemoView
+          AllowVectorExport = True
+          Left = 525.000000000000000000
+          Top = 160.519790000000000000
+          Width = 95.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'WhatsApp')
+          ParentFont = False
+        end
+        object HdrCidade: TfrxMemoView
+          AllowVectorExport = True
+          Left = 620.000000000000000000
+          Top = 160.519790000000000000
+          Width = 130.000000000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Cidade')
+          ParentFont = False
+        end
+        object LineHeaderCols: TfrxLineView
+          AllowVectorExport = True
+          Top = 179.000000000000000000
+          Width = 755.905536220000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+      end
+      object PageFooter: TfrxPageFooter
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 370.393940000000000000
+        Width = 755.906000000000000000
+        object Line2: TfrxLineView
+          AllowVectorExport = True
+          Top = 0.220470000000000000
+          Width = 755.905536220000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+        object SysMemo2: TfrxSysMemoView
+          AllowVectorExport = True
+          Left = 3.000000000000000000
+          Top = 1.779530000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[DATE] [TIME]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object lb_email: TfrxMemoView
+          AllowVectorExport = True
+          Left = 510.236550000000000000
+          Top = 1.779530000000000000
+          Width = 245.669450000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'EasyOne Systems - Listagem por data de associa'#231#227'o')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo1: TfrxMemoView
+          Align = baClient
+          AllowVectorExport = True
+          Width = 755.906000000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'www.conesulsistemas.com.br')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
+        Height = 41.574830000000000000
+        Top = 222.992270000000000000
+        Width = 755.906000000000000000
+        DataSet = frxDB
+        DataSetName = 'frxDB'
+        RowCount = 0
+        object BoxLinha: TfrxShapeView
+          AllowVectorExport = True
+          Width = 755.905536220000000000
+          Height = 37.795300000000000000
+          Frame.Color = 14211288
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        end
+        object DBCodigo: TfrxMemoView
+          AllowVectorExport = True
+          Left = 4.000000000000000000
+          Top = 3.000000000000000000
+          Width = 48.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'codigo'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."codigo"]')
+          ParentFont = False
+        end
+        object DBMatricula: TfrxMemoView
+          AllowVectorExport = True
+          Left = 55.000000000000000000
+          Top = 3.000000000000000000
+          Width = 70.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'matricula'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."matricula"]')
+          ParentFont = False
+        end
+        object DBNome: TfrxMemoView
+          AllowVectorExport = True
+          Left = 128.000000000000000000
+          Top = 3.000000000000000000
+          Width = 210.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'nome'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."nome"]')
+          ParentFont = False
+        end
+        object sociodeste: TfrxMemoView
+          AllowVectorExport = True
+          Left = 340.000000000000000000
+          Top = 3.000000000000000000
+          Width = 85.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'socio_deste'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."socio_deste"]')
+          ParentFont = False
+        end
+        object DBTelefone: TfrxMemoView
+          AllowVectorExport = True
+          Left = 430.000000000000000000
+          Top = 3.000000000000000000
+          Width = 90.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'telefone'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."telefone"]')
+          ParentFont = False
+        end
+        object DBWhatsApp: TfrxMemoView
+          AllowVectorExport = True
+          Left = 525.000000000000000000
+          Top = 3.000000000000000000
+          Width = 95.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'whatsapp'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."whatsapp"]')
+          ParentFont = False
+        end
+        object DBCidade: TfrxMemoView
+          AllowVectorExport = True
+          Left = 620.000000000000000000
+          Top = 3.000000000000000000
+          Width = 130.000000000000000000
+          Height = 16.000000000000000000
+          DataField = 'nomecidade'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."nomecidade"]')
+          ParentFont = False
+        end
+        object DBEmail: TfrxMemoView
+          AllowVectorExport = True
+          Left = 128.000000000000000000
+          Top = 20.000000000000000000
+          Width = 300.000000000000000000
+          Height = 14.000000000000000000
+          DataField = 'email'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."email"]')
+          ParentFont = False
+        end
+        object DBSituacao: TfrxMemoView
+          AllowVectorExport = True
+          Left = 430.000000000000000000
+          Top = 20.000000000000000000
+          Width = 154.015770000000000000
+          Height = 14.000000000000000000
+          DataField = 'situacao'
+          DataSet = frxDB
+          DataSetName = 'frxDB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGreen
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDB."situacao"]')
+          ParentFont = False
+        end
+      end
+      object ReportSummary1: TfrxReportSummary
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 325.039580000000000000
+        Width = 755.906000000000000000
+        object SysMemo1: TfrxSysMemoView
+          AllowVectorExport = True
+          Top = 2.000000000000000000
+          Width = 331.181200000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Total de associados: [COUNT(MasterData1)]')
+          ParentFont = False
+        end
+        object Line4: TfrxLineView
+          AllowVectorExport = True
+          Width = 755.905536220000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+      end
+    end
+  end
+end
