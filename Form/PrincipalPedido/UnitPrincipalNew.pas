@@ -32,7 +32,7 @@ uses
   Model.Avisos, UnitPlanoConta, UnitTransportadora, UnitManifesto,
   UGerenciarCompra, UnitTipoSituacaoCad, UnitLocalTrabalhoCad,
   UnitControleSindicato, UnitDepartamentoCad, UnitCategoriaCad, UnitControleBens,
-  UnitControleBancario, UnitHistoricoBancario;
+  UnitControleBancario, UnitHistoricoBancario, UnitAtualizacaoCadastro;
 
 type
   TFrmPrincipalNew = class(TdxRibbonForm)
@@ -261,6 +261,8 @@ type
     ActBancario: TAction;
     ActHistoricoBancario: TAction;
     dxBarLargeButton44: TdxBarLargeButton;
+    dxBarLargeButton45: TdxBarLargeButton;
+    Ac_solicitacaoapi: TAction;
     procedure FormCreate(Sender: TObject);
     procedure Cad_CidadeExecute(Sender: TObject);
     procedure cad_ContasExecute(Sender: TObject);
@@ -320,6 +322,7 @@ type
     procedure ActControlebensExecute(Sender: TObject);
     procedure ActBancarioExecute(Sender: TObject);
     procedure ActHistoricoBancarioExecute(Sender: TObject);
+    procedure Ac_solicitacaoapiExecute(Sender: TObject);
   private
     procedure CarregaImagemFundo;
     procedure CarregarSistema;
@@ -1200,6 +1203,27 @@ begin
     if not Assigned(FrmPedido) then
     FrmPedido         := TFrmPedido.Create(Application);
     FrmPedido.Show;
+  end
+  else
+    JKDialog('Acesso Negado',
+             'O seu perfil não tem permissão para utilizar.' + sLineBreak +
+             'Por favor, entre em contato com o administrador do sistema.',
+             tdAlerta);
+end;
+
+procedure TFrmPrincipalNew.Ac_solicitacaoapiExecute(Sender: TObject);
+var
+  Permissao: TPermissaoUsuario;
+begin
+  //Solicitação API
+  FreeAndNil(TPermissaoUsuario.FInstance);
+  Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
+
+  if Permissao.TemPermissao('Permitir Processar atualização') then
+  begin
+    if not Assigned(FrmAssociadoAtualizacao) then
+    FrmAssociadoAtualizacao  := TFrmAssociadoAtualizacao.Create(Application);
+    FrmAssociadoAtualizacao.Show;
   end
   else
     JKDialog('Acesso Negado',

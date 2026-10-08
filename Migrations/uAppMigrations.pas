@@ -2118,7 +2118,22 @@ begin
 
     {$ENDREGION}
 
+    {$REGION 'integracao_atualizacao_cadastral-046'}
 
+    AddMigration(Migs, '046_alterintegracao_atualizacao_cadastral',
+      procedure(Conn: TUniConnection)
+      var
+        M: TMigrator absolute Migrator;
+      begin
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'cep_novo', 'VARCHAR(10) NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'endereco_novo', 'VARCHAR(180) NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'numero_novo', 'VARCHAR(20) NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'bairro_novo', 'VARCHAR(100) NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'complemento_novo', 'VARCHAR(120) NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'cidade_nova', 'VARCHAR(100) NULL');
+      end);
+
+    {$ENDREGION}
 
     {$ENDREGION}
 

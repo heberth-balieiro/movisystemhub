@@ -399,8 +399,8 @@
         <DCCReference Include="Form\OAuth2.Outlook.pas"/>
         <DCCReference Include="Form\OAuth2.pas"/>
         <DCCReference Include="Utils\EnvioZap.pas"/>
-        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas">
-            <Form>FrmAssociadoSindicato</Form>
+        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitAtualizacaoCadastro.pas">
+            <Form>FrmAssociadoAtualizacao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Form\FormBase\UnitBaseCadCons.pas">
@@ -1086,6 +1086,17 @@
             <Form>FrmAdicionarWhatsApp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form\ModelE\Sindicato\Model.AssociadoAtualizarAPI.pas"/>
+        <DCCReference Include="Form\Controllers\Sindicato\Controller.AssociadoAtualizacaoAPI.pas"/>
+        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas">
+            <Form>FrmAssociadoSindicato</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitAssociadoProcessarAtualizacao.pas">
+            <Form>FrmAssociadoProcessarAtualizacao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Form\Dao\Sindicato\DAO.AssociadoAtualizacaoAPI.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

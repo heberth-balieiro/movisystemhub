@@ -269,8 +269,8 @@
             <Form>FrmDashBoard</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas">
-            <Form>FrmAssociadoSindicato</Form>
+        <DCCReference Include="Form\ModuloAssociaao\Sindicato\UnitAtualizacaoCadastro.pas">
+            <Form>FrmAssociadoAtualizacao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Form\Consulta\UnitSede.pas">

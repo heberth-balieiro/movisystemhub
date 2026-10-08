@@ -127,7 +127,8 @@ begin
   AdicionarTela('Associação','Associados/Dependentes','Permitir desfiliar');
   AdicionarTela('Associação','Associados/Dependentes','Permitir refiliar');
   AdicionarTela('Associação','Associados/Dependentes','Permitir visualizar histórico');
-
+  AdicionarTela('Associação','Associados/Dependentes','Permitir Processar atualização');
+  AdicionarTela('Associação','Associados/Dependentes','Permitir Processar');
 
 
   AdicionarTela('Associação','Dependentes','Permitir Criar Novo');

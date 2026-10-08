@@ -56,7 +56,7 @@ uses
   UnitFrmWhatsAppMSG in 'Form\Sistema\UnitFrmWhatsAppMSG.pas' {FrmEnviarWhatsAppMSG},
   UnitCandidato in 'Form\Consulta\UnitCandidato.pas' {FrmCandidato},
   UnitDashBoard in 'Form\Sistema\UnitDashBoard.pas' {FrmDashBoard},
-  UnitControleSindicato in 'Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas' {FrmAssociadoSindicato},
+  UnitAtualizacaoCadastro in 'Form\ModuloAssociaao\Sindicato\UnitAtualizacaoCadastro.pas' {FrmAssociadoAtualizacao},
   UnitSede in 'Form\Consulta\UnitSede.pas' {FrmSede},
   Model.Secretaria in 'Model\Model.Secretaria.pas',
   Model.Sede_old in 'Model\Model.Sede_old.pas',

@@ -95,7 +95,7 @@ uses
   OAuth2.Outlook in 'Form\OAuth2.Outlook.pas',
   OAuth2 in 'Form\OAuth2.pas',
   EnvioZap in 'Utils\EnvioZap.pas',
-  UnitControleSindicato in 'Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas' {FrmAssociadoSindicato},
+  UnitAtualizacaoCadastro in 'Form\ModuloAssociaao\Sindicato\UnitAtualizacaoCadastro.pas' {FrmAssociadoAtualizacao},
   UnitBaseCadCons in 'Form\FormBase\UnitBaseCadCons.pas' {FrmBaseCadCons},
   Model.SindLotacao in 'Model\Model.SindLotacao.pas',
   Model.SindEmpresa in 'Model\Model.SindEmpresa.pas',
@@ -413,7 +413,12 @@ uses
   Frame.QuestaoTextoLongo in 'Form\Frame\Assembleia\Frame.QuestaoTextoLongo.pas' {FrameQuestaoTextoLongo: TFrame},
   Model.EleicaoQuestao in 'Form\Eleicao\Model\Model.EleicaoQuestao.pas',
   Controller.EleicaoQuestao in 'Form\Eleicao\Controller\Controller.EleicaoQuestao.pas',
-  UnitFrmAddWhatsapp in 'Form\Sistema\UnitFrmAddWhatsapp.pas' {FrmAdicionarWhatsApp};
+  UnitFrmAddWhatsapp in 'Form\Sistema\UnitFrmAddWhatsapp.pas' {FrmAdicionarWhatsApp},
+  Model.AssociadoAtualizarAPI in 'Form\ModelE\Sindicato\Model.AssociadoAtualizarAPI.pas',
+  Controller.AssociadoAtualizacaoAPI in 'Form\Controllers\Sindicato\Controller.AssociadoAtualizacaoAPI.pas',
+  UnitControleSindicato in 'Form\ModuloAssociaao\Sindicato\UnitControleSindicato.pas' {FrmAssociadoSindicato},
+  UnitAssociadoProcessarAtualizacao in 'Form\ModuloAssociaao\Sindicato\UnitAssociadoProcessarAtualizacao.pas' {FrmAssociadoProcessarAtualizacao},
+  DAO.AssociadoAtualizacaoAPI in 'Form\Dao\Sindicato\DAO.AssociadoAtualizacaoAPI.pas';
 
 {$R *.res}
 var
