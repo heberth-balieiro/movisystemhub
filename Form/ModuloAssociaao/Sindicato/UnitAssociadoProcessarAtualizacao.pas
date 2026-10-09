@@ -118,6 +118,16 @@ implementation
 
 {$R *.dfm}
 
+function SomenteNumeros(const AValor: string): string;
+var
+  I: Integer;
+begin
+  Result := '';
+  for I := 1 to Length(AValor) do
+    if CharInSet(AValor[I], ['0'..'9']) then
+      Result := Result + AValor[I];
+end;
+
 procedure TFrmAssociadoProcessarAtualizacao.BtnErroClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
@@ -254,6 +264,7 @@ end;
 procedure TFrmAssociadoProcessarAtualizacao.BtnSalvarClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
+  LDoc: TAssociadoAtualizacao;
 begin
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
@@ -267,6 +278,74 @@ begin
     Exit;
   end;
 
+  if FIdSolicitacaoAPI <= 0 then
+  begin
+    JKDialog('Aviso','Nenhuma solicitação válida foi carregada.', tdAlerta);
+    Exit;
+  end;
+
+  if FIdSocio <= 0 then
+  begin
+    JKDialog('Aviso',
+             'O associado não foi localizado ou está inativo.' + sLineBreak +
+             'Não é possível processar a atualização cadastral.',
+             tdAlerta);
+    Exit;
+  end;
+
+  if not SameText(Trim(cxsituacao.Text), 'PENDENTE') then
+  begin
+    JKDialog('Aviso','Somente solicitações pendentes podem ser processadas.', tdAlerta);
+    Exit;
+  end;
+
+  if not JKDialog('Confirmação',
+                  'Confirma o processamento desta atualização cadastral?' + sLineBreak +
+                  'Os dados informados pela Web serão aplicados ao cadastro do associado.',
+                  tdMensagem) then
+    Exit;
+
+  LDoc := TAssociadoAtualizacao.Create;
+  try
+    LDoc.Id_Solicitacao_API := FIdSolicitacaoAPI;
+    LDoc.Id_Empresa         := TSession.idempresa;
+    LDoc.email_novo         := Trim(cxemailnovo.Text);
+    LDoc.telefone_novo      := SomenteNumeros(cxCelularnovo.Text);
+    LDoc.whatsapp_novo      := SomenteNumeros(cxwhatsapp_novo.Text);
+    LDoc.cep_novo           := SomenteNumeros(cxcepnovo.Text);
+    LDoc.endereco_novo      := Trim(cxendereconovo.Text);
+    LDoc.numero_novo        := Trim(cxnumeronovo.Text);
+    LDoc.bairro_novo        := Trim(cxBairroNovo.Text);
+    LDoc.complemento_novo   := Trim(cxcomplementonovo.Text);
+    LDoc.cidade_nova        := Trim(cxcidadenovo.Text);
+
+    try
+      if TAssociadoAtualizacaoController.ProcessarAtualizacao(
+           LDoc,
+           FIdSocio,
+           TSession.idempresa
+         ) then
+      begin
+        cxsituacao.EditValue := 'PROCESSADO';
+        cxobs.Clear;
+        JKDialog('Sucesso','Atualização cadastral processada com sucesso.', tdSucesso);
+        ModalResult := mrOk;
+        FrmAssociadoProcessarAtualizacao.Close;
+      end
+      else
+        JKDialog('Aviso',
+                 'Não foi possível processar a atualização cadastral.',
+                 tdAlerta);
+    except
+      on E: Exception do
+        JKDialog('Erro',
+                 'Ocorreu um erro ao processar a atualização cadastral:' + sLineBreak +
+                 E.Message,
+                 tdErro);
+    end;
+  finally
+    LDoc.Free;
+  end;
 end;
 
 procedure TFrmAssociadoProcessarAtualizacao.FormClose(Sender: TObject;
