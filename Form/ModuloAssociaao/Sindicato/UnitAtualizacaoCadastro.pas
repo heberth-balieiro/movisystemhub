@@ -89,7 +89,7 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure BtnNovoClick(Sender: TObject);
-    
+
   private
 
     { Private declarations }
@@ -121,13 +121,12 @@ begin
   inherited;
   try
     if not mdPesquisa.Active then
-    mdPesquisa.Open;
+      mdPesquisa.Open;
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
     end;
   end;
-
 end;
 
 procedure TFrmAssociadoAtualizacao.FormShow(Sender: TObject);
@@ -135,7 +134,10 @@ begin
   inherited;
   try
     ParamsTela  := 'Associados/Dependentes';
-    TitleText   := 'AtualizaÁ„o Cadastrais (API)';
+    TitleText   := 'Atualiza√ß√£o Cadastrais (API)';
+
+    if cxAtivo.Properties.Items.IndexOf('Rejeitado') < 0 then
+      cxAtivo.Properties.Items.Add('Rejeitado');
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
@@ -148,13 +150,13 @@ procedure TFrmAssociadoAtualizacao.GridCellDblClick(Sender: TcxCustomGridTableVi
   AShift: TShiftState; var AHandled: Boolean);
 begin
   try
-    Editar;
+    BtnNovoClick(BtnNovo);
+    AHandled := True;
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
     end;
   end;
-
 end;
 
 procedure TFrmAssociadoAtualizacao.Listagem;
@@ -166,7 +168,6 @@ begin
   try
     if mdPesquisa.RecordCount > 0 then
     begin
-
       DadosEmpresa  := TConfiguracaoService.ObterDadosEmpresaRelatorio(TSession.IDEMPRESA);
       FrxRelatorio.LoadFromFile(ExtractFilePath(Application.ExeName) +'\Relatorio\RelAssociadoListagem.fr3');
 
@@ -199,7 +200,7 @@ begin
       FrxRelatorio.Variables['wlogo']           := quotedstr(ExtractFilePath(Application.ExeName)+'Temp\Logo.jpeg');
       FrxRelatorio.Variables['ncep']            := quotedstr(DadosEmpresa.cep);
       FrxRelatorio.Variables['ncidade']         := quotedstr(DadosEmpresa.cidade);
-      FrxRelatorio.Variables['filtro']         := quotedstr('Filtro: '+cxativo.Text);
+      FrxRelatorio.Variables['filtro']          := quotedstr('Filtro: '+cxativo.Text);
 
       FrxRelatorio.Report.PrepareReport();
       FrxRelatorio.ShowReport;
@@ -207,9 +208,7 @@ begin
       mdPesquisa.First;
     end
     else
-    begin
       JKDialog('Aviso','Realize uma pesquisa!', tdAlerta);
-    end;
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
@@ -220,22 +219,12 @@ end;
 procedure TFrmAssociadoAtualizacao.Novo;
 begin
   inherited;
-//  try
-//    if not Assigned(FrmAssociadoCad) then
-//    FrmAssociadoCad             := TFrmAssociadoCad.Create(Application);
-//    FrmAssociadoCad.ParamsStr   := 'N';
-//    FrmAssociadoCad.ShowModal;
-//  except on E: Exception do
-//    begin
-//      JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
-//    end;
-//  end;
 end;
 
 procedure TFrmAssociadoAtualizacao.Pesquisa;
 var
-List    : TObjectList<TAssociadoAtualizacao>;
-nCampo, nSituacao, nOrdem  : String;
+  List: TObjectList<TAssociadoAtualizacao>;
+  nCampo, nSituacao, nOrdem: String;
 begin
   inherited;
   try
@@ -244,38 +233,26 @@ begin
     nSituacao := '';
     nOrdem    := '';
 
-    if trim(edtBusca.Text) <> '' then
-    nCampo     := Trim(edtBusca.Text);
+    if Trim(edtBusca.Text) <> '' then
+      nCampo := Trim(edtBusca.Text);
 
     case cxAtivo.ItemIndex of
       1: nSituacao := 'Pendente';
       2: nSituacao := 'Processado';
       3: nSituacao := 'Erro';
+      4: nSituacao := 'Rejeitado';
     end;
 
     case cxordenar.ItemIndex of
-      0:
-      begin
-        nOrdem  := 'nome';
-      end;
-      1:
-      begin //MatrÌcula
-        nOrdem  := 'matricula';
-      end;
-      2:
-      begin  //Nome
-        nOrdem  := 'nome';
-      end;
-      3:
-      begin //SituaÁ„o
-        nOrdem  := 'situacao';
-      end;
+      0: nOrdem := 'cpf';
+      1: nOrdem := 'matricula';
+      2: nOrdem := 'nome';
+      3: nOrdem := 'situacao';
     end;
 
-    Controller      := TAssociadoAtualizacaoController.Create;
-
-    Try
-      List  := Controller.ListarTodos(nCampo, nSituacao, nOrdem);
+    Controller := TAssociadoAtualizacaoController.Create;
+    try
+      List := Controller.ListarTodos(nCampo, nSituacao, nOrdem);
 
       mdPesquisa.Close;
       mdPesquisa.FieldDefs.Clear;
@@ -283,67 +260,62 @@ begin
       if (List = nil) or (List.Count = 0) then
       begin
         mdPesquisa.Close;
-        //JKDialog('Aviso','Nenhum registro encontrado!', tdAlerta);
-        exit;
+        Exit;
       end;
 
       if not mdPesquisa.Active then
         mdPesquisa.Open;
 
       mdPesquisa.DisableControls;
+      try
+        for var Item in List do
+        begin
+          mdPesquisa.Append;
+          mdPesquisaid_solicitacao_api.AsLargeInt := Item.Id_Solicitacao_API;
+          mdPesquisapessoa_id_api.AsInteger       := Item.Pessoa_Id_API;
+          mdPesquisamatricula.AsInteger           := StrToInt(Item.Matricula);
+          mdPesquisanome.AsString                 := Item.Nome;
+          mdPesquisacpf.AsString                  := Item.CPF;
+          mdPesquisatelefone_novo.AsString        := Item.Telefone_Novo;
+          mdPesquisawhatsapp_novo.AsString        := Item.Whatsapp_Novo;
+          mdPesquisaemail_novo.AsString           := Item.Email_Novo;
+          mdPesquisasituacao.AsString             := Item.Situacao;
+          mdPesquisarecebido_em.AsDateTime        := Item.Recebido_Em;
 
-      for var Item in List do
-      begin
-        mdPesquisa.Append;
-        mdPesquisaid_solicitacao_api.AsInteger  := Item.Id_Solicitacao_API;
-        mdPesquisapessoa_id_api.AsInteger       := ITem.Pessoa_Id_API;
-        mdPesquisamatricula.AsInteger           := Strtoint(Item.Matricula);
-        mdPesquisanome.AsString                 := Item.nome;
-        mdPesquisacpf.AsString                  := Item.cpf;
-        mdPesquisatelefone_novo.AsString        := Item.Telefone_Novo;
-        mdPesquisawhatsapp_novo.AsString        := Item.Whatsapp_Novo;
-        mdPesquisaemail_novo.AsString           := Item.Email_Novo;
-        mdPesquisasituacao.AsString             := Item.situacao;
-        mdPesquisarecebido_em.AsDateTime        := Item.Recebido_Em;
-        if Item.Processado_Em > 0 then
-          mdPesquisaprocessado_em.AsDateTime := Item.Processado_Em
-        else
-          mdPesquisaprocessado_em.Clear;
-        mdPesquisaerro.AsString                 := Item.Erro;
-        mdPesquisa.Post;
+          if Item.Processado_Em > 0 then
+            mdPesquisaprocessado_em.AsDateTime := Item.Processado_Em
+          else
+            mdPesquisaprocessado_em.Clear;
+
+          mdPesquisaerro.AsString := Item.Erro;
+          mdPesquisa.Post;
+        end;
+        mdPesquisa.First;
+      finally
+        mdPesquisa.EnableControls;
       end;
-      mdPesquisa.First;
-      mdPesquisa.EnableControls;
-
-    Finally
-      FreeAndNil(ContPessoa);
+    finally
+      FreeAndNil(Controller);
       if Assigned(List) then
         List.Free;
-    End;
+    end;
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
     end;
   end;
-
 end;
-
 
 procedure TFrmAssociadoAtualizacao.Relatorio;
 begin
   inherited;
   try
-//    if not Assigned(FrmRelAssociado) then
-//    FrmRelAssociado := TFrmRelAssociado.Create(Application);
-//    FrmRelAssociado.ShowModal;
   except on E: Exception do
     begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
     end;
   end;
-
 end;
-
 
 procedure TFrmAssociadoAtualizacao.BtnLimparClick(Sender: TObject);
 begin
@@ -355,44 +327,52 @@ begin
       JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
     end;
   end;
-
 end;
 
 procedure TFrmAssociadoAtualizacao.BtnNovoClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
+  IdSolicitacao: Int64;
 begin
-  //Processar registro
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
 
-  if not mdPesquisa.Eof then
+  if (not mdPesquisa.Active) or mdPesquisa.IsEmpty then
   begin
+    JKDialog('Alerta','Nenhum registro selecionado.', tdAlerta);
+    Exit;
+  end;
 
-    if Permissao.TemPermissao('Permitir Processar') then
-    begin
+  if not Permissao.TemPermissao('Permitir Processar') then
+  begin
+    JKDialog('Acesso Negado',
+             'O seu perfil n√£o tem permiss√£o para utilizar.' + sLineBreak +
+             'Por favor, entre em contato com o administrador do sistema.',
+             tdAlerta);
+    Exit;
+  end;
 
-      if mdPesquisaid_solicitacao_api.AsInteger = 0 then
-      begin
-        JKDialog('Alerta','Nenhum registro selecionado.', tdAlerta);
-        exit;
-      end;
+  IdSolicitacao := mdPesquisaid_solicitacao_api.AsLargeInt;
 
-      if not Assigned( FrmAssociadoProcessarAtualizacao) then
-      FrmAssociadoProcessarAtualizacao            := TFrmAssociadoProcessarAtualizacao.Create(Application);
-      FrmAssociadoProcessarAtualizacao.ParamsInt  := mdPesquisaid_solicitacao_api.AsInteger;
-      FrmAssociadoProcessarAtualizacao.Show;
-    end
-    else
-      JKDialog('Acesso Negado',
-               'O seu perfil n„o tem permiss„o para utilizar.' + sLineBreak +
-               'Por favor, entre em contato com o administrador do sistema.',
-               tdAlerta);
-  end
-    else
-    begin
-      JKDialog('Aviso','Realize uma pesquisa!', tdAlerta);
-    end;
+  if IdSolicitacao <= 0 then
+  begin
+    JKDialog('Alerta','Nenhum registro selecionado.', tdAlerta);
+    Exit;
+  end;
+
+  if IdSolicitacao > High(Integer) then
+  begin
+    JKDialog('Erro',
+             'O ID da solicita√ß√£o excede o limite suportado pela tela de processamento.',
+             tdErro);
+    Exit;
+  end;
+
+  if not Assigned(FrmAssociadoProcessarAtualizacao) then
+    FrmAssociadoProcessarAtualizacao := TFrmAssociadoProcessarAtualizacao.Create(Application);
+
+  FrmAssociadoProcessarAtualizacao.ParamsInt := Integer(IdSolicitacao);
+  FrmAssociadoProcessarAtualizacao.Show;
 end;
 
 procedure TFrmAssociadoAtualizacao.FormClose(Sender: TObject; var Action: TCloseAction);
