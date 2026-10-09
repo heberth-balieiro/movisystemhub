@@ -6,6 +6,55 @@ uses
   System.SysUtils, System.Classes, uAtributosRTTI;
 
 type
+  TAssociadoDadosAtuais = class
+  private
+    FId_Socio: Integer;
+    FEmail_Atual: string;
+    FCelular_Atual: string;
+    FWhatsapp_Atual: string;
+    FCep_Atual: string;
+    FEndereco_Atual: string;
+    FNumero_Atual: string;
+    FBairro_Atual: string;
+    FComplemento_Atual: string;
+    FSituacao_Atual: string;
+    Fcidade_atual: string;
+
+  public
+    property Id_Socio: Integer
+      read FId_Socio write FId_Socio;
+
+    property Email_Atual: string
+      read FEmail_Atual write FEmail_Atual;
+
+    property Celular_Atual: string
+      read FCelular_Atual write FCelular_Atual;
+
+    property Whatsapp_Atual: string
+      read FWhatsapp_Atual write FWhatsapp_Atual;
+
+    property Cep_Atual: string
+      read FCep_Atual write FCep_Atual;
+
+    property Endereco_Atual: string
+      read FEndereco_Atual write FEndereco_Atual;
+
+    property Numero_Atual: string
+      read FNumero_Atual write FNumero_Atual;
+
+    property Bairro_Atual: string
+      read FBairro_Atual write FBairro_Atual;
+
+    property Complemento_Atual: string
+      read FComplemento_Atual write FComplemento_Atual;
+
+    property Situacao_Atual: string
+      read FSituacao_Atual write FSituacao_Atual;
+
+    property cidade_atual:string read Fcidade_atual write Fcidade_atual;
+  end;
+
+type
   [TableName('integracao_atualizacao_cadastral')]
   TAssociadoAtualizacao = class
   private
@@ -89,6 +138,7 @@ type
     [FieldName('cidade_nova')]
     [FieldOptions([foSelect])]
     property cidade_nova: string           read Fcidade_nova write Fcidade_nova;
+
 end;
 
 implementation

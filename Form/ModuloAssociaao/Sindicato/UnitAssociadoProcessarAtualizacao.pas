@@ -28,7 +28,8 @@ uses
   dxSkinXmas2008Blue, Vcl.ComCtrls, dxCore, cxDateUtils, cxMaskEdit,
   cxButtonEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, cxCalendar, cxTextEdit, cxGroupBox, cxMemo,Model.AssociadoAtualizarAPI,
-  Controller.AssociadoAtualizacaoAPI, uJKDialog;
+  Controller.AssociadoAtualizacaoAPI, uJKDialog, Vcl.Session,
+  Vcl.PermissaoUsuario;
 
 type
   TFrmAssociadoProcessarAtualizacao = class(TFormNovoBaseCadastro)
@@ -51,15 +52,15 @@ type
     Label9: TLabel;
     cxsituacao: TcxTextEdit;
     cxGroupBox2: TcxGroupBox;
-    cxTextEdit3: TcxTextEdit;
-    cxTextEdit4: TcxTextEdit;
-    cxTextEdit5: TcxTextEdit;
-    cxTextEdit6: TcxTextEdit;
-    cxTextEdit7: TcxTextEdit;
-    cxTextEdit8: TcxTextEdit;
-    cxTextEdit9: TcxTextEdit;
-    cxTextEdit10: TcxTextEdit;
-    cxTextEdit11: TcxTextEdit;
+    cxemailatual: TcxTextEdit;
+    cxcelularatual: TcxTextEdit;
+    cxwhatsappatual: TcxTextEdit;
+    cxcepatual: TcxTextEdit;
+    cxenderecoatual: TcxTextEdit;
+    cxNumeroatual: TcxTextEdit;
+    cxBairroatual: TcxTextEdit;
+    cxComplementoatual: TcxTextEdit;
+    cxCidadeAtual: TcxTextEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -96,8 +97,11 @@ type
     BtnPesquisarAssociado: TStyledBitBtn;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BtnRejeitarClick(Sender: TObject);
   private
+    FIdSocio  :Integer;
     Procedure ProcessarCadastro(AID:Integer);
+    Procedure LocalizarAssociadolocal(AMatricula:integer; ACPF:String);
     { Private declarations }
   public
     { Public declarations }
@@ -110,6 +114,27 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrmAssociadoProcessarAtualizacao.BtnRejeitarClick(Sender: TObject);
+var
+  Permissao: TPermissaoUsuario;
+begin
+  //rejeitas cadastro
+  FreeAndNil(TPermissaoUsuario.FInstance);
+  Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
+
+  if Permissao.TemPermissao('Permitir Rejeitar Cadastro') then
+  begin
+    //Aqui vai a função que vamos chamar a controller
+
+
+  end
+  else
+    JKDialog('Acesso Negado',
+             'O seu perfil não tem permissão para utilizar.' + sLineBreak +
+             'Por favor, entre em contato com o administrador do sistema.',
+             tdAlerta);
+end;
 
 procedure TFrmAssociadoProcessarAtualizacao.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -132,6 +157,85 @@ begin
   End;
 end;
 
+function FormatarCEP(const AValor: string): string;
+var
+  S: string;
+begin
+  S := StringReplace(AValor, '-', '', [rfReplaceAll]);
+
+  if Length(S) = 8 then
+    Result := Copy(S, 1, 5) + '-' + Copy(S, 6, 3)
+  else
+    Result := AValor;
+end;
+
+function FormatarTelefone(const AValor: string): string;
+var
+  S: string;
+begin
+  S := AValor;
+  S := StringReplace(S, '(', '', [rfReplaceAll]);
+  S := StringReplace(S, ')', '', [rfReplaceAll]);
+  S := StringReplace(S, '-', '', [rfReplaceAll]);
+  S := StringReplace(S, ' ', '', [rfReplaceAll]);
+
+  if Length(S) = 11 then
+    Result :=
+      '(' + Copy(S, 1, 2) + ') ' +
+      Copy(S, 3, 5) + '-' +
+      Copy(S, 8, 4)
+  else if Length(S) = 10 then
+    Result :=
+      '(' + Copy(S, 1, 2) + ') ' +
+      Copy(S, 3, 4) + '-' +
+      Copy(S, 7, 4)
+  else
+    Result := AValor;
+end;
+
+procedure TFrmAssociadoProcessarAtualizacao.LocalizarAssociadolocal(AMatricula: integer; ACPF: String);
+var
+  LDadosAtuais: TAssociadoDadosAtuais;
+begin
+  LDadosAtuais := TAssociadoDadosAtuais.Create;
+  try
+    if TAssociadoAtualizacaoController.BuscarAssociadoVinculo(
+      LDadosAtuais,
+      AMatricula,
+      TSession.idempresa,
+      ACPF
+    ) then
+    begin
+      cxemailatual.EditValue       := LDadosAtuais.Email_Atual;
+      cxcelularatual.EditValue     := FormatarTelefone(LDadosAtuais.Celular_Atual);
+      cxwhatsappatual.EditValue    := FormatarTelefone(LDadosAtuais.Whatsapp_Atual);
+      cxcepatual.EditValue         := FormatarCEP(LDadosAtuais.Cep_Atual);
+      cxenderecoatual.EditValue    := LDadosAtuais.Endereco_Atual;
+      cxNumeroatual.EditValue      := LDadosAtuais.Numero_Atual;
+      cxBairroatual.EditValue      := LDadosAtuais.Bairro_Atual;
+      cxComplementoatual.EditValue := LDadosAtuais.Complemento_Atual;
+      cxcidadeatual.EditValue      := LDadosAtuais.cidade_atual;
+      FIdSocio := LDadosAtuais.Id_Socio;
+    end
+    else
+    begin
+      FIdSocio := 0;
+      cxemailatual.Clear;
+      cxcelularatual.Clear;
+      cxwhatsappatual.Clear;
+      cxcepatual.Clear;
+      cxenderecoatual.Clear;
+      cxNumeroatual.Clear;
+      cxBairroatual.Clear;
+      cxComplementoatual.Clear;
+      cxcidadeatual.Clear;
+      JKDialog('Aviso','Associado não localizado ou cadastro inativo.', tdAlerta);
+    end;
+  finally
+    LDadosAtuais.Free;
+  end;
+end;
+
 procedure TFrmAssociadoProcessarAtualizacao.ProcessarCadastro(AID: Integer);
 begin
   Obj      := Nil;
@@ -145,26 +249,34 @@ begin
       if Assigned(Obj) then
       begin
 
-        cxid.EditValue        := Obj.Id_Solicitacao_API;
-        cxidapi.EditValue     := Obj.Pessoa_Id_API;
-        cxmatricula.EditValue := Obj.Matricula;
-        cxnome.EditValue      := Obj.Nome;
-        cxcpf.EditValue       := Obj.CPF;
-        cxtelefone.EditValue  := Obj.telefone_novo;
-        cxwhatsapp.EditValue  := Obj.whatsapp_novo;
-        cxemail.EditValue     := Obj.email_novo;
-        cxsituacao.EditValue  := Obj.Situacao;
+        cxid.EditValue              := Obj.Id_Solicitacao_API;
+        cxidapi.EditValue           := Obj.Pessoa_Id_API;
+        cxmatricula.EditValue       := Obj.Matricula;
+        cxnome.EditValue            := Obj.Nome;
+        cxcpf.EditValue             := Obj.CPF;
+        cxtelefone.EditValue        := Obj.telefone_novo;
+        cxwhatsapp.EditValue        := Obj.whatsapp_novo;
+        cxemail.EditValue           := Obj.email_novo;
+        cxsituacao.EditValue        := Obj.Situacao;
 
 
         cxemailnovo.EditValue       := Obj.email_novo;
-        cxCelularnovo.EditValue     := Obj.telefone_novo;
-        cxwhatsapp_novo.EditValue   := Obj.whatsapp_novo;
-        cxcepnovo.EditValue         := Obj.cep_novo;
+        cxCelularnovo.EditValue     := FormatarTelefone(Obj.telefone_novo);
+        cxwhatsapp_novo.EditValue   := FormatarTelefone(Obj.whatsapp_novo);
+        cxcepnovo.EditValue         := FormatarCEP(Obj.cep_novo);
         cxendereconovo.EditValue    := Obj.endereco_novo;
         cxnumeronovo.EditValue      := Obj.numero_novo;
         cxBairroNovo.EditValue      := Obj.bairro_novo;
         cxcomplementonovo.EditValue := Obj.complemento_novo;
         cxcidadenovo.EditValue      := Obj.cidade_nova;
+
+
+        //Processou sem erro
+
+        if Obj.Id_Solicitacao_API > 0 then
+        begin
+          LocalizarAssociadolocal(StrToint(Obj.Matricula), Obj.CPF);
+        end;
 
       end;
 

@@ -6,7 +6,8 @@ uses
   Model.AssociadoAtualizarAPI,
   Dao.Operacoes,
   System.SysUtils,
-  System.Generics.Collections;
+  System.Generics.Collections,
+  DAO.AssociadoAtualizacaoAPI;
 type
   TAssociadoAtualizacaoController = class
   private
@@ -15,7 +16,7 @@ type
 
     class function ListarTodos(const FiltroCampo, FiltroSituacao, FiltroOrdem: string): TObjectList<TAssociadoAtualizacao>;
     class function BuscarPorID(AID: Integer): TAssociadoAtualizacao;
-    //class function Salvar(ADoc: TAssociadoAtualizacao; out RetornoID:integer; out AStr:String): Boolean;
+    class function BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; Const AMatricula, AIDEmpresa: Integer; Const ACPF:string): Boolean;
     //class function Excluir(const AIDRegistro: integer; const AIDUser: Integer; const AIDEmpresa:integer): Boolean;
 
   end;
@@ -25,6 +26,18 @@ implementation
 { TAssociadoAtualizacaoController }
 
 uses UDM, cxDateUtils, System.Variants;
+
+class function TAssociadoAtualizacaoController.BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; const AMatricula, AIDEmpresa: Integer;
+                                const ACPF: string): Boolean;
+var
+  FDAO: TDAOOperacao<TAssociadoDadosAtuais>;
+begin
+  Result := TDaoAssociadoAtualizacao.BuscarAssociadoVinculo(
+    ADoc,
+    AMatricula,
+    AIDEmpresa,
+    ACPF);
+end;
 
 class function TAssociadoAtualizacaoController.BuscarPorID(AID: Integer): TAssociadoAtualizacao;
 var

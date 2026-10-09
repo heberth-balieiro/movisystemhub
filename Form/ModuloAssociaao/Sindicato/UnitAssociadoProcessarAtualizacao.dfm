@@ -9,12 +9,14 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
   inherited PanelButton: TPanel
     Top = 637
     Width = 678
+    ExplicitTop = 637
     ExplicitWidth = 678
   end
   inherited PanelClient: TPanel
     Width = 684
     Height = 594
     ExplicitWidth = 684
+    ExplicitHeight = 594
     inherited dxBevel1: TdxBevel
       Left = 14
       Top = 404
@@ -322,7 +324,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Height = 17
         Caption = 'Cidade'
       end
-      object cxTextEdit3: TcxTextEdit
+      object cxemailatual: TcxTextEdit
         Left = 114
         Top = 25
         Properties.ClearKey = 16452
@@ -333,7 +335,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 0
         Width = 220
       end
-      object cxTextEdit4: TcxTextEdit
+      object cxcelularatual: TcxTextEdit
         Left = 114
         Top = 56
         Properties.ClearKey = 16452
@@ -344,7 +346,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 1
         Width = 220
       end
-      object cxTextEdit5: TcxTextEdit
+      object cxwhatsappatual: TcxTextEdit
         Left = 114
         Top = 87
         Properties.ClearKey = 16452
@@ -355,7 +357,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 2
         Width = 220
       end
-      object cxTextEdit6: TcxTextEdit
+      object cxcepatual: TcxTextEdit
         Left = 114
         Top = 118
         Properties.ClearKey = 16452
@@ -366,7 +368,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 3
         Width = 220
       end
-      object cxTextEdit7: TcxTextEdit
+      object cxenderecoatual: TcxTextEdit
         Left = 114
         Top = 149
         Properties.ClearKey = 16452
@@ -377,7 +379,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 4
         Width = 220
       end
-      object cxTextEdit8: TcxTextEdit
+      object cxNumeroatual: TcxTextEdit
         Left = 114
         Top = 180
         Properties.ClearKey = 16452
@@ -388,7 +390,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 5
         Width = 220
       end
-      object cxTextEdit9: TcxTextEdit
+      object cxBairroatual: TcxTextEdit
         Left = 114
         Top = 211
         Properties.ClearKey = 16452
@@ -399,7 +401,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 6
         Width = 220
       end
-      object cxTextEdit10: TcxTextEdit
+      object cxComplementoatual: TcxTextEdit
         Left = 114
         Top = 242
         Properties.ClearKey = 16452
@@ -410,7 +412,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         TabOrder = 7
         Width = 220
       end
-      object cxTextEdit11: TcxTextEdit
+      object cxCidadeAtual: TcxTextEdit
         Left = 114
         Top = 273
         Properties.ClearKey = 16452
@@ -500,17 +502,29 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
+        Style.TransparentBorder = True
+        StyleDisabled.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
+        StyleHot.TextColor = clGreen
         TabOrder = 0
         Width = 220
       end
       object cxCelularnovo: TcxTextEdit
         Left = 114
         Top = 56
+        ParentFont = False
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clGreen
+        Style.Font.Height = -13
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.TextColor = clGreen
+        Style.IsFontAssigned = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 1
@@ -522,6 +536,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 2
@@ -533,6 +548,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 3
@@ -544,6 +560,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 4
@@ -555,6 +572,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 5
@@ -566,6 +584,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 6
@@ -577,6 +596,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 7
@@ -588,6 +608,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ClearKey = 16452
         Properties.MaxLength = 180
         Properties.ReadOnly = True
+        Style.TextColor = clGreen
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
         TabOrder = 8
@@ -620,6 +641,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
       Height = 35
       Caption = 'Rejeitar | F6'
       TabOrder = 6
+      OnClick = BtnRejeitarClick
       StyleFamily = 'Bootstrap'
       StyleClass = 'Secondary'
     end
