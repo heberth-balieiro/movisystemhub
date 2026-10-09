@@ -17,6 +17,7 @@ Type
 
   public
     class function BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; Const AMatricula, AIDEmpresa: Integer; Const ACPF:string): Boolean;
+    class function Rejeitar(const AIdSolicitacaoAPI: Int64; const AIdEmpresa: Integer; const AMotivo: string): Boolean;
     //Class Function Delete(const AIDRegistro: integer; const AIDUser: Integer; const AIDEmpresa: integer):Boolean;
     //Class Function ExisteNome(const AStr: String; const AIDEmpresa: Integer =0; const AIDIgnorar:integer = 0):Boolean;
     //Class Function PossuiVinculo(const AIDRegistro:Integer):boolean;
@@ -60,7 +61,7 @@ const
 begin
   Result := False;
 
-  { Evita buscar qualquer associado caso n„o tenha identificaÁ„o }
+  { Evita buscar qualquer associado caso n√£o tenha identifica√ß√£o }
   if (AMatricula <= 0) and (Trim(ACPF) = '') then
     Exit;
 
@@ -75,9 +76,6 @@ begin
 
   if Trim(ACPF) = '' then
     Exit;
-
-
-
 
   Qry := TUniQuery.Create(nil);
   try
@@ -118,6 +116,40 @@ begin
     Adoc.cidade_atual       := Qry.FieldByName('cidade').AsString;
     Result := True;
 
+  finally
+    Qry.Free;
+  end;
+end;
+
+class function TDaoAssociadoAtualizacao.Rejeitar(
+  const AIdSolicitacaoAPI: Int64;
+  const AIdEmpresa: Integer;
+  const AMotivo: string): Boolean;
+var
+  Qry: TUniQuery;
+begin
+  Result := False;
+
+  Qry := TUniQuery.Create(nil);
+  try
+    Qry.Connection := dm.Conn;
+    Qry.SQL.Text :=
+      'UPDATE integracao_atualizacao_cadastral ' +
+      'SET situacao = :situacao, ' +
+      '    erro = :erro, ' +
+      '    processado_em = NOW() ' +
+      'WHERE id_solicitacao_api = :id_solicitacao_api ' +
+      '  AND id_empresa = :id_empresa ' +
+      '  AND situacao = ''PENDENTE'' ';
+
+    Qry.ParamByName('situacao').AsString := 'REJEITADO';
+    Qry.ParamByName('erro').AsString := Trim(AMotivo);
+    Qry.ParamByName('id_solicitacao_api').AsLargeInt := AIdSolicitacaoAPI;
+    Qry.ParamByName('id_empresa').AsInteger := AIdEmpresa;
+
+    Qry.ExecSQL;
+
+    Result := Qry.RowsAffected > 0;
   finally
     Qry.Free;
   end;
