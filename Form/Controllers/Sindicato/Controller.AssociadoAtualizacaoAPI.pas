@@ -17,6 +17,7 @@ type
     class function ListarTodos(const FiltroCampo, FiltroSituacao, FiltroOrdem: string): TObjectList<TAssociadoAtualizacao>;
     class function BuscarPorID(AID: Integer): TAssociadoAtualizacao;
     class function BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; Const AMatricula, AIDEmpresa: Integer; Const ACPF:string): Boolean;
+    class function Rejeitar(const AIdSolicitacaoAPI: Int64; const AIdEmpresa: Integer; const AMotivo: string): Boolean;
     //class function Excluir(const AIDRegistro: integer; const AIDUser: Integer; const AIDEmpresa:integer): Boolean;
 
   end;
@@ -29,8 +30,6 @@ uses UDM, cxDateUtils, System.Variants;
 
 class function TAssociadoAtualizacaoController.BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; const AMatricula, AIDEmpresa: Integer;
                                 const ACPF: string): Boolean;
-var
-  FDAO: TDAOOperacao<TAssociadoDadosAtuais>;
 begin
   Result := TDaoAssociadoAtualizacao.BuscarAssociadoVinculo(
     ADoc,
@@ -54,6 +53,27 @@ begin
   Finally
     FDAO.Free;
   End;
+end;
+
+class function TAssociadoAtualizacaoController.Rejeitar(
+  const AIdSolicitacaoAPI: Int64;
+  const AIdEmpresa: Integer;
+  const AMotivo: string): Boolean;
+begin
+  if AIdSolicitacaoAPI <= 0 then
+    raise Exception.Create('ID da solicitação inválido.');
+
+  if AIdEmpresa <= 0 then
+    raise Exception.Create('Empresa inválida.');
+
+  if Trim(AMotivo) = '' then
+    raise Exception.Create('Informe o motivo da rejeição.');
+
+  Result := TDaoAssociadoAtualizacao.Rejeitar(
+    AIdSolicitacaoAPI,
+    AIdEmpresa,
+    Trim(AMotivo)
+  );
 end;
 
 class function TAssociadoAtualizacaoController.ListarTodos(
