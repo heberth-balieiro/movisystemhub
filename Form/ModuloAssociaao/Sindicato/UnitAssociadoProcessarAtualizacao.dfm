@@ -652,6 +652,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
       Height = 35
       Caption = 'Erro | F10'
       TabOrder = 7
+      OnClick = BtnErroClick
       StyleFamily = 'Bootstrap'
       StyleClass = 'Warning'
     end

@@ -98,6 +98,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnRejeitarClick(Sender: TObject);
+    procedure BtnErroClick(Sender: TObject);
   private
     FIdSocio: Integer;
     FIdSolicitacaoAPI: Int64;
@@ -115,6 +116,24 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrmAssociadoProcessarAtualizacao.BtnErroClick(Sender: TObject);
+var
+  Permissao: TPermissaoUsuario;
+begin
+  FreeAndNil(TPermissaoUsuario.FInstance);
+  Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
+
+  if not Permissao.TemPermissao('Permitir Marcar com Erro') then
+  begin
+    JKDialog('Acesso Negado',
+             'O seu perfil não tem permissão para utilizar.' + sLineBreak +
+             'Por favor, entre em contato com o administrador do sistema.',
+             tdAlerta);
+    Exit;
+  end;
+
+end;
 
 procedure TFrmAssociadoProcessarAtualizacao.BtnRejeitarClick(Sender: TObject);
 var
