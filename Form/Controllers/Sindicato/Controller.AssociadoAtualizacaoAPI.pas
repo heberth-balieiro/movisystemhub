@@ -19,6 +19,7 @@ type
     class function BuscarAssociadoVinculo(ADoc: TAssociadoDadosAtuais; Const AMatricula, AIDEmpresa: Integer; Const ACPF:string): Boolean;
     class function Rejeitar(const AIdSolicitacaoAPI: Int64; const AIdEmpresa: Integer; const AMotivo: string): Boolean;
     class function MarcarErro(const AIdSolicitacaoAPI: Int64; const AIdEmpresa: Integer; const AMotivo: string): Boolean;
+    class function ProcessarAtualizacao(ADoc: TAssociadoAtualizacao; const AIdSocio, AIdEmpresa: Integer): Boolean;
     //class function Excluir(const AIDRegistro: integer; const AIDUser: Integer; const AIDEmpresa:integer): Boolean;
 
   end;
@@ -95,6 +96,40 @@ begin
     AIdSolicitacaoAPI,
     AIdEmpresa,
     Trim(AMotivo)
+  );
+end;
+
+class function TAssociadoAtualizacaoController.ProcessarAtualizacao(
+  ADoc: TAssociadoAtualizacao;
+  const AIdSocio, AIdEmpresa: Integer): Boolean;
+begin
+  if not Assigned(ADoc) then
+    raise Exception.Create('Dados da atualização cadastral não informados.');
+
+  if ADoc.Id_Solicitacao_API <= 0 then
+    raise Exception.Create('ID da solicitação inválido.');
+
+  if AIdSocio <= 0 then
+    raise Exception.Create('Associado não localizado para processamento.');
+
+  if AIdEmpresa <= 0 then
+    raise Exception.Create('Empresa inválida.');
+
+  if (Trim(ADoc.email_novo) = '') and
+     (Trim(ADoc.telefone_novo) = '') and
+     (Trim(ADoc.whatsapp_novo) = '') and
+     (Trim(ADoc.cep_novo) = '') and
+     (Trim(ADoc.endereco_novo) = '') and
+     (Trim(ADoc.numero_novo) = '') and
+     (Trim(ADoc.bairro_novo) = '') and
+     (Trim(ADoc.complemento_novo) = '') and
+     (Trim(ADoc.cidade_nova) = '') then
+    raise Exception.Create('Não existem dados novos para processar.');
+
+  Result := TDaoAssociadoAtualizacao.ProcessarAtualizacao(
+    ADoc,
+    AIdSocio,
+    AIdEmpresa
   );
 end;
 
