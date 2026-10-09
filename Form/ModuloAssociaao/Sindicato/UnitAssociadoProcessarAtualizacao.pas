@@ -99,7 +99,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnRejeitarClick(Sender: TObject);
   private
-    FIdSocio  :Integer;
+    FIdSocio: Integer;
+    FIdSolicitacaoAPI: Int64;
     Procedure ProcessarCadastro(AID:Integer);
     Procedure LocalizarAssociadolocal(AMatricula:integer; ACPF:String);
     { Private declarations }
@@ -118,22 +119,70 @@ implementation
 procedure TFrmAssociadoProcessarAtualizacao.BtnRejeitarClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
+  Motivo: string;
 begin
-  //rejeitas cadastro
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
 
-  if Permissao.TemPermissao('Permitir Rejeitar Cadastro') then
+  if not Permissao.TemPermissao('Permitir Rejeitar Cadastro') then
   begin
-    //Aqui vai a fun��o que vamos chamar a controller
-
-
-  end
-  else
     JKDialog('Acesso Negado',
-             'O seu perfil n�o tem permiss�o para utilizar.' + sLineBreak +
+             'O seu perfil não tem permissão para utilizar.' + sLineBreak +
              'Por favor, entre em contato com o administrador do sistema.',
              tdAlerta);
+    Exit;
+  end;
+
+  if FIdSolicitacaoAPI <= 0 then
+  begin
+    JKDialog('Aviso','Nenhuma solicitação válida foi carregada.', tdAlerta);
+    Exit;
+  end;
+
+  if not SameText(Trim(cxsituacao.Text), 'PENDENTE') then
+  begin
+    JKDialog('Aviso','Somente solicitações pendentes podem ser rejeitadas.', tdAlerta);
+    Exit;
+  end;
+
+  Motivo := Trim(cxobs.Text);
+
+  if Motivo = '' then
+  begin
+    JKDialog('Aviso','Informe o motivo da rejeição no campo Observação.', tdAlerta);
+    cxobs.SetFocus;
+    Exit;
+  end;
+
+  if MessageDlg(
+       'Confirma a rejeição desta atualização cadastral?' + sLineBreak + sLineBreak +
+       'Motivo: ' + Motivo,
+       mtConfirmation,
+       [mbYes, mbNo],
+       0
+     ) <> mrYes then
+    Exit;
+
+  try
+    if TAssociadoAtualizacaoController.Rejeitar(
+         FIdSolicitacaoAPI,
+         TSession.idempresa,
+         Motivo
+       ) then
+    begin
+      cxsituacao.EditValue := 'REJEITADO';
+      JKDialog('Sucesso','Atualização cadastral rejeitada com sucesso.', tdAlerta);
+      ModalResult := mrOk;
+    end
+    else
+      JKDialog('Aviso',
+               'Não foi possível rejeitar a solicitação.' + sLineBreak +
+               'Verifique se ela ainda está pendente.',
+               tdAlerta);
+  except
+    on E: Exception do
+      JKDialog('Erro','Ocorreu um erro ao rejeitar a solicitação:' + sLineBreak + E.Message, tdErro);
+  end;
 end;
 
 procedure TFrmAssociadoProcessarAtualizacao.FormClose(Sender: TObject;
@@ -148,7 +197,7 @@ begin
   inherited;
   ParamsStr := 'N';
   ParamsTela:= 'Associados/Dependentes';
-  TitleText := 'Processar Atualiza��o Cadastral';
+  TitleText := 'Processar Atualização Cadastral';
 
   Try
     ProcessarCadastro(ParamsInt);
@@ -229,7 +278,7 @@ begin
       cxBairroatual.Clear;
       cxComplementoatual.Clear;
       cxcidadeatual.Clear;
-      JKDialog('Aviso','Associado n�o localizado ou cadastro inativo.', tdAlerta);
+      JKDialog('Aviso','Associado não localizado ou cadastro inativo.', tdAlerta);
     end;
   finally
     LDadosAtuais.Free;
@@ -238,16 +287,18 @@ end;
 
 procedure TFrmAssociadoProcessarAtualizacao.ProcessarCadastro(AID: Integer);
 begin
-  Obj      := Nil;
+  FIdSolicitacaoAPI := 0;
+  Obj := nil;
   try
-    Obj    := TAssociadoAtualizacao.Create;
+    Obj := TAssociadoAtualizacao.Create;
     Try
       if (ParamsInt=0) or (InttoStr(ParamsInt) = '') then
-      raise Exception.Create('Nenhum ID passado no par�metro.');
+        raise Exception.Create('Nenhum ID passado no parâmetro.');
 
-      Obj     := TAssociadoAtualizacaoController.BuscarPorID(ParamsInt);
+      Obj := TAssociadoAtualizacaoController.BuscarPorID(ParamsInt);
       if Assigned(Obj) then
       begin
+        FIdSolicitacaoAPI := Obj.Id_Solicitacao_API;
 
         cxid.EditValue              := Obj.Id_Solicitacao_API;
         cxidapi.EditValue           := Obj.Pessoa_Id_API;
@@ -258,7 +309,7 @@ begin
         cxwhatsapp.EditValue        := Obj.whatsapp_novo;
         cxemail.EditValue           := Obj.email_novo;
         cxsituacao.EditValue        := Obj.Situacao;
-
+        cxobs.EditValue             := Obj.Erro;
 
         cxemailnovo.EditValue       := Obj.email_novo;
         cxCelularnovo.EditValue     := FormatarTelefone(Obj.telefone_novo);
@@ -270,14 +321,8 @@ begin
         cxcomplementonovo.EditValue := Obj.complemento_novo;
         cxcidadenovo.EditValue      := Obj.cidade_nova;
 
-
-        //Processou sem erro
-
         if Obj.Id_Solicitacao_API > 0 then
-        begin
           LocalizarAssociadolocal(StrToint(Obj.Matricula), Obj.CPF);
-        end;
-
       end;
 
     Finally
