@@ -131,6 +131,7 @@ begin
   AdicionarTela('Associação','Associados/Dependentes','Permitir Processar');
   AdicionarTela('Associação','Associados/Dependentes','Permitir Rejeitar Cadastro');
   AdicionarTela('Associação','Associados/Dependentes','Permitir Marcar com Erro');
+  AdicionarTela('Associação','Associados/Dependentes','Permitir Salvar Cadastro');
 
 
   AdicionarTela('Associação','Dependentes','Permitir Criar Novo');

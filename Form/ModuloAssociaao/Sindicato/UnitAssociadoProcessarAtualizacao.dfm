@@ -32,12 +32,14 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
     inherited BtnSalvar: TStyledBitBtn
       Left = 460
       Top = 556
+      OnClick = BtnSalvarClick
       ExplicitLeft = 460
       ExplicitTop = 556
     end
     inherited BtnCancelar: TStyledBitBtn
       Left = 571
       Top = 556
+      OnClick = BtnCancelarClick
       ExplicitLeft = 571
       ExplicitTop = 556
     end
