@@ -120,6 +120,7 @@ implementation
 procedure TFrmAssociadoProcessarAtualizacao.BtnErroClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
+  Motivo: string;
 begin
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
@@ -133,6 +134,53 @@ begin
     Exit;
   end;
 
+  if FIdSolicitacaoAPI <= 0 then
+  begin
+    JKDialog('Aviso','Nenhuma solicitação válida foi carregada.', tdAlerta);
+    Exit;
+  end;
+
+  if not SameText(Trim(cxsituacao.Text), 'PENDENTE') then
+  begin
+    JKDialog('Aviso','Somente solicitações pendentes podem ser marcadas com erro.', tdAlerta);
+    Exit;
+  end;
+
+  Motivo := Trim(cxobs.Text);
+
+  if Motivo = '' then
+  begin
+    JKDialog('Aviso','Informe o motivo do erro no campo Observação.', tdAlerta);
+    cxobs.SetFocus;
+    Exit;
+  end;
+
+  if JKDialog('Confirmação', 'Confirma marcar esta atualização cadastral com erro?', tdMensagem) then
+  begin
+    try
+      if TAssociadoAtualizacaoController.MarcarErro(
+           FIdSolicitacaoAPI,
+           TSession.idempresa,
+           Motivo
+         ) then
+      begin
+        cxsituacao.EditValue := 'ERRO';
+        JKDialog('Sucesso','Atualização cadastral marcada com erro com sucesso.', tdSucesso);
+        ModalResult := mrOk;
+        FrmAssociadoProcessarAtualizacao.Close;
+      end
+      else
+        JKDialog('Aviso',
+                 'Não foi possível marcar a solicitação com erro.' + sLineBreak +
+                 'Verifique se ela ainda está pendente.',
+                 tdAlerta);
+    except
+      on E: Exception do
+        JKDialog('Erro','Ocorreu um erro ao marcar a solicitação:' + sLineBreak + E.Message, tdErro);
+    end;
+  end
+  else
+    Exit;
 end;
 
 procedure TFrmAssociadoProcessarAtualizacao.BtnRejeitarClick(Sender: TObject);
