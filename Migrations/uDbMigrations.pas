@@ -321,6 +321,9 @@ begin
 end;
 
 procedure TMigrator.RunAll(const Migrations: TArray<TMigration>);
+const
+  MIG_ATUALIZACAO_CADASTRAL_RETORNO_API =
+    '047_integracao_atualizacao_cadastral_retorno_api';
 var
   M: TMigration;
 begin
@@ -349,6 +352,30 @@ begin
           raise; // propaga para você tratar
         end;
       end;
+    end;
+
+    // Migração local do Hub para controlar o retorno do EasyBot à API.
+    // Fica no módulo de migrations do EasyOne; o EasyBot não altera schema local.
+    if TableExists('integracao_atualizacao_cadastral') and
+       not IsMigrationApplied(MIG_ATUALIZACAO_CADASTRAL_RETORNO_API) then
+    begin
+      if Assigned(FLogger) then
+        FLogger.Info('Running migration: ' + MIG_ATUALIZACAO_CADASTRAL_RETORNO_API);
+
+      AddColumnIfMissing(
+        'integracao_atualizacao_cadastral',
+        'retornado_api_em',
+        'DATETIME NULL'
+      );
+      AddColumnIfMissing(
+        'integracao_atualizacao_cadastral',
+        'retorno_api_erro',
+        'VARCHAR(500) NULL'
+      );
+
+      MarkMigrationApplied(MIG_ATUALIZACAO_CADASTRAL_RETORNO_API);
+      if Assigned(FLogger) then
+        FLogger.Info('Applied: ' + MIG_ATUALIZACAO_CADASTRAL_RETORNO_API);
     end;
 
     FConn.Commit;
@@ -385,4 +412,3 @@ begin
 end;
 
 end.
-
