@@ -1,4 +1,4 @@
-unit UnitAssociadoProcessarAtualizacao;
+﻿unit UnitAssociadoProcessarAtualizacao;
 
 interface
 
@@ -154,35 +154,33 @@ begin
     Exit;
   end;
 
-  if MessageDlg(
-       'Confirma a rejeição desta atualização cadastral?' + sLineBreak + sLineBreak +
-       'Motivo: ' + Motivo,
-       mtConfirmation,
-       [mbYes, mbNo],
-       0
-     ) <> mrYes then
-    Exit;
+  if JKDialog('Confirmação', 'Confirma a rejeição desta atualização cadastral?', tdMensagem)  then
+  begin
+    try
+      if TAssociadoAtualizacaoController.Rejeitar(
+           FIdSolicitacaoAPI,
+           TSession.idempresa,
+           Motivo
+         ) then
+      begin
+        cxsituacao.EditValue := 'REJEITADO';
+        JKDialog('Sucesso','Atualização cadastral rejeitada com sucesso.', tdSucesso);
+        ModalResult     := mrOk;
+        FrmAssociadoProcessarAtualizacao.Close;
+      end
+      else
+        JKDialog('Aviso',
+                 'Não foi possível rejeitar a solicitação.' + sLineBreak +
+                 'Verifique se ela ainda está pendente.',
+                 tdAlerta);
+    except
+      on E: Exception do
+        JKDialog('Erro','Ocorreu um erro ao rejeitar a solicitação:' + sLineBreak + E.Message, tdErro);
+    end;
+  end
+  else
+  Exit;
 
-  try
-    if TAssociadoAtualizacaoController.Rejeitar(
-         FIdSolicitacaoAPI,
-         TSession.idempresa,
-         Motivo
-       ) then
-    begin
-      cxsituacao.EditValue := 'REJEITADO';
-      JKDialog('Sucesso','Atualização cadastral rejeitada com sucesso.', tdAlerta);
-      ModalResult := mrOk;
-    end
-    else
-      JKDialog('Aviso',
-               'Não foi possível rejeitar a solicitação.' + sLineBreak +
-               'Verifique se ela ainda está pendente.',
-               tdAlerta);
-  except
-    on E: Exception do
-      JKDialog('Erro','Ocorreu um erro ao rejeitar a solicitação:' + sLineBreak + E.Message, tdErro);
-  end;
 end;
 
 procedure TFrmAssociadoProcessarAtualizacao.FormClose(Sender: TObject;
