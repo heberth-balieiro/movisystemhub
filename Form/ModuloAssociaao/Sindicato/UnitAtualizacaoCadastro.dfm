@@ -1499,8 +1499,12 @@ inherited FrmAssociadoAtualizacao: TFrmAssociadoAtualizacao
     Top = 4
     inherited btnEditar: TMenuItem
       Caption = 'Desfiliar'
+      Visible = False
     end
     inherited btnExcluir: TMenuItem
+      Visible = False
+    end
+    inherited N1: TMenuItem
       Visible = False
     end
     object N7: TMenuItem
