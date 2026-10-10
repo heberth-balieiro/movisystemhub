@@ -122,7 +122,7 @@ begin
     Q.ParamByName('db').AsString  := DBName;
     Q.ParamByName('tbl').AsString := ATable;
     Q.Open;
-    Result := Q.Fields[0].AsInteger > 0;
+    Result        := Q.Fields[0].AsInteger > 0;
   finally
     Q.Free;
   end;
@@ -324,8 +324,13 @@ procedure TMigrator.RunAll(const Migrations: TArray<TMigration>);
 const
   MIG_ATUALIZACAO_CADASTRAL_RETORNO_API =
     '047_integracao_atualizacao_cadastral_retorno_api';
+  MIG_ELEICAO_RESULTADO =
+    '048_initial_schema_eleicao_resultado';
+  MIG_ELEICAO_RESULTADO_CHAPA =
+    '049_initial_schema_eleicao_resultado_chapa';
 var
   M: TMigration;
+  SQL: string;
 begin
   EnsureMigrationsTable;
 
@@ -376,6 +381,107 @@ begin
       MarkMigrationApplied(MIG_ATUALIZACAO_CADASTRAL_RETORNO_API);
       if Assigned(FLogger) then
         FLogger.Info('Applied: ' + MIG_ATUALIZACAO_CADASTRAL_RETORNO_API);
+    end;
+
+    // Resultado final recebido da API. Uma linha por empresa/eleição.
+    if not IsMigrationApplied(MIG_ELEICAO_RESULTADO) then
+    begin
+      if Assigned(FLogger) then
+        FLogger.Info('Running migration: ' + MIG_ELEICAO_RESULTADO);
+
+      SQL :=
+        'CREATE TABLE IF NOT EXISTS eleicao_resultado (' +
+        ' id_resultado BIGINT NOT NULL AUTO_INCREMENT,' +
+        ' id_empresa INT NOT NULL,' +
+        ' id_eleicao INT NOT NULL,' +
+        ' operacao VARCHAR(30) NULL,' +
+        ' situacao VARCHAR(30) NOT NULL,' +
+        ' total_eleitores INT NOT NULL DEFAULT 0,' +
+        ' total_votantes INT NOT NULL DEFAULT 0,' +
+        ' total_nao_votantes INT NOT NULL DEFAULT 0,' +
+        ' total_votos INT NOT NULL DEFAULT 0,' +
+        ' votos_validos INT NOT NULL DEFAULT 0,' +
+        ' votos_brancos INT NOT NULL DEFAULT 0,' +
+        ' votos_nulos INT NOT NULL DEFAULT 0,' +
+        ' recebido_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,' +
+        ' atualizado_em DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,' +
+        ' PRIMARY KEY (id_resultado),' +
+        ' UNIQUE KEY uk_eleicao_resultado (id_empresa, id_eleicao),' +
+        ' KEY idx_eleicao_resultado_eleicao (id_eleicao),' +
+        ' KEY idx_eleicao_resultado_situacao (id_empresa, situacao)' +
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
+
+      CreateTableIfMissing(SQL, 'eleicao_resultado');
+
+      if TableExists('empresa') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado',
+          'fk_eleicao_resultado_empresa',
+          'FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado',
+          'fk_eleicao_resultado_eleicao',
+          'FOREIGN KEY (id_eleicao) REFERENCES eleicao(id_eleicao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      MarkMigrationApplied(MIG_ELEICAO_RESULTADO);
+      if Assigned(FLogger) then
+        FLogger.Info('Applied: ' + MIG_ELEICAO_RESULTADO);
+    end;
+
+    // Resultado por chapa. id_chapa é o id local enviado à API como id_chapa_int.
+    if not IsMigrationApplied(MIG_ELEICAO_RESULTADO_CHAPA) then
+    begin
+      if Assigned(FLogger) then
+        FLogger.Info('Running migration: ' + MIG_ELEICAO_RESULTADO_CHAPA);
+
+      SQL :=
+        'CREATE TABLE IF NOT EXISTS eleicao_resultado_chapa (' +
+        ' id_resultado_chapa BIGINT NOT NULL AUTO_INCREMENT,' +
+        ' id_empresa INT NOT NULL,' +
+        ' id_eleicao INT NOT NULL,' +
+        ' id_chapa INT NOT NULL,' +
+        ' numero INT NULL,' +
+        ' nome VARCHAR(200) NULL,' +
+        ' quantidade_votos INT NOT NULL DEFAULT 0,' +
+        ' percentual DECIMAL(10,4) NOT NULL DEFAULT 0.0000,' +
+        ' recebido_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,' +
+        ' atualizado_em DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,' +
+        ' PRIMARY KEY (id_resultado_chapa),' +
+        ' UNIQUE KEY uk_eleicao_resultado_chapa (id_empresa, id_eleicao, id_chapa),' +
+        ' KEY idx_eleicao_resultado_chapa_eleicao (id_empresa, id_eleicao),' +
+        ' KEY idx_eleicao_resultado_chapa_chapa (id_chapa)' +
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
+
+      CreateTableIfMissing(SQL, 'eleicao_resultado_chapa');
+
+      if TableExists('empresa') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_chapa',
+          'fk_eleicao_resultado_chapa_empresa',
+          'FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_chapa',
+          'fk_eleicao_resultado_chapa_eleicao',
+          'FOREIGN KEY (id_eleicao) REFERENCES eleicao(id_eleicao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao_chapa') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_chapa',
+          'fk_eleicao_resultado_chapa_chapa',
+          'FOREIGN KEY (id_chapa) REFERENCES eleicao_chapa(id) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      MarkMigrationApplied(MIG_ELEICAO_RESULTADO_CHAPA);
+      if Assigned(FLogger) then
+        FLogger.Info('Applied: ' + MIG_ELEICAO_RESULTADO_CHAPA);
     end;
 
     FConn.Commit;
