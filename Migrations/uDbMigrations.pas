@@ -328,6 +328,10 @@ const
     '048_initial_schema_eleicao_resultado';
   MIG_ELEICAO_RESULTADO_CHAPA =
     '049_initial_schema_eleicao_resultado_chapa';
+  MIG_ELEICAO_RESULTADO_QUESTAO =
+    '050_initial_schema_eleicao_resultado_questao';
+  MIG_ELEICAO_RESULTADO_QUESTAO_OPCAO =
+    '051_initial_schema_eleicao_resultado_questao_opcao';
 var
   M: TMigration;
   SQL: string;
@@ -482,6 +486,116 @@ begin
       MarkMigrationApplied(MIG_ELEICAO_RESULTADO_CHAPA);
       if Assigned(FLogger) then
         FLogger.Info('Applied: ' + MIG_ELEICAO_RESULTADO_CHAPA);
+    end;
+
+    if not IsMigrationApplied(MIG_ELEICAO_RESULTADO_QUESTAO) then
+    begin
+      if Assigned(FLogger) then
+        FLogger.Info('Running migration: ' + MIG_ELEICAO_RESULTADO_QUESTAO);
+
+      SQL :=
+        'CREATE TABLE IF NOT EXISTS eleicao_resultado_questao (' +
+        ' id_resultado_questao BIGINT NOT NULL AUTO_INCREMENT,' +
+        ' id_empresa INT NOT NULL,' +
+        ' id_eleicao INT NOT NULL,' +
+        ' id_questao INT NOT NULL,' +
+        ' ordem INT NOT NULL DEFAULT 1,' +
+        ' titulo VARCHAR(200) NOT NULL,' +
+        ' total_votos INT NOT NULL DEFAULT 0,' +
+        ' recebido_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,' +
+        ' atualizado_em DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,' +
+        ' PRIMARY KEY (id_resultado_questao),' +
+        ' UNIQUE KEY uk_eleicao_resultado_questao (id_empresa,id_eleicao,id_questao),' +
+        ' KEY idx_eleicao_resultado_questao_eleicao (id_empresa,id_eleicao),' +
+        ' KEY idx_eleicao_resultado_questao_questao (id_questao)' +
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
+
+      CreateTableIfMissing(SQL, 'eleicao_resultado_questao');
+
+      if TableExists('empresa') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao',
+          'fk_eleicao_resultado_questao_empresa',
+          'FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao',
+          'fk_eleicao_resultado_questao_eleicao',
+          'FOREIGN KEY (id_eleicao) REFERENCES eleicao(id_eleicao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao_questao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao',
+          'fk_eleicao_resultado_questao_questao',
+          'FOREIGN KEY (id_questao) REFERENCES eleicao_questao(id_questao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      MarkMigrationApplied(MIG_ELEICAO_RESULTADO_QUESTAO);
+      if Assigned(FLogger) then
+        FLogger.Info('Applied: ' + MIG_ELEICAO_RESULTADO_QUESTAO);
+    end;
+
+    if not IsMigrationApplied(MIG_ELEICAO_RESULTADO_QUESTAO_OPCAO) then
+    begin
+      if Assigned(FLogger) then
+        FLogger.Info('Running migration: ' + MIG_ELEICAO_RESULTADO_QUESTAO_OPCAO);
+
+      SQL :=
+        'CREATE TABLE IF NOT EXISTS eleicao_resultado_questao_opcao (' +
+        ' id_resultado_questao_opcao BIGINT NOT NULL AUTO_INCREMENT,' +
+        ' id_empresa INT NOT NULL,' +
+        ' id_eleicao INT NOT NULL,' +
+        ' id_questao INT NOT NULL,' +
+        ' id_opcao INT NOT NULL,' +
+        ' ordem INT NOT NULL DEFAULT 1,' +
+        ' descricao VARCHAR(200) NOT NULL,' +
+        ' quantidade_votos INT NOT NULL DEFAULT 0,' +
+        ' percentual DECIMAL(10,4) NOT NULL DEFAULT 0.0000,' +
+        ' recebido_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,' +
+        ' atualizado_em DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,' +
+        ' PRIMARY KEY (id_resultado_questao_opcao),' +
+        ' UNIQUE KEY uk_eleicao_resultado_questao_opcao (id_empresa,id_eleicao,id_questao,id_opcao),' +
+        ' KEY idx_eleicao_resultado_qop_eleicao (id_empresa,id_eleicao),' +
+        ' KEY idx_eleicao_resultado_qop_questao (id_questao),' +
+        ' KEY idx_eleicao_resultado_qop_opcao (id_opcao)' +
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
+
+      CreateTableIfMissing(SQL, 'eleicao_resultado_questao_opcao');
+
+      if TableExists('empresa') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao_opcao',
+          'fk_eleicao_resultado_qop_empresa',
+          'FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao_opcao',
+          'fk_eleicao_resultado_qop_eleicao',
+          'FOREIGN KEY (id_eleicao) REFERENCES eleicao(id_eleicao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao_questao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao_opcao',
+          'fk_eleicao_resultado_qop_questao',
+          'FOREIGN KEY (id_questao) REFERENCES eleicao_questao(id_questao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      if TableExists('eleicao_questao_opcao') then
+        AddForeignKeyIfMissing(
+          'eleicao_resultado_questao_opcao',
+          'fk_eleicao_resultado_qop_opcao',
+          'FOREIGN KEY (id_opcao) REFERENCES eleicao_questao_opcao(id_opcao) ON DELETE RESTRICT ON UPDATE NO ACTION'
+        );
+
+      MarkMigrationApplied(MIG_ELEICAO_RESULTADO_QUESTAO_OPCAO);
+      if Assigned(FLogger) then
+        FLogger.Info('Applied: ' + MIG_ELEICAO_RESULTADO_QUESTAO_OPCAO);
     end;
 
     FConn.Commit;
