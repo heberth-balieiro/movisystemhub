@@ -19,16 +19,16 @@ inherited FrmPessoaAdicionar: TFrmPessoaAdicionar
     Width = 902
     Height = 328
     TabOrder = 1
-    ExplicitTop = 120
+    ExplicitTop = 169
     ExplicitWidth = 902
-    ExplicitHeight = 377
+    ExplicitHeight = 328
     inherited cxGrid: TcxGrid
       Width = 902
       Height = 328
       ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 902
-      ExplicitHeight = 377
+      ExplicitHeight = 328
       inherited Grid: TcxGridDBTableView
         OnMouseDown = GridMouseDown
         OnFocusedRecordChanged = GridFocusedRecordChanged
@@ -135,6 +135,33 @@ inherited FrmPessoaAdicionar: TFrmPessoaAdicionar
           DataBinding.FieldName = 'nascimento'
           Visible = False
         end
+        object GridCep: TcxGridDBColumn
+          DataBinding.FieldName = 'cep'
+          Visible = False
+        end
+        object Gridendereco: TcxGridDBColumn
+          DataBinding.FieldName = 'endereco'
+          Visible = False
+        end
+        object Gridnumero: TcxGridDBColumn
+          DataBinding.FieldName = 'numero'
+          Visible = False
+        end
+        object GridBairro: TcxGridDBColumn
+          DataBinding.FieldName = 'bairro'
+          Visible = False
+        end
+        object GridComplemento: TcxGridDBColumn
+          DataBinding.FieldName = 'complemento'
+          Visible = False
+        end
+        object Gridcidade: TcxGridDBColumn
+          DataBinding.FieldName = 'cidade'
+          Visible = False
+        end
+        object GridCelular: TcxGridDBColumn
+          DataBinding.FieldName = 'celular'
+        end
       end
     end
   end
@@ -159,10 +186,8 @@ inherited FrmPessoaAdicionar: TFrmPessoaAdicionar
     ExplicitWidth = 902
     ExplicitHeight = 129
     inherited GBFiltro: TcxGroupBox
-      ExplicitLeft = 15
-      ExplicitTop = 6
       ExplicitWidth = 902
-      ExplicitHeight = 177
+      ExplicitHeight = 129
       Height = 129
       Width = 902
       object Label2: TLabel [1]
@@ -545,6 +570,29 @@ inherited FrmPessoaAdicionar: TFrmPessoaAdicionar
     end
     object mdPesquisasocio_deste: TDateField
       FieldName = 'socio_deste'
+    end
+    object mdPesquisacep: TStringField
+      FieldName = 'cep'
+      Size = 15
+    end
+    object mdPesquisaendereco: TStringField
+      FieldName = 'endereco'
+      Size = 180
+    end
+    object mdPesquisanumero: TStringField
+      FieldName = 'numero'
+    end
+    object mdPesquisabairro: TStringField
+      FieldName = 'bairro'
+      Size = 80
+    end
+    object mdPesquisacomplemento: TStringField
+      FieldName = 'complemento'
+      Size = 60
+    end
+    object mdPesquisacidade: TStringField
+      FieldName = 'cidade'
+      Size = 80
     end
   end
   object TabSindLotacao: TClientDataSet

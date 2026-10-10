@@ -136,7 +136,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 1
+        TabOrder = 2
         Width = 80
       end
       object cxnome: TcxTextEdit
@@ -148,7 +148,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 2
+        TabOrder = 3
         Width = 337
       end
       object cxcpf: TcxButtonEdit
@@ -190,7 +190,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 3
+        TabOrder = 4
         Text = '   .   .   -  '
         Width = 117
       end
@@ -203,7 +203,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 4
+        TabOrder = 5
         Text = '(  )    -    '
         Width = 98
       end
@@ -216,7 +216,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 5
+        TabOrder = 6
         Text = '(  )     -    '
         Width = 100
       end
@@ -228,7 +228,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 6
+        TabOrder = 7
         Width = 356
       end
       object cxidapi: TcxTextEdit
@@ -239,7 +239,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
         Properties.ReadOnly = True
         StyleFocused.BorderColor = clNavy
         StyleFocused.Color = 15855596
-        TabOrder = 7
+        TabOrder = 1
         Width = 70
       end
       object cxsituacao: TcxTextEdit
@@ -665,6 +665,7 @@ inherited FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao
       Height = 35
       Caption = 'Pesquisar | F7'
       TabOrder = 8
+      OnClick = BtnPesquisarAssociadoClick
       StyleFamily = 'Bootstrap'
     end
   end

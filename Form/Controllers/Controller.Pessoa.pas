@@ -180,10 +180,18 @@ begin
            ' s.email,                                 '+
            ' sc.razao as socio_secretaria,  '+
            ' s.socio_deste as sociodeste, '+
-           ' s.nascimento  '+
+           ' s.nascimento,  '+
+           ' s.cep,'+
+           ' s.endereco,  '+
+           ' s.numero,   '+
+           ' s.bairro,  '+
+           ' s.complemento,   '+
+           ' c.cidade  '+
            ' From Socio s                            '+
            ' Left Join secretaria sc '+
            ' on s.escritorio = sc.id_secretaria    '+
+           ' Left Join cidade c    '+
+           ' on s.id_cidade = c.id_cidade   '+
            ' where s.excluido= 0                      '+
            ' and s.id_socio > 0                      '+
            ' and s.cliente=''S'' ';

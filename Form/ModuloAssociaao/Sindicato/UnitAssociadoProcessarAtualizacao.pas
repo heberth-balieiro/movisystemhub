@@ -29,7 +29,8 @@ uses
   cxButtonEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, cxCalendar, cxTextEdit, cxGroupBox, cxMemo,Model.AssociadoAtualizarAPI,
   Controller.AssociadoAtualizacaoAPI, uJKDialog, Vcl.Session,
-  Vcl.PermissaoUsuario;
+  Vcl.PermissaoUsuario, uConfiguracaoService, Controller.Mensagem_Whatsapp, Model.Mensagem_Whatsapp, ACBRUTIL,
+  UConeSul;
 
 type
   TFrmAssociadoProcessarAtualizacao = class(TFormNovoBaseCadastro)
@@ -100,13 +101,18 @@ type
     procedure BtnRejeitarClick(Sender: TObject);
     procedure BtnErroClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnPesquisarAssociadoClick(Sender: TObject);
   private
-    FIdSocio: Integer;
+
     FIdSolicitacaoAPI: Int64;
     Procedure ProcessarCadastro(AID:Integer);
     Procedure LocalizarAssociadolocal(AMatricula:integer; ACPF:String);
+    function ProcedureGravarMSGEnvio(npara, ncpf, nmatricula, nfone,
+      msgpadrao: String; idpessoa: Integer): Boolean;
+    function RecuperarToken: string;
     { Private declarations }
   public
+    FIdSocio: Integer;
     { Public declarations }
   end;
 
@@ -114,9 +120,14 @@ var
   FrmAssociadoProcessarAtualizacao: TFrmAssociadoProcessarAtualizacao;
   Obj   :TAssociadoAtualizacao;
   Cont  :TAssociadoAtualizacaoController;
+
+  ContrMensagem   : TMensagemWhatsappController;
+  ObjMensagem     : TMensagemWhatsapp;
 implementation
 
 {$R *.dfm}
+
+Uses UnitPessoaAdicionar;
 
 function SomenteNumeros(const AValor: string): string;
 var
@@ -194,10 +205,23 @@ begin
     Exit;
 end;
 
+procedure TFrmAssociadoProcessarAtualizacao.BtnPesquisarAssociadoClick(
+  Sender: TObject);
+begin
+  //Chamar tela para vincualr ao um associado.
+
+  if not Assigned(FrmPessoaAdicionar) then
+      FrmPessoaAdicionar            := TFrmPessoaAdicionar.Create(Application);
+      FrmPessoaAdicionar.AOrigem    := 'A';
+      FrmPessoaAdicionar.AIDEleicao := 0;
+      FrmPessoaAdicionar.ShowModal;
+
+end;
+
 procedure TFrmAssociadoProcessarAtualizacao.BtnRejeitarClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
-  Motivo: string;
+  Motivo, RetFuncao, MensagemEnvio: string;
 begin
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
@@ -242,6 +266,29 @@ begin
          ) then
       begin
         cxsituacao.EditValue := 'REJEITADO';
+
+        //enviar mensagem
+        // validar envio de mensagem
+        if TConfiguracaoService.ValidarUsoWhatsApp(TSession.IDEMPRESA) then
+        begin
+          if TConfiguracaoService.ValidarPessoaReceberWhatsApp(FIdSocio, RetFuncao) then
+          begin
+
+            MensagemEnvio :='Olá, [Nome]. Informamos que sua solicitação de atualização cadastral foi rejeitada.'+ sLineBreak +
+                            sLineBreak + sLineBreak +
+                            'Motivo: '+Motivo+'. Em caso de dúvida, entre em contato com a entidade.';
+
+
+            ProcedureGravarMSGEnvio(cxnome.Text,
+                                      cxcpf.Text,
+                                      cxmatricula.EditValue,
+                                      cxwhatsapp.Text,
+                                      MensagemEnvio,
+                                      FIdSocio);
+          end;
+        end;
+
+
         JKDialog('Sucesso','Atualização cadastral rejeitada com sucesso.', tdSucesso);
         ModalResult     := mrOk;
         FrmAssociadoProcessarAtualizacao.Close;
@@ -261,10 +308,105 @@ begin
 
 end;
 
+function TFrmAssociadoProcessarAtualizacao.ProcedureGravarMSGEnvio(npara, ncpf, nmatricula, nfone, msgpadrao:String; idpessoa:Integer):Boolean;
+Var
+  telefone      : String;
+  Mensagem      : String;
+  MensagemFormatada : String;
+  RetMensagemPadrao:String;
+begin
+  Result        := False;
+  ContrMensagem := Nil;
+  ObjMensagem   := nil;
+  Telefone      := TiraPontos(nfone);
+  Mensagem      := Trim(msgpadrao);
+
+  Try
+    ContrMensagem := TMensagemWhatsappController.Create;
+    ObjMensagem   := TMensagemWhatsapp.Create;
+    //TConfiguracaoService.RetornoMensagemPadraoWhatsApp(RetMensagemPadrao,'id_mensagempadraowhatsapp',Tsession.IDEMPRESA);
+    //Preparar Formatacao da mensagem
+    MensagemFormatada       := Mensagem;
+    //MensagemFormatada       := RetMensagemPadrao;
+    MensagemFormatada       := StringReplace(MensagemFormatada,'[Nome]'     ,trim(npara), [rfReplaceAll]);
+    MensagemFormatada       := StringReplace(MensagemFormatada,'[Empresa]'  ,TSession.RAZAO,[rfReplaceAll]);
+    MensagemFormatada       := StringReplace(MensagemFormatada,'[CPF]'      , ncpf,[rfReplaceAll]);
+    MensagemFormatada       := StringReplace(MensagemFormatada,'[Matricula]',nmatricula,[rfReplaceAll]);
+
+    //Primeiro Grava a mensagem
+    Try
+      //Montar os dados no objeto
+      ObjMensagem.id_zap            := 0;
+      ObjMensagem.mensagem          := MensagemFormatada;
+      ObjMensagem.url               := '';
+      ObjMensagem.nomepessoa        := Trim(npara);
+      ObjMensagem.id_pessoa         := idpessoa;
+      ObjMensagem.fone              := Telefone;
+      ObjMensagem.status            := 'A';
+      ObjMensagem.anexobase         := '';
+      ObjMensagem.ext               := '';
+      ObjMensagem.tipo              := 'M';  //mensagem apenas
+      ObjMensagem.token             := RecuperarToken;
+      ObjMensagem.nomeinstancia     := TConeSul.Crypt('C',TSession.RAZAO);
+
+      if ContrMensagem.GravarMensagem(ObjMensagem) then
+      begin
+        msg := 'Mensagem foi salva e será enviada automaticamente pelo WhatsApp.';
+        Result  := True;
+      end;
+    Finally
+      FreeAndNil(ContrMensagem);
+      FreeAndNil(ObjMensagem);
+    End;
+
+  Except on e:exception do
+    begin
+      JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
+    end;
+  End;
+end;
+
+Function TFrmAssociadoProcessarAtualizacao.RecuperarToken:string;
+var
+Token    : String;
+begin
+    Result  := '';
+    Token   := '';
+
+    Try
+      //Por Funcionario
+      if TConfiguracaoService.ValidarInstanciaWhatsappFuncionario(TSession.IDEMPRESA) then
+      begin
+        if TConfiguracaoService.RetornoInstanciaWhatsAppFuncionario(token,TSession.ID_USUARIO) then
+        begin
+          Result  := token;
+        end
+        else
+        Result  := '';
+      end
+      else
+      begin
+        //Instancia por empresa
+        if TConfiguracaoService.RetornoInstanciaWhatsAppEmpresa(token,TSession.IDEMPRESA) then
+        begin
+          Result  := token;
+        end
+        else
+        Result  := '';
+      end;
+      Except on e:exception do
+      begin
+        JKDialog('Erro','Ocorreu um erro:'+#13+e.Message, tderro);
+      end;
+    End;
+end;
+
+
 procedure TFrmAssociadoProcessarAtualizacao.BtnSalvarClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
   LDoc: TAssociadoAtualizacao;
+  RetFuncao,MensagemEnvio:string;
 begin
   FreeAndNil(TPermissaoUsuario.FInstance);
   Permissao := TPermissaoUsuario.GetInstance(TSession.idperfiluser,'Associados/Dependentes');
@@ -327,6 +469,29 @@ begin
          ) then
       begin
         cxsituacao.EditValue := 'PROCESSADO';
+
+        //enviar mensagem
+        // validar envio de mensagem
+        if TConfiguracaoService.ValidarUsoWhatsApp(TSession.IDEMPRESA) then
+        begin
+          if TConfiguracaoService.ValidarPessoaReceberWhatsApp(FIdSocio, RetFuncao) then
+          begin
+
+            MensagemEnvio :='Olá, [Nome]. Informamos que sua solicitação de atualização cadastral foi processada com sucesso.'+ sLineBreak +
+                            sLineBreak + sLineBreak +
+                            'Obrigado por manter seus dados atualizados.';
+
+
+            ProcedureGravarMSGEnvio(cxnome.Text,
+                                      cxcpf.Text,
+                                      cxmatricula.EditValue,
+                                      cxwhatsapp.Text,
+                                      MensagemEnvio,
+                                      FIdSocio);
+          end;
+        end;
+
+
         cxobs.Clear;
         JKDialog('Sucesso','Atualização cadastral processada com sucesso.', tdSucesso);
         ModalResult := mrOk;

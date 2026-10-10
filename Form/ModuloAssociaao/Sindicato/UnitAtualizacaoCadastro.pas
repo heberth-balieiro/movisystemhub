@@ -89,6 +89,8 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure BtnNovoClick(Sender: TObject);
+    procedure btnListagemClick(Sender: TObject);
+    procedure BtnRelatorioClick(Sender: TObject);
 
   private
 
@@ -329,6 +331,11 @@ begin
   end;
 end;
 
+procedure TFrmAssociadoAtualizacao.btnListagemClick(Sender: TObject);
+begin
+  JKDialog('Aviso','Em Desenvolvimento.', tdAlerta);
+end;
+
 procedure TFrmAssociadoAtualizacao.BtnNovoClick(Sender: TObject);
 var
   Permissao: TPermissaoUsuario;
@@ -373,6 +380,11 @@ begin
 
   FrmAssociadoProcessarAtualizacao.ParamsInt := Integer(IdSolicitacao);
   FrmAssociadoProcessarAtualizacao.Show;
+end;
+
+procedure TFrmAssociadoAtualizacao.BtnRelatorioClick(Sender: TObject);
+begin
+  JKDialog('Aviso','Em Desenvolvimento.', tdAlerta);
 end;
 
 procedure TFrmAssociadoAtualizacao.FormClose(Sender: TObject; var Action: TCloseAction);

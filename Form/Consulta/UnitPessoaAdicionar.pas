@@ -38,7 +38,8 @@ uses
   Controller.LookupHelper, UnitGlobal, Controller.Pessoa,Model.Pessoa,
   UnitFrmWhatsAppMassa,
   Model.EleicaoEleitor,
-  Controller.EleicaoEleitor;
+  Controller.EleicaoEleitor,
+  UnitAssociadoProcessarAtualizacao;
 
   const
   UM_CHECK = WM_USER + 10000;
@@ -103,6 +104,19 @@ type
     mdPesquisasocio_deste: TDateField;
     BtnMarca: TStyledBitBtn;
     Btndesmarca: TStyledBitBtn;
+    GridCep: TcxGridDBColumn;
+    Gridendereco: TcxGridDBColumn;
+    Gridnumero: TcxGridDBColumn;
+    GridBairro: TcxGridDBColumn;
+    GridComplemento: TcxGridDBColumn;
+    Gridcidade: TcxGridDBColumn;
+    mdPesquisacep: TStringField;
+    mdPesquisaendereco: TStringField;
+    mdPesquisanumero: TStringField;
+    mdPesquisabairro: TStringField;
+    mdPesquisacomplemento: TStringField;
+    mdPesquisacidade: TStringField;
+    GridCelular: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure GridCheckPropertiesChange(Sender: TObject);
@@ -127,6 +141,7 @@ type
   public
     AOrigem     : String;
     AIDEleicao  :Integer;
+
     Procedure Pesquisa    ;override;
     { Public declarations }
   end;
@@ -148,6 +163,7 @@ var
   Marcado: Variant;
   NaoInseridos: TStringList;
   NomeAssociado: string;
+  QuantidadeMarcados: Integer;
 begin
 
   if mdPesquisa.IsEmpty then
@@ -262,6 +278,67 @@ begin
 
     {$ENDREGION}
 
+    {$REGION 'Função para Vincular ao cadastro'}
+
+      if AOrigem = 'A' then
+      begin
+          QuantidadeMarcados := 0;
+
+          for I := 0 to Grid.DataController.RecordCount - 1 do
+          begin
+            Marcado := Grid.DataController.Values[I, GridCheck.Index];
+
+            if VarIsNull(Marcado) then
+              Continue;
+
+            if SameText(VarToStr(Marcado), 'True') or SameText(VarToStr(Marcado), '1') or SameText(VarToStr(Marcado), 'S') then
+            begin
+              Inc(QuantidadeMarcados);
+            end;
+          end;
+
+          if QuantidadeMarcados = 0 then
+          begin
+            JKDialog('Aviso','Selecione um associado para continuar.',tdAlerta);
+            Exit;
+          end;
+
+          if QuantidadeMarcados > 1 then
+          begin
+            JKDialog('Aviso','Selecione apenas um associado para continuar.',tdAlerta);
+            Exit;
+          end;
+
+          for I := 0 to Grid.DataController.RecordCount - 1 do
+          begin
+            Marcado := Grid.DataController.Values[I, GridCheck.Index];
+
+            if VarIsNull(Marcado) then
+              Continue;
+
+            if SameText(VarToStr(Marcado), 'True') or SameText(VarToStr(Marcado), '1') or SameText(VarToStr(Marcado), 'S') then
+            begin
+              //Adiciona direto no banco de dados
+              NomeAssociado := VarToStr(Grid.DataController.Values[I,Gridnome.Index]);
+
+              FrmAssociadoProcessarAtualizacao.FIdSocio	                    :=  Grid.DataController.Values[I, Gridid_socio.Index];
+              FrmAssociadoProcessarAtualizacao.cxemailatual.EditValue       :=  Grid.DataController.Values[I, Gridemail.Index];
+              FrmAssociadoProcessarAtualizacao.cxcelularatual.EditValue     :=  Grid.DataController.Values[I, GridCelular.Index];
+              FrmAssociadoProcessarAtualizacao.cxwhatsappatual.EditValue    :=  Grid.DataController.Values[I, Gridwhatsapp.Index];
+              FrmAssociadoProcessarAtualizacao.cxcepatual.EditValue         :=  Grid.DataController.Values[I, GridCep.Index];
+              FrmAssociadoProcessarAtualizacao.cxenderecoatual.EditValue    :=  Grid.DataController.Values[I, Gridendereco.Index];
+              FrmAssociadoProcessarAtualizacao.cxNumeroatual.EditValue      :=  Grid.DataController.Values[I, Gridnumero.Index];
+              FrmAssociadoProcessarAtualizacao.cxBairroatual.EditValue      :=  Grid.DataController.Values[I, GridBairro.Index];
+              FrmAssociadoProcessarAtualizacao.cxComplementoatual.EditValue :=  Grid.DataController.Values[I, GridComplemento.Index];
+              FrmAssociadoProcessarAtualizacao.cxcidadeatual.EditValue      :=  Grid.DataController.Values[I, Gridcidade.Index];
+            end;
+          end;
+
+      end;
+
+
+    {$ENDREGION}
+
 
   finally
     mdPesquisa.EnableControls;
@@ -319,7 +396,6 @@ procedure TFrmPessoaAdicionar.DesmarcarTodos;
 begin
   if mdPesquisa.IsEmpty then
     Exit;
-
   mdPesquisa.DisableControls;
   try
     mdPesquisa.First;
@@ -352,6 +428,14 @@ begin
 
   ParamsTela  := 'Associados/Dependentes';
   TitleText   := 'Pesquisa de Associado';
+
+  if AOrigem = 'A' then  //da tela de atualizacao de cadastro
+  begin
+    BtnMarca.Visible    := false;
+    Btndesmarca.Visible := false;
+    BtnAdicionar.Caption  := 'Vincular';
+  end;
+
 
   try
     TLookupHelper.CarregarLookup(
@@ -421,7 +505,6 @@ procedure TFrmPessoaAdicionar.MarcarTodos;
 begin
 if mdPesquisa.IsEmpty then
     Exit;
-
   mdPesquisa.DisableControls;
   try
     mdPesquisa.First;
@@ -524,6 +607,12 @@ begin
         else
         mdPesquisasocio_secretaria.AsString := Item.socio_secretaria;
         mdPesquisasocio_deste.AsDateTime  := item.sociodeste;
+        mdPesquisacep.asstring            := item.cep;
+        mdPesquisaendereco.asstring       := item.endereco;
+        mdPesquisanumero.asstring         := item.numero;
+        mdPesquisabairro.asstring         := item.bairro;
+        mdPesquisacomplemento.asstring    := item.complemento;
+        mdPesquisacidade.asstring         := item.cidade;
 
         mdPesquisa.Post;
       end;

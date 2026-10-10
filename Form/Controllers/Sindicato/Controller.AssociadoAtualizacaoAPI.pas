@@ -63,13 +63,13 @@ class function TAssociadoAtualizacaoController.Rejeitar(
   const AMotivo: string): Boolean;
 begin
   if AIdSolicitacaoAPI <= 0 then
-    raise Exception.Create('ID da solicita'#231#227'o inv'#225'lido.');
+    raise Exception.Create('ID da solicitação invalido.');
 
   if AIdEmpresa <= 0 then
-    raise Exception.Create('Empresa inv'#225'lida.');
+    raise Exception.Create('Empresa invalida.');
 
   if Trim(AMotivo) = '' then
-    raise Exception.Create('Informe o motivo da rejei'#231#227'o.');
+    raise Exception.Create('Informe o motivo da rejeição');
 
   Result := TDaoAssociadoAtualizacao.Rejeitar(
     AIdSolicitacaoAPI,
@@ -84,10 +84,10 @@ class function TAssociadoAtualizacaoController.MarcarErro(
   const AMotivo: string): Boolean;
 begin
   if AIdSolicitacaoAPI <= 0 then
-    raise Exception.Create('ID da solicita'#231#227'o inv'#225'lido.');
+    raise Exception.Create('ID da solicitação invalido');
 
   if AIdEmpresa <= 0 then
-    raise Exception.Create('Empresa inv'#225'lida.');
+    raise Exception.Create('Empresa invalido.');
 
   if Trim(AMotivo) = '' then
     raise Exception.Create('Informe o motivo do erro.');
@@ -104,16 +104,16 @@ class function TAssociadoAtualizacaoController.ProcessarAtualizacao(
   const AIdSocio, AIdEmpresa: Integer): Boolean;
 begin
   if not Assigned(ADoc) then
-    raise Exception.Create('Dados da atualiza'#231#227'o cadastral n'#227'o informados.');
+    raise Exception.Create('Dados da atualização cadastral não informados.');
 
   if ADoc.Id_Solicitacao_API <= 0 then
-    raise Exception.Create('ID da solicita'#231#227'o inv'#225'lido.');
+    raise Exception.Create('ID da solicitação invalido.');
 
   if AIdSocio <= 0 then
-    raise Exception.Create('Associado n'#227'o localizado para processamento.');
+    raise Exception.Create('Associado não localizado para processamento.');
 
   if AIdEmpresa <= 0 then
-    raise Exception.Create('Empresa inv'#225'lida.');
+    raise Exception.Create('Empresa invalido.');
 
   if (Trim(ADoc.email_novo) = '') and
      (Trim(ADoc.telefone_novo) = '') and
@@ -124,7 +124,7 @@ begin
      (Trim(ADoc.bairro_novo) = '') and
      (Trim(ADoc.complemento_novo) = '') and
      (Trim(ADoc.cidade_nova) = '') then
-    raise Exception.Create('N'#227'o existem dados novos para processar.');
+    raise Exception.Create('Não existem dados novos para processar.');
 
   Result := TDaoAssociadoAtualizacao.ProcessarAtualizacao(
     ADoc,

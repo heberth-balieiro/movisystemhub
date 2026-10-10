@@ -136,6 +136,9 @@ inherited FrmAssociadoAtualizacao: TFrmAssociadoAtualizacao
         ExplicitHeight = 25
         Width = 420
       end
+      inherited PPopPap: TPanel
+        TabOrder = 6
+      end
       inherited cxAtivo: TcxComboBox
         Left = 422
         Properties.Items.Strings = (
@@ -146,8 +149,15 @@ inherited FrmAssociadoAtualizacao: TFrmAssociadoAtualizacao
         ExplicitLeft = 422
         ExplicitHeight = 25
       end
+      inherited BtnPesquisar: TStyledBitBtn
+        TabOrder = 3
+      end
+      inherited BtnLimpar: TStyledBitBtn
+        TabOrder = 4
+      end
       inherited BtnNovo: TStyledBitBtn
         Caption = 'Processar'
+        TabOrder = 5
       end
       object cxordenar: TcxComboBox
         Left = 506
@@ -162,7 +172,7 @@ inherited FrmAssociadoAtualizacao: TFrmAssociadoAtualizacao
           'Nome'
           'Situa'#231#227'o')
         StyleFocused.Color = 15855596
-        TabOrder = 6
+        TabOrder = 2
         Text = 'Nome'
         Width = 85
       end
