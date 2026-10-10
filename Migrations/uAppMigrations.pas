@@ -2135,6 +2135,19 @@ begin
 
     {$ENDREGION}
 
+    {$REGION 'integracao_atualizacao_cadastral-047'}
+
+    AddMigration(Migs, '047_alterintegracao_atualizacao_cadastral',
+      procedure(Conn: TUniConnection)
+      var
+        M: TMigrator absolute Migrator;
+      begin
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'retornado_api_em', 'DATETIME NULL');
+        M.AddColumnIfMissing('integracao_atualizacao_cadastral', 'retorno_api_erro', 'VARCHAR(500) NULL');
+      end);
+
+    {$ENDREGION}
+
     {$ENDREGION}
 
     //====================== Alter Table datatype ==============================
